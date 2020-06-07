@@ -1,0 +1,11 @@
+ci:
+  collect:
+    numberOfRuns: 3
+    startServerCommand: serve -s build
+    url:
+      - http://localhost:5000/
+      # - http://localhost:5000/visualisations
+  # upload:
+  # target: "temporary-public-storage"
+  # token: $LHCI_SERVER_TOKEN
+  # serverBaseUrl: "http://13.236.93.196:9001"
