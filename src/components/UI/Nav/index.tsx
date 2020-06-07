@@ -1,4 +1,4 @@
-import React, { useState, useContext, Fragment } from "react";
+import React, { useContext } from "react";
 import history from "../../../history";
 import Context from "../../../storeContext/Context";
 // import { withStyles } from "@material-ui/core/styles";
@@ -8,7 +8,6 @@ import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 
 import IconButton from "@material-ui/core/IconButton";
-import BugReport from "@material-ui/icons/BugReport";
 import Timeline from "@material-ui/icons/Timeline";
 import MenuIcon from "@material-ui/icons/Menu";
 import Typography from "@material-ui/core/Typography";
@@ -41,8 +40,6 @@ import MailIcon from "@material-ui/icons/Mail";
 // import MenuItem from "@material-ui/core/MenuItem";
 import WbSunny from "@material-ui/icons/WbSunny";
 import WbSunnyOutlined from "@material-ui/icons/WbSunnyOutlined";
-
-import { fade } from "@material-ui/core/styles/colorManipulator";
 
 const useStyles = makeStyles((theme: Theme) => ({
   link: {
@@ -214,9 +211,7 @@ const NavBar = (props) => {
             aria-label="Report an Issue"
             href="/raiseIssue"
             // onClick={() => console.log("TODO add side menu")}
-          >
-            <BugReport />
-          </IconButton>
+          ></IconButton>
           <IconButton
             color="inherit"
             edge="start"

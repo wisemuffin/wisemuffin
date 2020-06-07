@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useContext } from "react";
 import Context from "../../../storeContext/Context";
 import clsx from "clsx";
 import { makeStyles, Theme } from "@material-ui/core/styles";

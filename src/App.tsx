@@ -6,6 +6,7 @@ import ThemeProvider from "./hooks/ThemeProvider";
 import "./App.css";
 
 import Home from "./pages/Home";
+import TvEpisodes from "./pages/TvEpisodes";
 
 function App(): JSX.Element {
   return (
@@ -14,6 +15,7 @@ function App(): JSX.Element {
         <Router history={history}>
           <Switch>
             <Route exact path="/" component={Home} />
+            <Route exact path="/tvepisodes" component={TvEpisodes} />
           </Switch>
         </Router>
       </ThemeProvider>
