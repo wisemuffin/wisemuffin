@@ -1,7 +1,8 @@
 import React from "react";
+import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
-import { IEpisode, IAction } from "../interfaces";
+import { IEpisode, IAction, IEpisodeProps } from "../interfaces";
 import Layout from "../components/UI/Layout";
 import Context from "../storeContext/Context";
 
@@ -41,14 +42,14 @@ const TvEpisodes = () => {
     return dispatch(dispatchObj);
   };
 
-  const props = {
+  const props: IEpisodeProps = {
     episodes: episodes,
     toggleFavAction,
     favourites: state.favourites,
   };
 
   return (
-    <Layout>
+    <section>
       <Typography variant="h1">
         Tv Shows{" "}
         <span role="img" aria-label="tv emoji">
@@ -58,12 +59,14 @@ const TvEpisodes = () => {
       <Typography variant="caption">
         Favourite Count: {state.favourites.length}
       </Typography>
+      <Link to="/">Home</Link>
+      <Link to="/fav">Fav</Link>
       <React.Suspense fallback={<div>...loading</div>}>
         <Grid container spacing={2}>
           <EpisodeList {...props} />
         </Grid>
       </React.Suspense>
-    </Layout>
+    </section>
   );
 };
 

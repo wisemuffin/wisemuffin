@@ -1,7 +1,6 @@
 import React, { useContext } from "react";
 import history from "../../../history";
 import Context from "../../../storeContext/Context";
-// import { withStyles } from "@material-ui/core/styles";
 import { makeStyles, useTheme, Theme } from "@material-ui/core/styles";
 import { Link } from "react-router-dom";
 import AppBar from "@material-ui/core/AppBar";
@@ -29,85 +28,15 @@ import ListItemText from "@material-ui/core/ListItemText";
 import InboxIcon from "@material-ui/icons/MoveToInbox";
 import MailIcon from "@material-ui/icons/Mail";
 
-// import SearchIcon from "@material-ui/icons/Search";
-// import InputBase from "@material-ui/core/InputBase";
-// import Badge from "@material-ui/core/Badge";
-// import MoreIcon from "@material-ui/icons/MoreVert";
-// import MailIcon from "@material-ui/icons/Mail";
-// import NotificationsIcon from "@material-ui/icons/Notifications";
-// import AccountCircle from "@material-ui/icons/AccountCircle";
-// import Menu from "@material-ui/core/Menu";
-// import MenuItem from "@material-ui/core/MenuItem";
 import WbSunny from "@material-ui/icons/WbSunny";
 import WbSunnyOutlined from "@material-ui/icons/WbSunnyOutlined";
 
-const useStyles = makeStyles((theme: Theme) => ({
-  link: {
-    textDecoration: "none",
-    color: "inherit",
-  },
-  menuButton: {
-    marginRight: theme.spacing(2),
-  },
-  toolbar: {
-    "justify-content": "start",
-  },
-  title: {
-    flexGrow: 1,
-  },
-  root: {
-    display: "flex",
-  },
-  appBar: {
-    transition: theme.transitions.create(["margin", "width"], {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen,
-    }),
-  },
-  appBarShift: {
-    width: `calc(100% - ${drawerWidth}px)`,
-    marginLeft: drawerWidth,
-    transition: theme.transitions.create(["margin", "width"], {
-      easing: theme.transitions.easing.easeOut,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
-  },
-  hide: {
-    display: "none",
-  },
-  drawer: {
-    width: drawerWidth,
-    flexShrink: 0,
-  },
-  drawerPaper: {
-    width: drawerWidth,
-  },
-  drawerHeader: {
-    display: "flex",
-    alignItems: "center",
-    padding: theme.spacing(0, 1),
-    ...theme.mixins.toolbar,
-    justifyContent: "flex-end",
-  },
-  content: {
-    flexGrow: 1,
-    padding: theme.spacing(3),
-    transition: theme.transitions.create("margin", {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen,
-    }),
-    marginLeft: -drawerWidth,
-  },
-  contentShift: {
-    transition: theme.transitions.create("margin", {
-      easing: theme.transitions.easing.easeOut,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
-    marginLeft: 0,
-  },
-}));
-
 const drawerWidth = 240;
+
+const drawerItems = [
+  { name: "TV Episodes", link: "/tvepisodes" },
+  { name: "TV Fav", link: "/tvepisodesfav" },
+];
 
 const NavBar = (props) => {
   const classes = useStyles();
@@ -243,13 +172,7 @@ const NavBar = (props) => {
         </div>
         <Divider />
         <List>
-          {[
-            { name: "About", link: "/about" },
-            { name: "Metrics", link: "/metrics" },
-
-            { name: "Example", link: "/example" },
-            { name: "ExampleVega", link: "/exampleVega" },
-          ].map((navItem, index) => {
+          {drawerItems.map((navItem, index) => {
             return (
               <ListItem
                 button
@@ -265,25 +188,75 @@ const NavBar = (props) => {
             );
           })}
         </List>
-
-        <Divider />
-        <List>
-          <ListItem button onClick={() => handleWeeklyReportType("csaWeekly")}>
-            <ListItemText primary={"CSA Exceed"} />
-          </ListItem>
-          <ListItem button onClick={() => handleWeeklyReportType("fldWeekly")}>
-            <ListItemText primary={"FLD Scorecard"} />
-          </ListItem>
-          <ListItem button onClick={() => handleWeeklyReportType("ccWeekly")}>
-            <ListItemText primary={"CC Weekly"} />
-          </ListItem>
-          <ListItem button onClick={() => handleWeeklyReportType("neoWeekly")}>
-            <ListItemText primary={"NEO Consol"} />
-          </ListItem>
-        </List>
       </Drawer>
     </div>
   );
 };
+
+const useStyles = makeStyles((theme: Theme) => ({
+  link: {
+    textDecoration: "none",
+    color: "inherit",
+  },
+  menuButton: {
+    marginRight: theme.spacing(2),
+  },
+  toolbar: {
+    "justify-content": "start",
+  },
+  title: {
+    flexGrow: 1,
+  },
+  root: {
+    display: "flex",
+  },
+  appBar: {
+    transition: theme.transitions.create(["margin", "width"], {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.leavingScreen,
+    }),
+  },
+  appBarShift: {
+    width: `calc(100% - ${drawerWidth}px)`,
+    marginLeft: drawerWidth,
+    transition: theme.transitions.create(["margin", "width"], {
+      easing: theme.transitions.easing.easeOut,
+      duration: theme.transitions.duration.enteringScreen,
+    }),
+  },
+  hide: {
+    display: "none",
+  },
+  drawer: {
+    width: drawerWidth,
+    flexShrink: 0,
+  },
+  drawerPaper: {
+    width: drawerWidth,
+  },
+  drawerHeader: {
+    display: "flex",
+    alignItems: "center",
+    padding: theme.spacing(0, 1),
+    ...theme.mixins.toolbar,
+    justifyContent: "flex-end",
+  },
+  content: {
+    flexGrow: 1,
+    padding: theme.spacing(3),
+    transition: theme.transitions.create("margin", {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.leavingScreen,
+    }),
+    marginLeft: -drawerWidth,
+  },
+  contentShift: {
+    transition: theme.transitions.create("margin", {
+      easing: theme.transitions.easing.easeOut,
+      duration: theme.transitions.duration.enteringScreen,
+    }),
+    marginLeft: 0,
+  },
+}));
 
 export default NavBar;

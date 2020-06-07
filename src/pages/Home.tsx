@@ -7,21 +7,19 @@ import Layout from "../components/UI/Layout";
 const Home = (props) => {
   const classes = useStyles();
   return (
-    <Layout>
-      <main className={classes.content}>
-        <Container maxWidth="lg" className={classes.container}>
-          <Typography
-            component="h1"
-            variant="h2"
-            align="center"
-            color="textPrimary"
-            gutterBottom
-          >
-            Latest News
-          </Typography>
-        </Container>
-      </main>
-    </Layout>
+    <main className={classes.content}>
+      <Container maxWidth="lg" className={classes.container}>
+        <Typography
+          component="h1"
+          variant="h2"
+          align="center"
+          color="textPrimary"
+          gutterBottom
+        >
+          Latest News
+        </Typography>
+      </Container>
+    </main>
   );
 };
 
