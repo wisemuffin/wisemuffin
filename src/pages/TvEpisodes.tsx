@@ -1,20 +1,15 @@
 import React from "react";
 import Grid from "@material-ui/core/Grid";
-import Card from "@material-ui/core/Card";
-import CardContent from "@material-ui/core/CardContent";
-import CardHeader from "@material-ui/core/CardHeader";
-import CardActions from "@material-ui/core/CardActions";
-import CardActionArea from "@material-ui/core/CardActionArea";
-import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import { IEpisode, IAction } from "../interfaces";
 import Layout from "../components/UI/Layout";
 import Context from "../storeContext/Context";
 
+const EpisodeList = React.lazy<any>(() => import("../components/EpisodeList"));
+
 const TvEpisodes = () => {
   const { state, dispatch } = React.useContext(Context);
   const [episodes, setEpisodes] = React.useState([]);
-  console.log("state from context: ", state);
 
   React.useEffect(() => {
     fetchTV();
@@ -28,7 +23,7 @@ const TvEpisodes = () => {
     return setEpisodes(dataJSON._embedded.episodes);
   };
 
-  const toggleFav = (episode: IEpisode): IAction => {
+  const toggleFavAction = (episode: IEpisode): IAction => {
     const episodeInFav = state.favourites.includes(episode);
     let dispatchObj = {
       type: "ADD_FAV",
@@ -46,9 +41,11 @@ const TvEpisodes = () => {
     return dispatch(dispatchObj);
   };
 
-  console.log(state.favouries);
-  console.log("[].length", [].length);
-  console.log("check: ", state.favouries);
+  const props = {
+    episodes: episodes,
+    toggleFavAction,
+    favourites: state.favourites,
+  };
 
   return (
     <Layout>
@@ -61,42 +58,11 @@ const TvEpisodes = () => {
       <Typography variant="caption">
         Favourite Count: {state.favourites.length}
       </Typography>
-      <Grid container spacing={2}>
-        {episodes.length !== 0 &&
-          episodes.map((episode: IEpisode) => {
-            return (
-              <Grid item key={episode.id}>
-                <Card>
-                  <CardActionArea>
-                    <CardContent>
-                      <img src={episode.image.medium} alt={episode.summary} />
-                    </CardContent>
-                    <CardHeader
-                      title={episode.name}
-                      subheader={`Season: ${episode.season}, Episode: ${episode.number}`}
-                    />
-                  </CardActionArea>
-                  <CardActions>
-                    <Button
-                      size="small"
-                      color="primary"
-                      onClick={() => toggleFav(episode)}
-                    >
-                      {state.favourites.find(
-                        (fav: IEpisode) => fav.id === episode.id
-                      )
-                        ? "Unfavourite"
-                        : "Favourite"}
-                    </Button>
-                    <Button size="small" color="primary">
-                      Learn More
-                    </Button>
-                  </CardActions>
-                </Card>
-              </Grid>
-            );
-          })}
-      </Grid>
+      <React.Suspense fallback={<div>...loading</div>}>
+        <Grid container spacing={2}>
+          <EpisodeList {...props} />
+        </Grid>
+      </React.Suspense>
     </Layout>
   );
 };
