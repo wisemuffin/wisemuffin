@@ -25,7 +25,9 @@
     "start": "react-scripts start -port 3000",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "cdkWeb": "cdk deploy Wisemuffin-Pipeline",
+    "cdkDocs": "cdk deploy Wisemuffin-Pipeline-Docs"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -43,6 +45,16 @@
     ]
   },
   "devDependencies": {
+    "@aws-cdk/aws-certificatemanager": "^1.21.1",
+    "@aws-cdk/aws-cloudfront": "^1.21.1",
+    "@aws-cdk/aws-codebuild": "^1.21.1",
+    "@aws-cdk/aws-codepipeline": "^1.21.1",
+    "@aws-cdk/aws-codepipeline-actions": "^1.21.1",
+    "@aws-cdk/aws-route53": "^1.21.1",
+    "@aws-cdk/aws-route53-targets": "^1.21.1",
+    "@aws-cdk/aws-s3": "^1.21.1",
+    "@aws-cdk/core": "^1.21.1",
+    "aws-cdk": "^1.21.1",
     "@types/material-ui": "^0.21.7",
     "@types/jest": "^24.0.0",
     "@types/node": "^12.0.0",

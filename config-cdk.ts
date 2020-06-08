@@ -1,7 +1,7 @@
 export const config = {
   github: {
     owner: "wisemuffin",
-    repository: "wisemuffin-viz2",
+    repository: "wisemuffin",
   },
   env: { region: "ap-southeast-2", account: "643260079476" },
   route53: {

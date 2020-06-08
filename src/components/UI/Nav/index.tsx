@@ -99,35 +99,20 @@ const NavBar = (props) => {
           <Grid container spacing={1}>
             <Grid item>
               <Typography variant="h6" className={classes.title}>
-                <Link className={classes.link} to="/" onClick={handleDrillDown}>
-                  Odin
+                <Link className={classes.link} to="/">
+                  Wisemuffin
                 </Link>
               </Typography>
             </Grid>
             <Grid item>
-              <Button variant="contained" color="primary" href="/about">
-                About
-              </Button>
-            </Grid>
-
-            <Grid item>
-              <Button
-                variant="contained"
-                color="primary"
-                onClick={() => handleWeeklyReportType("neoWeekly")}
-              >
-                NEO Consol
-              </Button>
-            </Grid>
-            <Grid item>
-              <Button variant="contained" color="primary" href="/example">
-                Example
-              </Button>
-            </Grid>
-            <Grid item>
-              <Button variant="contained" color="primary" href="/exampleVega">
-                Example Vega
-              </Button>
+              <Typography variant="subtitle1" className={classes.title}>
+                <Button
+                  className={classes.link}
+                  href="http://docs.wisemuffin.com/"
+                >
+                  Docs
+                </Button>
+              </Typography>
             </Grid>
           </Grid>
 
