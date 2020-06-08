@@ -7,7 +7,7 @@ const StoreProvider = ({
 }: JSX.ElementChildrenAttribute): JSX.Element => {
   const [state, dispatch] = useReducer(reducer, initialState, () => {
     const localData = localStorage.getItem("localWisemuffin");
-    return localData ? JSON.parse(localData) : [];
+    return localData ? JSON.parse(localData) : initialState;
   });
   useEffect(() => {
     localStorage.setItem("localWisemuffin", JSON.stringify(state));

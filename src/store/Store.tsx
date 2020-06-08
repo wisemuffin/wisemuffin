@@ -3,8 +3,6 @@ import { IState } from "../interfaces";
 
 export const initialState: IState = {
   showNav: false,
-  drillDownMetric: {},
-  weeklyReportSelected: "",
   dark: false,
   episodes: [],
   favourites: [],

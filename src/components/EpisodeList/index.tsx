@@ -9,7 +9,8 @@ import Grid from "@material-ui/core/Grid";
 import { IEpisode, IAction } from "../../interfaces";
 
 function EpisodeList(props: any): JSX.Element[] {
-  const { episodes, toggleFavAction, favourites } = props;
+  const { episodes, toggleFavAction, favourites, store } = props;
+  const { state, dispatch } = store;
   return (
     episodes.length !== 0 &&
     episodes.map((episode: IEpisode) => {
@@ -29,7 +30,7 @@ function EpisodeList(props: any): JSX.Element[] {
               <Button
                 size="small"
                 color="primary"
-                onClick={() => toggleFavAction(episode)}
+                onClick={() => toggleFavAction(state, dispatch, episode)}
               >
                 {favourites.find((fav: IEpisode) => fav.id === episode.id)
                   ? "Unfavourite"

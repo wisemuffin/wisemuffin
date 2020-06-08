@@ -9,8 +9,6 @@ export interface IAction {
 
 export interface IState {
   showNav: boolean;
-  drillDownMetric: {};
-  weeklyReportSelected: string;
   dark: boolean;
   episodes: Array<IEpisode>;
   favourites: Array<IEpisode>;
@@ -35,7 +33,8 @@ export interface IEpisode {
 
 export interface IEpisodeProps {
   episodes: Array<IEpisode>;
-  toggleFavAction: (episode: IEpisode) => IAction;
+  toggleFavAction: (state: IState, dispatch: any, episode: IEpisode) => IAction;
+  store: { state: IState; dispatch: any };
   favourites: Array<IEpisode>;
 }
 

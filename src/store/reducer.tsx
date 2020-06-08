@@ -30,7 +30,7 @@ const reducer = (stateContext: IState, { type, payload }: IAction): IState => {
     case "REMOVE_FAV":
       return {
         ...stateContext,
-        favourites: [payload],
+        favourites: payload,
       };
 
     default:
