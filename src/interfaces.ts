@@ -12,7 +12,8 @@ export interface IState {
   drillDownMetric: {};
   weeklyReportSelected: string;
   dark: boolean;
-  favourites: Array<any>;
+  episodes: Array<IEpisode>;
+  favourites: Array<IEpisode>;
 }
 
 export interface IEpisode {
@@ -37,3 +38,5 @@ export interface IEpisodeProps {
   toggleFavAction: (episode: IEpisode) => IAction;
   favourites: Array<IEpisode>;
 }
+
+export type Dispatch = React.Dispatch<IAction>;

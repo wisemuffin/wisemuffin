@@ -10,18 +10,20 @@ const EpisodeList = React.lazy<any>(() => import("../components/EpisodeList"));
 
 const TvEpisodes = () => {
   const { state, dispatch } = React.useContext(Store);
-  const [episodes, setEpisodes] = React.useState([]);
 
   React.useEffect(() => {
-    fetchTV();
+    fetchDataAction();
   }, []);
 
-  const fetchTV = async () => {
+  const fetchDataAction = async () => {
     const URL =
       "https://api.tvmaze.com/singlesearch/shows?q=rick-&-morty&embed=episodes";
     const data = await fetch(URL);
     const dataJSON = await data.json();
-    return setEpisodes(dataJSON._embedded.episodes);
+    return dispatch({
+      type: "ADD_EPISODE_DATA",
+      payload: dataJSON._embedded.episodes,
+    });
   };
 
   const toggleFavAction = (episode: IEpisode): IAction => {
@@ -43,7 +45,7 @@ const TvEpisodes = () => {
   };
 
   const props: IEpisodeProps = {
-    episodes: episodes,
+    episodes: state.episodes,
     toggleFavAction,
     favourites: state.favourites,
   };

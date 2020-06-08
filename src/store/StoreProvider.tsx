@@ -2,7 +2,9 @@ import React, { useReducer, useContext, useEffect, createContext } from "react";
 import Store, { initialState } from "./Store";
 import reducer from "./reducer";
 
-const StoreProvider = (props: any): JSX.Element => {
+const StoreProvider = ({
+  children,
+}: JSX.ElementChildrenAttribute): JSX.Element => {
   const [state, dispatch] = useReducer(reducer, initialState, () => {
     const localData = localStorage.getItem("localWisemuffin");
     return localData ? JSON.parse(localData) : [];
@@ -11,9 +13,7 @@ const StoreProvider = (props: any): JSX.Element => {
     localStorage.setItem("localWisemuffin", JSON.stringify(state));
   }, [state]);
   return (
-    <Store.Provider value={{ state, dispatch }}>
-      {props.children}
-    </Store.Provider>
+    <Store.Provider value={{ state, dispatch }}>{children}</Store.Provider>
   );
 };
 

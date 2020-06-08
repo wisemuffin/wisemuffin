@@ -6,6 +6,7 @@ export const initialState: IState = {
   drillDownMetric: {},
   weeklyReportSelected: "",
   dark: false,
+  episodes: [],
   favourites: [],
 };
 
