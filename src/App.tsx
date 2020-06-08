@@ -1,7 +1,7 @@
 import React from "react";
 import { Router, Route, Switch } from "react-router-dom";
 import history from "./history";
-import ContextProvider from "./storeContext/ContextProvider";
+import StoreProvider from "./store/StoreProvider";
 import ThemeProvider from "./hooks/ThemeProvider";
 import Layout from "./components/UI/Layout";
 import "./App.css";
@@ -12,7 +12,7 @@ import TvEpisodesFav from "./pages/TvEpisodesFav";
 
 function App(): JSX.Element {
   return (
-    <ContextProvider>
+    <StoreProvider>
       <ThemeProvider>
         <Router history={history}>
           <Layout>
@@ -24,7 +24,7 @@ function App(): JSX.Element {
           </Layout>
         </Router>
       </ThemeProvider>
-    </ContextProvider>
+    </StoreProvider>
   );
 }
 

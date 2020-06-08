@@ -4,12 +4,12 @@ import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import { IEpisode, IAction, IEpisodeProps } from "../interfaces";
 import Layout from "../components/UI/Layout";
-import Context from "../storeContext/Context";
+import Store from "../store/Store";
 
 const EpisodeList = React.lazy<any>(() => import("../components/EpisodeList"));
 
 const TvEpisodes = () => {
-  const { state, dispatch } = React.useContext(Context);
+  const { state, dispatch } = React.useContext(Store);
   const [episodes, setEpisodes] = React.useState([]);
 
   React.useEffect(() => {

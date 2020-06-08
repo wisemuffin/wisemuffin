@@ -14,7 +14,7 @@ import teal from "@material-ui/core/colors/teal";
 import indigo from "@material-ui/core/colors/indigo";
 import deepOrange from "@material-ui/core/colors/deepOrange";
 
-import Context from "../storeContext/Context";
+import Store from "../store/Store";
 
 const theme = {
   palette: {
@@ -58,7 +58,7 @@ const theme = {
 };
 
 const ThemeProvider = (props) => {
-  const { state } = useContext(Context);
+  const { state } = useContext(Store);
 
   return (
     <MuiThemeProvider

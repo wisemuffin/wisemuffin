@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import history from "../../../history";
-import Context from "../../../storeContext/Context";
+import Context from "../../../store/Store";
 import { makeStyles, useTheme, Theme } from "@material-ui/core/styles";
 import { Link } from "react-router-dom";
 import AppBar from "@material-ui/core/AppBar";

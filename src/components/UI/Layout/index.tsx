@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import Context from "../../../storeContext/Context";
+import Store from "../../../store/Store";
 import clsx from "clsx";
 import { makeStyles, Theme } from "@material-ui/core/styles";
 
@@ -33,7 +33,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 const Layout = (props) => {
   const classes = useStyles();
-  const { state } = useContext(Context);
+  const { state } = useContext(Store);
   const { showNav } = state;
 
   return (
