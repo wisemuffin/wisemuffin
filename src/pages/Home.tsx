@@ -14,6 +14,7 @@ const Home: React.FC = (props) => {
           align="center"
           color="textPrimary"
           gutterBottom
+          data-test="heading"
         >
           Latest News
         </Typography>

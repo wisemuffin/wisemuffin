@@ -63,6 +63,16 @@ Historical reports and advanced report diffing is available with the Lighthouse 
 
 checkout out [The Lighthouse CI Server docs](https://github.com/GoogleChrome/lighthouse-ci/blob/master/docs/getting-started.md)
 
+## end to end test - Cyrpess
+
+```bash
+yarn run e2e
+```
+
+### Using Graphical User Interfaces like Cypress' in WSL2
+
+[check out this](https://dev.to/nickymeuleman/using-graphical-user-interfaces-like-cypress-in-wsl2-249j)
+
 # Amplify notes
 
 Authentication - As a workaorund for unauthenticated and federated access, i am using AWS_IAM. Instructions from [Nada Dabit](https://github.com/dabit3/appsync-auth-and-unauth) legend!
