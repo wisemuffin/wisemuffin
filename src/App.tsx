@@ -10,7 +10,7 @@ import Home from "./pages/Home";
 import TvEpisodes from "./pages/TvEpisodes";
 import TvEpisodesFav from "./pages/TvEpisodesFav";
 
-function App(): JSX.Element {
+const App: React.FC = () => {
   return (
     <StoreProvider>
       <ThemeProvider>
@@ -26,6 +26,6 @@ function App(): JSX.Element {
       </ThemeProvider>
     </StoreProvider>
   );
-}
+};
 
 export default App;

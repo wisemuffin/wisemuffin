@@ -3,7 +3,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
 
-const Home = (props) => {
+const Home: React.FC = (props) => {
   const classes = useStyles();
   return (
     <main className={classes.content}>

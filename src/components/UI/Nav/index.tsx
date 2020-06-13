@@ -27,6 +27,7 @@ import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import InboxIcon from "@material-ui/icons/MoveToInbox";
 import MailIcon from "@material-ui/icons/Mail";
+import TvIcon from "@material-ui/icons/Tv";
 
 import WbSunny from "@material-ui/icons/WbSunny";
 import WbSunnyOutlined from "@material-ui/icons/WbSunnyOutlined";
@@ -34,8 +35,8 @@ import WbSunnyOutlined from "@material-ui/icons/WbSunnyOutlined";
 const drawerWidth = 240;
 
 const drawerItems = [
-  { name: "TV Episodes", link: "/tvepisodes" },
-  { name: "TV Fav", link: "/tvepisodesfav" },
+  { name: "TV Episodes", link: "/tvepisodes", icon: TvIcon },
+  { name: "TV Fav", link: "/tvepisodesfav", icon: TvIcon },
 ];
 
 const NavBar = (props) => {
@@ -158,6 +159,7 @@ const NavBar = (props) => {
         <Divider />
         <List>
           {drawerItems.map((navItem, index) => {
+            const TagName = navItem.icon;
             return (
               <ListItem
                 button
@@ -166,7 +168,7 @@ const NavBar = (props) => {
                 to={navItem.link}
               >
                 <ListItemIcon>
-                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                  <navItem.icon />
                 </ListItemIcon>
                 <ListItemText primary={navItem.name} />
               </ListItem>

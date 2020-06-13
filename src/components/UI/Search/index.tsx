@@ -6,26 +6,6 @@ import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
 import SearchIcon from "@material-ui/icons/Search";
 
-const useStyles = makeStyles((theme: Theme) => ({
-  root: {
-    padding: "2px 4px",
-    display: "flex",
-    alignItems: "center",
-    width: 400,
-  },
-  input: {
-    marginLeft: theme.spacing(1),
-    flex: 1,
-  },
-  iconButton: {
-    padding: 10,
-  },
-  divider: {
-    height: 28,
-    margin: 4,
-  },
-}));
-
 const Search = ({ placeholder = "Search", onSubmit }) => {
   const classes = useStyles();
   const [searchState, setSearchState] = useState();
@@ -60,5 +40,25 @@ const Search = ({ placeholder = "Search", onSubmit }) => {
     </Paper>
   );
 };
+
+const useStyles = makeStyles((theme: Theme) => ({
+  root: {
+    padding: "2px 4px",
+    display: "flex",
+    alignItems: "center",
+    width: 400,
+  },
+  input: {
+    marginLeft: theme.spacing(1),
+    flex: 1,
+  },
+  iconButton: {
+    padding: 10,
+  },
+  divider: {
+    height: 28,
+    margin: 4,
+  },
+}));
 
 export default Search;
