@@ -73,3 +73,7 @@ npx webpack-bundle-analyzer stats.json
 - SQL (warehouse and relational db experiance)
 - grafana
 - matomo
+
+# adding vis
+
+[cloudinary](https://cloudinary.com/console)

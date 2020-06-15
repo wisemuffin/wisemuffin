@@ -21,9 +21,13 @@
     "react-scripts": "3.4.1",
     "react-spring": "^8.0.27",
     "react-svg-brush": "^1.0.0",
+    "react-vega": "^7.3.0",
     "source-map-explorer": "^2.4.2",
     "styled-components": "^5.1.1",
     "typescript": "~3.7.2",
+    "vega": "^5.13.0",
+    "vega-datasets": "^1.31.1",
+    "vega-lite": "^4.13.1",
     "wisemuffin-charts": "^1.0.2"
   },
   "scripts": {

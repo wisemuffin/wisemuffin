@@ -2,6 +2,8 @@ import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
+import Grid from "@material-ui/core/Grid";
+import Button from "@material-ui/core/Button";
 
 const Home: React.FC = (props) => {
   const classes = useStyles();
@@ -14,10 +16,30 @@ const Home: React.FC = (props) => {
           align="center"
           color="textPrimary"
           gutterBottom
-          data-test="heading"
         >
-          Latest News
+          Visualisations
         </Typography>
+        <Typography variant="h6" align="center" color="textSecondary" paragraph>
+          Explore my gallery of visualisations i have built with a range of
+          visualisation tools.
+        </Typography>
+        {/* <PacmanLoader
+              size="60"
+              color="#6b5ce7"
+              css={{ width: "260px !important", height: "130px !important" }}
+            /> */}
+        <Grid container spacing={1} justify="center" alignContent="center">
+          <Grid item>
+            <Button href="/visualisations" variant="contained" color="primary">
+              Visualisations
+            </Button>
+          </Grid>
+          <Grid item>
+            <Button href="/chartlib" variant="outlined" color="primary">
+              Vis Library
+            </Button>
+          </Grid>
+        </Grid>
       </Container>
     </main>
   );

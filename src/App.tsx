@@ -10,6 +10,8 @@ import Home from "./pages/Home";
 import TvEpisodes from "./pages/TvEpisodes";
 import TvEpisodesFav from "./pages/TvEpisodesFav";
 import ChartLib from "./pages/ChartLib";
+import Visualisations from "./pages/Visualisations";
+import VegaExamples from "./pages/Visualisations/VegaExamples";
 
 const App: React.FC = () => {
   return (
@@ -22,6 +24,12 @@ const App: React.FC = () => {
               <Route exact path="/tvepisodes" component={TvEpisodes} />
               <Route exact path="/tvepisodesfav" component={TvEpisodesFav} />
               <Route exact path="/chartlib" component={ChartLib} />
+              <Route exact path="/visualisations" component={Visualisations} />
+              <Route
+                exact
+                path="/visualisations/vegaExamples"
+                component={VegaExamples}
+              />
             </Switch>
           </Layout>
         </Router>

@@ -6,6 +6,7 @@ export const initialState: IState = {
   dark: false,
   episodes: [],
   favourites: [],
+  visualisations: [],
 };
 
 const Store = React.createContext<IState | any>(initialState);

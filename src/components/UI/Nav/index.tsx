@@ -37,6 +37,7 @@ import BarChartIcon from "@material-ui/icons/BarChart";
 const drawerWidth = 240;
 
 const drawerItems = [
+  { name: "Visualisations", link: "/visualisations", icon: BubbleChartIcon },
   { name: "Wisemuffin-charts", link: "/chartlib", icon: AssessmentIcon },
   { name: "TV Episodes", link: "/tvepisodes", icon: TvIcon },
   { name: "TV Fav", link: "/tvepisodesfav", icon: TvIcon },

@@ -12,6 +12,7 @@ export interface IState {
   dark: boolean;
   episodes: Array<IEpisode>;
   favourites: Array<IEpisode>;
+  visualisations: Array<IVis>;
 }
 
 export interface IEpisode {
@@ -39,3 +40,21 @@ export interface IEpisodeProps {
 }
 
 export type Dispatch = React.Dispatch<IAction>;
+
+export interface IVis {
+  createdDate: string;
+  id: number;
+  mediaType: "video" | "img";
+  media: {
+    medium: string;
+    original: string;
+  };
+  name: string;
+  summary: string;
+  link: string;
+}
+
+export interface IVisListProps {
+  visualisations: Array<IVis>;
+  store: { state: IState; dispatch: any };
+}
