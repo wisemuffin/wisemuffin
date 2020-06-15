@@ -9,6 +9,7 @@ import "./App.css";
 import Home from "./pages/Home";
 import TvEpisodes from "./pages/TvEpisodes";
 import TvEpisodesFav from "./pages/TvEpisodesFav";
+import ChartLib from "./pages/ChartLib";
 
 const App: React.FC = () => {
   return (
@@ -20,6 +21,7 @@ const App: React.FC = () => {
               <Route exact path="/" component={Home} />
               <Route exact path="/tvepisodes" component={TvEpisodes} />
               <Route exact path="/tvepisodesfav" component={TvEpisodesFav} />
+              <Route exact path="/chartlib" component={ChartLib} />
             </Switch>
           </Layout>
         </Router>

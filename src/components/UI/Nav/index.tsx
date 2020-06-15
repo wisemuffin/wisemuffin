@@ -25,16 +25,19 @@ import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
-import InboxIcon from "@material-ui/icons/MoveToInbox";
-import MailIcon from "@material-ui/icons/Mail";
 import TvIcon from "@material-ui/icons/Tv";
 
 import WbSunny from "@material-ui/icons/WbSunny";
 import WbSunnyOutlined from "@material-ui/icons/WbSunnyOutlined";
+import AssessmentIcon from "@material-ui/icons/Assessment";
+import PieChartIcon from "@material-ui/icons/PieChart";
+import BubbleChartIcon from "@material-ui/icons/BubbleChart";
+import BarChartIcon from "@material-ui/icons/BarChart";
 
 const drawerWidth = 240;
 
 const drawerItems = [
+  { name: "Wisemuffin-charts", link: "/chartlib", icon: AssessmentIcon },
   { name: "TV Episodes", link: "/tvepisodes", icon: TvIcon },
   { name: "TV Fav", link: "/tvepisodesfav", icon: TvIcon },
 ];
