@@ -122,7 +122,7 @@ const ChartLib: React.FC<ChartLibProps> = ({}) => {
         >
           <Grid item>
             <Button
-              variant="outlined"
+              variant="contained"
               color="primary"
               href="http://docscharts.wisemuffin.com/"
             >
@@ -132,7 +132,7 @@ const ChartLib: React.FC<ChartLibProps> = ({}) => {
           <Grid item>
             <Button
               variant="outlined"
-              color="secondary"
+              color="primary"
               href="https://www.npmjs.com/package/wisemuffin-charts/"
             >
               NPM

@@ -13207,9 +13207,9 @@ which@^2.0.1:
     isexe "^2.0.0"
 
 wisemuffin-charts@^1.0.2:
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/wisemuffin-charts/-/wisemuffin-charts-1.0.2.tgz#96a97ede5e8ff428f4b57f91d2edd46eabb91b35"
-  integrity sha512-BTt7uABWKLzmvBKCO5gCqEs18A8cEOCSGNsTcCYdnCeGASDvjaR79E4APW06g5bjvRoa4VyhxmOYI6efzNjcBA==
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/wisemuffin-charts/-/wisemuffin-charts-1.0.3.tgz#999cef07b97b6c1c824e472894d1c89f052f8d2d"
+  integrity sha512-DSV//qBZydbR9V+sHgRO1zwegGHtgq5wekl8n8scFAa0231dIiY0ACUFCeN6+KoZZXepVw/tYiF8NyD9ZCHBZA==
 
 word-wrap@~1.2.3:
   version "1.2.3"

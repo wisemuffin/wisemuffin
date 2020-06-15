@@ -22,6 +22,10 @@ Codepipeline status => cloudwatch rule => sns topic => lambda => slackwebhook
 
 # Cloud Formation - infrastructure as code for AWS Codepipline
 
+:::caution
+Warning! Have switched to AWS's Cloud Developer Kit CDK for software as code
+:::
+
 creat stack
 
 ```bash
@@ -32,6 +36,18 @@ to redeploy existing stack
 
 ```bash
 aws cloudformation deploy --template-file file://./cloudformation-ci-cd.yml --stack-name wisemuffin-ci-cd
+```
+
+# CDK
+
+```bash
+yarn cdkWeb
+```
+
+or
+
+```bash
+cdk deploy Wisemuffin-Pipeline
 ```
 
 # Testing
