@@ -129,6 +129,15 @@ const ChartLib: React.FC<ChartLibProps> = ({}) => {
               Docs
             </Button>
           </Grid>
+          <Grid item>
+            <Button
+              variant="outlined"
+              color="secondary"
+              href="https://www.npmjs.com/package/wisemuffin-charts/"
+            >
+              NPM
+            </Button>
+          </Grid>
         </Grid>
         <Grid spacing={3} container>
           <Grid item md={3} sm={4}>
