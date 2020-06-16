@@ -1,4 +1,5 @@
 import React from "react";
+import { Link as RouterLink } from "react-router-dom";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import CardHeader from "@material-ui/core/CardHeader";
@@ -41,7 +42,7 @@ const VisList: React.FC<IVisListProps> = ({ store, visualisations }) => {
           return (
             <Grid item key={vis.id} xl={3} md={6} sm={12}>
               <Card>
-                <CardActionArea href={vis.link}>
+                <CardActionArea component={RouterLink} to={vis.link}>
                   <ChooseMedia />
                   <CardHeader title={vis.name} />
 

@@ -3,6 +3,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Store from "../../store/Store";
 import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
+import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
 import Search from "../../components/UI/Search";
 import VisList from "../../components/VisList";
@@ -81,7 +82,14 @@ const Visualisations: React.FC = () => {
           Visualisation Gallery
         </Typography>
         <Box mb={3}>
-          <Search onSubmit={setSearchVis} placeholder="Search Visualisation" />
+          <Grid container spacing={5} justify="center">
+            <Grid item>
+              <Search
+                onSubmit={setSearchVis}
+                placeholder="Search Visualisation"
+              />
+            </Grid>
+          </Grid>
         </Box>
         <VisList visualisations={filteredVisList} store={{ state, dispatch }} />
       </Container>

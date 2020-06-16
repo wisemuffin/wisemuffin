@@ -1,4 +1,5 @@
 import React from "react";
+import { Link as RouterLink } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
@@ -30,12 +31,22 @@ const Home: React.FC = (props) => {
             /> */}
         <Grid container spacing={1} justify="center" alignContent="center">
           <Grid item>
-            <Button href="/visualisations" variant="contained" color="primary">
+            <Button
+              component={RouterLink}
+              to="/visualisations"
+              variant="contained"
+              color="primary"
+            >
               Visualisations
             </Button>
           </Grid>
           <Grid item>
-            <Button href="/chartlib" variant="outlined" color="primary">
+            <Button
+              component={RouterLink}
+              to="/chartlib"
+              variant="outlined"
+              color="primary"
+            >
               Vis Library
             </Button>
           </Grid>
