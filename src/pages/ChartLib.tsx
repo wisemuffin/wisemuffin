@@ -5,6 +5,7 @@ import Button from "@material-ui/core/Button";
 import Card from "@material-ui/core/Card";
 import CardActionArea from "@material-ui/core/CardActionArea";
 import CardContent from "@material-ui/core/CardContent";
+import Box from "@material-ui/core/Box";
 import * as d3 from "d3";
 import {
   Timeline,
@@ -99,7 +100,7 @@ const ChartLib: React.FC<ChartLibProps> = ({}) => {
     <section>
       <div style={{ flexGrow: 1, padding: "2rem" }}>
         <Typography variant="h1" align="center" gutterBottom>
-          wisemuffin-chart library{" "}
+          wisemuffin chart library{" "}
           <span role="img" aria-label="chart emoji">
             📊
           </span>{" "}
@@ -140,7 +141,7 @@ const ChartLib: React.FC<ChartLibProps> = ({}) => {
           </Grid>
         </Grid>
         <Grid spacing={3} container>
-          <Grid item md={3} sm={4}>
+          <Grid item md={3} sm={6} xs={12}>
             <Card>
               <CardActionArea>
                 <CardContent>
@@ -159,7 +160,7 @@ const ChartLib: React.FC<ChartLibProps> = ({}) => {
               </CardActionArea>
             </Card>
           </Grid>
-          <Grid item md={3} sm={4}>
+          <Grid item md={3} sm={6} xs={12}>
             <Card>
               <CardActionArea>
                 <CardContent>
@@ -219,31 +220,33 @@ const ChartLib: React.FC<ChartLibProps> = ({}) => {
             </Card>
           </Grid>
           <Grid item xl={8} md={12} sm={12}>
-            <Card>
-              <CardActionArea>
-                <CardContent>
-                  <HeatMap
-                    data={heatMapDataSetup()}
-                    xAccessor={(d) => d.date}
-                    yAccessor={(d) => d.value}
-                    xTickFormat={d3.timeFormat("%d/%m/%Y")}
-                    xLabel="date"
-                    yLabel="value"
-                  />
-                  <Typography gutterBottom variant="h5" component="h2">
-                    Heatmap
-                  </Typography>
-                  <Typography
-                    variant="body2"
-                    color="textSecondary"
-                    component="p"
-                  >
-                    compare rows with column based on colour to highlight
-                    outliers or trends.
-                  </Typography>
-                </CardContent>
-              </CardActionArea>
-            </Card>
+            <Box display={{ xs: "none", md: "block" }} m={1}>
+              <Card>
+                <CardActionArea>
+                  <CardContent>
+                    <HeatMap
+                      data={heatMapDataSetup()}
+                      xAccessor={(d) => d.date}
+                      yAccessor={(d) => d.value}
+                      xTickFormat={d3.timeFormat("%d/%m/%Y")}
+                      xLabel="date"
+                      yLabel="value"
+                    />
+                    <Typography gutterBottom variant="h5" component="h2">
+                      Heatmap
+                    </Typography>
+                    <Typography
+                      variant="body2"
+                      color="textSecondary"
+                      component="p"
+                    >
+                      compare rows with column based on colour to highlight
+                      outliers or trends.
+                    </Typography>
+                  </CardContent>
+                </CardActionArea>
+              </Card>
+            </Box>
           </Grid>
           <Grid item xl={4} md={6} sm={12}>
             <Card>

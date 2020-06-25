@@ -13572,9 +13572,9 @@ wide-align@^1.1.0:
     string-width "^1.0.2 || 2"
 
 wisemuffin-charts@^1.0.2:
-  version "1.0.3"
-  resolved "https://registry.yarnpkg.com/wisemuffin-charts/-/wisemuffin-charts-1.0.3.tgz#999cef07b97b6c1c824e472894d1c89f052f8d2d"
-  integrity sha512-DSV//qBZydbR9V+sHgRO1zwegGHtgq5wekl8n8scFAa0231dIiY0ACUFCeN6+KoZZXepVw/tYiF8NyD9ZCHBZA==
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/wisemuffin-charts/-/wisemuffin-charts-1.0.4.tgz#f0586a9a9ef3fe9f9aebba01bc88cbbfc9b04db3"
+  integrity sha512-qKWhQ3ydeiwUixGREzVYF9oko5nRG+HVvP8GYplTm49FTVBocyxQfk5rytIw6oummyKNj3S+wdsopQl+qgfBJQ==
 
 word-wrap@~1.2.3:
   version "1.2.3"

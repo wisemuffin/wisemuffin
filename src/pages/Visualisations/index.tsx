@@ -82,7 +82,7 @@ const Visualisations: React.FC = () => {
           Visualisation Gallery
         </Typography>
         <Box mb={3}>
-          <Grid container spacing={5} justify="center">
+          <Grid container spacing={2} justify="center">
             <Grid item>
               <Search
                 onSubmit={setSearchVis}
