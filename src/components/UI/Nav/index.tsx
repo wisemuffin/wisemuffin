@@ -170,6 +170,7 @@ const NavBar = (props) => {
                 key={navItem.name}
                 component={Link}
                 to={navItem.link}
+                onClick={handleDrawerClose}
               >
                 <ListItemIcon>
                   <navItem.icon />
