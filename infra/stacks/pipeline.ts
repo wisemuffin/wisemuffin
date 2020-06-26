@@ -6,6 +6,7 @@ import * as CodePipelineAction from "@aws-cdk/aws-codepipeline-actions";
 import * as ssm from "@aws-cdk/aws-ssm";
 import * as route53 from "@aws-cdk/aws-route53";
 import * as route53targets from "@aws-cdk/aws-route53-targets";
+import * as iam from "@aws-cdk/aws-iam";
 
 export interface PipelineProps extends CDK.StackProps {
   github: {
@@ -67,35 +68,53 @@ export class Pipeline extends CDK.Stack {
       ],
     });
 
+    // AWS CodeBuild to build CRA website and CDK resources
+    const codeBuildStage = new CodeBuild.PipelineProject(
+      this,
+      "BuildWebsiteWisemuffinTemp",
+      {
+        environmentVariables: {
+          REACT_APP_YAHOOFINANCE: {
+            type: CodeBuild.BuildEnvironmentVariableType.PARAMETER_STORE,
+            value: "REACT_APP_YAHOOFINANCE",
+          },
+          REACT_APP_MAPBOX_TOKEN: {
+            type: CodeBuild.BuildEnvironmentVariableType.PARAMETER_STORE,
+            value: "REACT_APP_MAPBOX_TOKEN",
+          },
+        },
+        projectName: "Websitetemp",
+        buildSpec: CodeBuild.BuildSpec.fromSourceFilename(
+          "./infra/buildspec.yml"
+        ),
+        environment: { computeType: CodeBuild.ComputeType.MEDIUM },
+      }
+    );
+
+    // Grant code build paramter store access
+    codeBuildStage.addToRolePolicy(
+      new iam.PolicyStatement({
+        actions: ["ssm:GetParameters", "ssm:GetParameter"],
+        resources: [
+          `arn:aws:ssm:${CDK.Stack.of(this).region}:${
+            CDK.Stack.of(this).account
+          }:parameter/REACT_APP_YAHOOFINANCE`,
+          `arn:aws:ssm:${CDK.Stack.of(this).region}:${
+            CDK.Stack.of(this).account
+          }:parameter/REACT_APP_MAPBOX_TOKEN`,
+        ],
+        effect: iam.Effect.ALLOW,
+      })
+    );
+
     // AWS CodePipeline stage to build CRA website and CDK resources
     pipeline.addStage({
       stageName: "Build",
       actions: [
         // AWS CodePipeline action to run CodeBuild project
         new CodePipelineAction.CodeBuildAction({
-          actionName: "Website",
-          project: new CodeBuild.PipelineProject(
-            this,
-            "BuildWebsiteWisemuffinTemp",
-            {
-              environmentVariables: {
-                REACT_APP_YAHOOFINANCE: {
-                  type: CodeBuild.BuildEnvironmentVariableType.PARAMETER_STORE,
-                  value: "REACT_APP_YAHOOFINANCE",
-                },
-                REACT_APP_MAPBOX_TOKEN: {
-                  type: CodeBuild.BuildEnvironmentVariableType.PARAMETER_STORE,
-                  value: "REACT_APP_MAPBOX_TOKEN",
-                },
-              },
-              projectName: "Websitetemp",
-              buildSpec: CodeBuild.BuildSpec.fromSourceFilename(
-                "./infra/buildspec.yml"
-              ),
-              environment: { computeType: CodeBuild.ComputeType.MEDIUM },
-            }
-          ),
-
+          actionName: "Build",
+          project: codeBuildStage,
           input: outputSources,
           outputs: [outputWebsite],
         }),
