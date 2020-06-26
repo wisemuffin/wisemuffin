@@ -130,8 +130,7 @@ const StockLineChart = (props) => {
           method: "GET",
           headers: {
             "x-rapidapi-host": "apidojo-yahoo-finance-v1.p.rapidapi.com",
-            "x-rapidapi-key":
-              "403e8d2c3emshb2a6f056df380a9p121e13jsnce6b651b6124",
+            "x-rapidapi-key": process.env.REACT_APP_YAHOOFINANCE!,
           },
         }
       );

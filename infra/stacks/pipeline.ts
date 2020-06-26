@@ -67,17 +67,6 @@ export class Pipeline extends CDK.Stack {
       ],
     });
 
-    // Retrieve the latest value of the non-secret parameter
-    // with name "/My/String/Parameter".
-    const WISE_REACT_APP_MAPBOX_TOKEN = ssm.StringParameter.fromStringParameterAttributes(
-      this,
-      "MyValue",
-      {
-        parameterName: "WISE_REACT_APP_MAPBOX_TOKEN",
-        // 'version' can be specified but is optional.
-      }
-    ).stringValue;
-
     // AWS CodePipeline stage to build CRA website and CDK resources
     pipeline.addStage({
       stageName: "Build",
@@ -89,6 +78,16 @@ export class Pipeline extends CDK.Stack {
             this,
             "BuildWebsiteWisemuffinTemp",
             {
+              environmentVariables: {
+                REACT_APP_YAHOOFINANCE: {
+                  type: CodeBuild.BuildEnvironmentVariableType.PARAMETER_STORE,
+                  value: "REACT_APP_YAHOOFINANCE",
+                },
+                REACT_APP_MAPBOX_TOKEN: {
+                  type: CodeBuild.BuildEnvironmentVariableType.PARAMETER_STORE,
+                  value: "REACT_APP_MAPBOX_TOKEN",
+                },
+              },
               projectName: "Websitetemp",
               buildSpec: CodeBuild.BuildSpec.fromSourceFilename(
                 "./infra/buildspec.yml"
