@@ -13,6 +13,9 @@ export interface IState {
   episodes: Array<IEpisode>;
   favourites: Array<IEpisode>;
   visualisations: Array<IVis>;
+  yahooFinanceApiOff: boolean;
+  yahooFinanceApiOffChartWithinCard: boolean;
+  yahooFinanceApiOffStockCard: boolean;
 }
 
 export interface IEpisode {
@@ -57,4 +60,54 @@ export interface IVis {
 export interface IVisListProps {
   visualisations: Array<IVis>;
   store: { state: IState; dispatch: any };
+}
+
+export interface IStockQuote {
+  language: string;
+  region: string;
+  quoteType: string;
+  triggerable: boolean;
+  exchange: string;
+  sourceInterval: number;
+  exchangeTimezoneName: string;
+  exchangeTimezoneShortName: string;
+  gmtOffSetMilliseconds: number;
+  esgPopulated: boolean;
+  tradeable: boolean;
+  exchangeDataDelayedBy: number;
+  market: string;
+  fullExchangeName: string;
+  marketState: string;
+  priceHint: number;
+  symbol: string;
+}
+
+export interface IStock {
+  id: string;
+  title: string;
+  description: string;
+  canonicalName: string;
+  criteriaMeta: {
+    size: number;
+    offset: number;
+    sortField: string;
+    sortType: string;
+    quoteType: string;
+    topOperator: string;
+    criteria: [
+      {
+        field: string;
+        operators: [string];
+        values: [number];
+        labelsSelected: [string];
+      }
+    ];
+  };
+  rawCriteria: string;
+  start: number;
+  count: number;
+  total: number;
+  quotes: [IStockQuote];
+  predefinedScr: boolean;
+  versionId: number;
 }
