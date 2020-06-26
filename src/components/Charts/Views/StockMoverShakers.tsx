@@ -35,16 +35,15 @@ const StockMoverShakers = (props) => {
 
   const getYahooFinanceMovers = async () => {
     try {
-      const resp = await fetch(
-        "https://apidojo-yahoo-finance-v1.p.rapidapi.com/market/get-movers?region=US&lang=en",
-        {
-          method: "GET",
-          headers: {
-            "x-rapidapi-host": "apidojo-yahoo-finance-v1.p.rapidapi.com",
-            "x-rapidapi-key": process.env.REACT_APP_YAHOOFINANCE!,
-          },
-        }
-      );
+      const url =
+        "https://apidojo-yahoo-finance-v1.p.rapidapi.com/market/get-movers?region=US&lang=en";
+      const resp = await fetch(url, {
+        method: "GET",
+        headers: {
+          "x-rapidapi-host": "apidojo-yahoo-finance-v1.p.rapidapi.com",
+          "x-rapidapi-key": process.env.REACT_APP_YAHOOFINANCE!,
+        },
+      });
       const data = await resp.json();
       return data;
     } catch (err) {
@@ -57,17 +56,15 @@ const StockMoverShakers = (props) => {
     const listOfSymbols = props.quotes.join("%252C");
     console.log("listOfSymbols ", listOfSymbols);
     try {
-      const resp = await fetch(
-        `https://apidojo-yahoo-finance-v1.p.rapidapi.com/market/get-quotes?region=US&lang=en&symbols=${listOfSymbols}`,
-        {
-          method: "GET",
-          headers: {
-            "x-rapidapi-host": "apidojo-yahoo-finance-v1.p.rapidapi.com",
-            "x-rapidapi-key":
-              "403e8d2c3emshb2a6f056df380a9p121e13jsnce6b651b6124",
-          },
-        }
-      );
+      const url = `https://apidojo-yahoo-finance-v1.p.rapidapi.com/market/get-quotes?region=US&lang=en&symbols=${listOfSymbols}`;
+
+      const resp = await fetch(url, {
+        method: "GET",
+        headers: {
+          "x-rapidapi-host": "apidojo-yahoo-finance-v1.p.rapidapi.com",
+          "x-rapidapi-key": process.env.REACT_APP_YAHOOFINANCE!,
+        },
+      });
       const data = await resp.json();
       console.log("getYahooFinanceQuotes ", data);
       return data;
@@ -77,17 +74,14 @@ const StockMoverShakers = (props) => {
   };
   const getYahooFinanceQuoteHistory = async (stockCode) => {
     try {
-      const resp = await fetch(
-        `https://apidojo-yahoo-finance-v1.p.rapidapi.com/stock/v2/get-historical-data?frequency=${frequency}&filter=history&period1=${fromDate}&period2=${toDate}&symbol=${stockCode}`,
-        {
-          method: "GET",
-          headers: {
-            "x-rapidapi-host": "apidojo-yahoo-finance-v1.p.rapidapi.com",
-            "x-rapidapi-key":
-              "403e8d2c3emshb2a6f056df380a9p121e13jsnce6b651b6124",
-          },
-        }
-      );
+      const url = `https://apidojo-yahoo-finance-v1.p.rapidapi.com/stock/v2/get-historical-data?frequency=${frequency}&filter=history&period1=${fromDate}&period2=${toDate}&symbol=${stockCode}`;
+      const resp = await fetch(url, {
+        method: "GET",
+        headers: {
+          "x-rapidapi-host": "apidojo-yahoo-finance-v1.p.rapidapi.com",
+          "x-rapidapi-key": process.env.REACT_APP_YAHOOFINANCE!,
+        },
+      });
       const data = await resp.json();
       return data;
     } catch (err) {
