@@ -27,6 +27,12 @@ const StockMoverShakers = (props) => {
   const [dayLossers, setDayLossers] = useState<IStock>();
   const [dayMovers, setDayMovers] = useState<IStock>();
   const [quotes, setQuotes] = useState<IStockQuote>();
+
+  const ticksDivideBy = 1;
+  const fromDate = 111;
+  const toDate = 111;
+  const frequency = "1d";
+
   const getYahooFinanceMovers = async () => {
     try {
       const resp = await fetch(
@@ -70,14 +76,33 @@ const StockMoverShakers = (props) => {
       console.error(err);
     }
   };
+  const getYahooFinanceQuoteHistory = async (stockCode) => {
+    try {
+      const resp = await fetch(
+        `https://apidojo-yahoo-finance-v1.p.rapidapi.com/stock/v2/get-historical-data?frequency=${frequency}&filter=history&period1=${fromDate}&period2=${toDate}&symbol=${stockCode}`,
+        {
+          method: "GET",
+          headers: {
+            "x-rapidapi-host": "apidojo-yahoo-finance-v1.p.rapidapi.com",
+            "x-rapidapi-key":
+              "403e8d2c3emshb2a6f056df380a9p121e13jsnce6b651b6124",
+          },
+        }
+      );
+      const data = await resp.json();
+      return data;
+    } catch (err) {
+      console.error(err);
+    }
+  };
   useEffect(() => {
     const getDataAndDraw = async () => {
       const data = yahooFinanceApiOffStockCard
         ? fakedataMovers
         : await getYahooFinanceMovers();
       setDayGainers(data.finance.result[0]);
-      setDayLossers(data.finance.result[1]);
-      setDayMovers(data.finance.result[2]);
+      // setDayLossers(data.finance.result[1]);
+      // setDayMovers(data.finance.result[2]);
       console.log("gainers ", data);
       console.log(
         "symbols to pass ",
@@ -111,7 +136,7 @@ const StockMoverShakers = (props) => {
           </Box>
           <Grid container spacing={1} justify="center" alignContent="center">
             {dayGainers?.quotes.map((moversQuote) => (
-              <Grid item key={moversQuote.symbol} xs={12} sm={6} md={4} lg={3}>
+              <Grid item key={moversQuote.symbol} xs={6} sm={4} md={3} lg={2}>
                 <DashCard
                   metricName={
                     quotes[moversQuote.symbol].longName +
@@ -135,9 +160,9 @@ const StockMoverShakers = (props) => {
                   }
                   timeUpdated={
                     "Last updated: " +
-                    moment(quotes[moversQuote.symbol].regularMarketTime).format(
-                      "DD MMM YY"
-                    )
+                    moment
+                      .unix(quotes[moversQuote.symbol].regularMarketTime)
+                      .format("DD MMM YY")
                   }
                 />
               </Grid>

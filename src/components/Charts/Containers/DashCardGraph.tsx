@@ -30,15 +30,23 @@ const DashCardGraph = (props) => {
         direction="row"
         justify="flex-start"
         alignItems="flex-end"
+        spacing={1}
       >
-        <Grid item xs={8}>
+        <Grid item>
           <Typography variant={"h3"}>{curretMetricValue}</Typography>
         </Grid>
-        <Grid item xs={4}>
-          <Typography variant={"h5"}>{units}</Typography>
+        <Grid item>
+          <Typography color="textSecondary" variant={"h4"}>
+            {units}
+          </Typography>
         </Grid>
       </Grid>
-      <Grid container alignItems="center">
+      <Grid container alignItems="center" spacing={1}>
+        <Grid item>
+          <Typography color="textSecondary" variant={"h5"}>
+            {metricChange} {units}
+          </Typography>
+        </Grid>
         <Grid item>
           {Math.sign(metricChange) === -1 ? (
             <TrendingDown style={{ color: "#DC143C" }} />
@@ -46,14 +54,9 @@ const DashCardGraph = (props) => {
             <TrendingUp style={{ color: "#8FBC8F" }} />
           )}
         </Grid>
-        <Grid item xs={1} />
-        <Grid item>
-          <Typography variant={"h5"}>{metricChange}</Typography>
-        </Grid>
-        <Grid item xs={1} />
         <Grid item>
           <Typography
-            variant={"h6"}
+            variant={"h5"}
             style={
               Math.sign(metricPercentageChange) === -1
                 ? { color: "#DC143C" }
@@ -66,14 +69,15 @@ const DashCardGraph = (props) => {
       </Grid>
       <Grid container>
         <Grid item xs={12}>
-          <MiniStockLineHistoryChart
+          {/* TODO currently calling API far to many times on re render */}
+          {/* <MiniStockLineHistoryChart
             stockCode={"AMZN"}
             chartTitle={"Amazon over x months"}
             ticksDivideBy={1}
             fromDate={111}
             toDate={111}
             frequency={"1d"}
-          />
+          /> */}
         </Grid>
       </Grid>
       <Typography variant={"caption"}>{timeUpdated}</Typography>
