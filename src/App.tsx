@@ -13,6 +13,7 @@ import ChartLib from "./pages/ChartLib";
 import Visualisations from "./pages/Visualisations";
 import VegaExamples from "./pages/Visualisations/VegaExamples";
 import Stocks from "./pages/Visualisations/Stocks";
+import Earthquake from "./pages/Visualisations/Earthquake";
 
 const App: React.FC = () => {
   return (
@@ -32,6 +33,11 @@ const App: React.FC = () => {
                 component={VegaExamples}
               />
               <Route exact path="/visualisations/stocks" component={Stocks} />
+              <Route
+                exact
+                path="/visualisations/earthquake"
+                component={Earthquake}
+              />
             </Switch>
           </Layout>
         </Router>

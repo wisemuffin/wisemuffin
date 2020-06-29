@@ -129,7 +129,7 @@ const StockMoverShakers = (props) => {
           </Box>
           <Grid container spacing={1} justify="center" alignContent="center">
             {dayGainers?.quotes.map((moversQuote) => (
-              <Grid item key={moversQuote.symbol} xs={6} sm={4} md={3} lg={2}>
+              <Grid item key={moversQuote.symbol} xs={12} sm={6} md={4} lg={3}>
                 <DashCard
                   metricName={
                     quotes[moversQuote.symbol].longName +
