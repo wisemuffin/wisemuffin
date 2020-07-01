@@ -8,10 +8,10 @@ export const initialState: IState = {
   episodes: [],
   favourites: [],
   visualisations: [],
-  yahooFinanceApiOff: false,
+  yahooFinanceApiOff: true,
   // TODO turning off currently because so many api calls
-  yahooFinanceApiOffChartWithinCard: false,
-  yahooFinanceApiOffStockCard: false,
+  yahooFinanceApiOffChartWithinCard: true,
+  yahooFinanceApiOffStockCard: true,
 };
 
 const Store = React.createContext<IState | any>(initialState);

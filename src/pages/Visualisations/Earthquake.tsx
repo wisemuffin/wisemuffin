@@ -10,6 +10,9 @@ import EarthquakeCard from "../../components/EarthquakeCard";
 import EarthquakeTable from "../../components/Tables/EarthquakeTable";
 import Grid from "@material-ui/core/Grid";
 import moment from "moment";
+import { isNullOrFalse } from "vega-lite/build/src/util";
+
+import useFetch from "../../hooks/useFetch";
 
 // This is a custom filter UI that uses a
 // slider to set the filter value between a column's
@@ -47,35 +50,15 @@ function SliderColumnFilter({
 }
 
 const Earthquake = (props) => {
-  const [sigEarthquake, setSigEarthquake] = useState<IEarthquake>();
-  const [earthquakeSigPastMonth, setEarthquakeSigPastMonth] = useState<
-    IEarthquake
-  >();
   const { classes } = props;
 
-  const getSigEarthquake = async () => {
-    const url =
-      "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/significant_week.geojson";
-    const resp = await fetch(url, { method: "GET" });
-    const data = await resp.json();
-    setSigEarthquake(data);
-  };
+  const sigEarthquake: IEarthquake = useFetch(
+    "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/significant_week.geojson"
+  );
 
-  const getEarthquakeSigPastMonth = async () => {
-    const url =
-      "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/significant_month.geojson";
-    const resp = await fetch(url, { method: "GET" });
-    const data = await resp.json();
-    setEarthquakeSigPastMonth(data);
-  };
-
-  useEffect(() => {
-    getSigEarthquake();
-  }, []);
-
-  useEffect(() => {
-    getEarthquakeSigPastMonth();
-  }, []);
+  const earthquakeSigPastMonth: IEarthquake = useFetch(
+    "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/significant_month.geojson"
+  );
 
   return (
     <section>
@@ -192,95 +175,60 @@ const Earthquake = (props) => {
             <EarthquakeTable
               data={earthquakeSigPastMonth.features}
               columns={[
+                // {
+                //   Header: "Type",
+                //   accessor: "properties.type"
+                // },
                 {
-                  Header: "Name",
-                  columns: [
-                    // {
-                    //   Header: "Type",
-                    //   accessor: "properties.type"
-                    // },
-                    {
-                      Header: "Location",
-                      accessor: "properties.place",
-                      minWidth: 200,
-                    },
-                    {
-                      Header: "Time",
-                      accessor: "properties.time",
-                      Cell: (row) =>
-                        moment(row.value).format("Do MMM YYYY, h a"),
-                    },
-                    {
-                      Header: "Magnitude",
-                      accessor: "properties.mag",
-                      Filter: SliderColumnFilter,
-                      aggregate: "average",
-                      Aggregated: ({ value }) => `${value} (avg)`,
-                      Cell: (row) => (
-                        <div
-                          style={{
-                            width: "100%",
-                            height: "100%",
-                            backgroundColor: "#dadada",
-                            borderRadius: "2px",
-                          }}
-                        >
-                          <div
-                            style={{
-                              width: `${row.value * 10}%`, // mag out of 10
-                              height: "100%",
-                              backgroundColor:
-                                row.value < 4.5
-                                  ? "#85cc00"
-                                  : row.value < 6.5
-                                  ? "#ffbf00"
-                                  : "#ff2e00",
-                              borderRadius: "2px",
-                              transition: "all .2s ease-out",
-                            }}
-                          >
-                            {row.value}
-                          </div>
-                        </div>
-                      ),
-                    },
-                    {
-                      Header: "Mag Type",
-                      accessor: "properties.magType",
-                    },
-                  ],
+                  Header: "Location",
+                  accessor: "properties.place",
+                  minWidth: 200,
+                },
+                {
+                  Header: "Time",
+                  accessor: "properties.time",
+                  Cell: (row) => moment(row.value).format("Do MMM YYYY, h a"),
+                },
+                {
+                  Header: "Magnitude",
+                  accessor: "properties.mag",
+                  Filter: SliderColumnFilter,
+                  aggregate: "average",
+                  Aggregated: ({ value }) => `${value} (avg)`,
+                  Cell: (row) => (
+                    <div
+                      style={{
+                        width: "100%",
+                        height: "100%",
+                        backgroundColor: "#dadada",
+                        borderRadius: "2px",
+                      }}
+                    >
+                      <div
+                        style={{
+                          width: `${row.value * 10}%`, // mag out of 10
+                          height: "100%",
+                          backgroundColor:
+                            row.value < 4.5
+                              ? "#85cc00"
+                              : row.value < 6.5
+                              ? "#ffbf00"
+                              : "#ff2e00",
+                          borderRadius: "2px",
+                          transition: "all .2s ease-out",
+                        }}
+                      >
+                        {row.value}
+                      </div>
+                    </div>
+                  ),
+                },
+                {
+                  Header: "Mag Type",
+                  accessor: "properties.magType",
                 },
               ]}
             />
-
-            <Grid container justify="center" spacing={2}>
-              {earthquakeSigPastMonth.features.map((card) => (
-                <Grid item xs={12} sm={6} md={4} lg={3} key={card.id}>
-                  <EarthquakeCard
-                    title={`Magnitude ${card.properties.mag}`}
-                    id={card.id}
-                    subheader={`${card.properties.type}`}
-                    cardContent={`${card.properties.place} ${new Date(
-                      card.properties.time
-                    ).toDateString()} ${new Date(
-                      card.properties.time
-                    ).toLocaleTimeString()}`}
-                  >
-                    <Map
-                      markerPosition={{
-                        lat: card.geometry.coordinates[1],
-                        lng: card.geometry.coordinates[0],
-                      }}
-                      radius={5000 * card.properties.mag}
-                      id={"sipPastMonth" + card.id}
-                      width={"100%"}
-                      height={"300px"}
-                      zoom={8}
-                    />
-                  </EarthquakeCard>
-                </Grid>
-              ))}
-            </Grid>
           </>
         )}
       </div>

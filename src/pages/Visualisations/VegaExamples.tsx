@@ -4,6 +4,7 @@ import data from "vega-datasets";
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
 import Container from "@material-ui/core/Container";
+import RealTimeExample from "../../components/Charts/RealTimeExample";
 
 const VegaExamples = (props) => {
   const [cars, setCars] = useState([]);
@@ -146,6 +147,9 @@ const VegaExamples = (props) => {
               style={{ width: "400px" }}
             />
           </Grid>
+        <Grid item>
+          <RealTimeExample/>
+        </Grid>
         </Grid>
       </Container>
     </section>
