@@ -67,7 +67,12 @@ const ChartLib: React.FC<ChartLibProps> = ({}) => {
     const heatMapData = data.heatMap.sort(
       (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()
     );
-    const dateValues = heatMapData.map((dv) => ({
+
+    interface IDateValues {
+      date: Date;
+      value: number;
+    }
+    const dateValues: IDateValues[] = heatMapData.map((dv) => ({
       date: d3.timeDay(new Date(dv.date)),
       value: Number(dv.value),
     }));
@@ -77,7 +82,7 @@ const ChartLib: React.FC<ChartLibProps> = ({}) => {
     );
 
     const years = d3
-      .nest()
+      .nest<any>()
       .key((d) => d.date.getUTCFullYear())
       .entries(dateValues)
       .reverse();
