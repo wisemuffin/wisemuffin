@@ -9,6 +9,7 @@ import SimpleD3LineChart from "../../components/Charts/Training/SimpleD3LineChar
 import D3LineChartWithUpdatePattern from "../../components/Charts/Training/D3LineChartWithUpdatePattern";
 import D3LineChartRealTime from "../../components/Charts/Training/D3LineChartRealTime";
 import * as d3 from "d3";
+import RealTimeExampleContainer from "../../components/Charts/Containers/RealTimeExampleContainer";
 
 const VegaExamples = (props) => {
   const [cars, setCars] = useState([]);
@@ -150,6 +151,9 @@ const VegaExamples = (props) => {
               }}
               style={{ width: "400px" }}
             />
+          </Grid>
+          <Grid item>
+            <RealTimeExampleContainer />
           </Grid>
           <Grid item>
             <D3LineChartRealTime />
