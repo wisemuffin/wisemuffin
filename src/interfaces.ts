@@ -162,3 +162,8 @@ export interface IEarthquake {
   ];
   bbox: [number];
 }
+
+export interface IRealTimeChartData {
+  date: number;
+  value: number;
+}

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import * as d3 from "d3";
 import useChartDimensions from "../../../hooks/useChartDimensions";
+import { IRealTimeChartData } from "../../../interfaces";
 
 /*
 example react d3: 
@@ -13,6 +14,7 @@ interface IRealTimeProps {
   fill?: string;
   stroke?: string;
   strokeWidth?: string;
+  data: IRealTimeChartData[];
 }
 
 const TRANSITION_DURATION = 100;
@@ -23,6 +25,7 @@ const RealTimeExample: React.FC<IRealTimeProps> = ({
   fill,
   stroke = "#038C7E",
   strokeWidth = 5,
+  data,
 }) => {
   const d3Container = React.useRef<SVGSVGElement | null>(null);
 
@@ -32,8 +35,6 @@ const RealTimeExample: React.FC<IRealTimeProps> = ({
     null,
     undefined
   >>(null);
-
-  const [data, setData] = useState<IData[]>(generateInitalData());
 
   const [ref, dimensions] = useChartDimensions({
     marginTop: 20,
@@ -77,13 +78,13 @@ const RealTimeExample: React.FC<IRealTimeProps> = ({
       );
 
   const line = d3
-    .line<IData>()
+    .line<IRealTimeChartData>()
     .defined((d) => !isNaN(d.value))
     .x((d) => x(d.date))
     .y((d) => y(d.value));
 
   const area = d3
-    .area<IData>()
+    .area<IRealTimeChartData>()
     .defined((d) => !isNaN(d.value))
     .x((d) => x(d.date))
     .y0(y(0))
@@ -114,14 +115,6 @@ const RealTimeExample: React.FC<IRealTimeProps> = ({
         .attr("d", line);
     }
   }, [selection]);
-
-  // Update the data
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setData((prevData) => refreshData(prevData));
-    }, 1000);
-    return () => clearTimeout(timer);
-  }, [data]);
 
   // Update the chart
   useEffect(() => {
@@ -186,59 +179,3 @@ const RealTimeExample: React.FC<IRealTimeProps> = ({
 };
 
 export default RealTimeExample;
-
-interface IData {
-  date: number;
-  value: number;
-}
-
-// inital data
-const n = 20; // number of records
-const tickInterval = 500;
-const generateInitalData = () => {
-  let currentValue = 0.5;
-  let initalData = d3.range(n).map((d, i) => {
-    let rand = (Math.random() - 0.5) * 0.2;
-    currentValue =
-      currentValue + rand < 0.2 || currentValue + rand > 0.8
-        ? currentValue - rand
-        : currentValue + rand;
-
-    return {
-      date:
-        Math.round(Date.now() / tickInterval) * tickInterval -
-        (n - d) * tickInterval,
-      value: currentValue,
-    };
-  });
-  return initalData;
-};
-
-// refresh data
-const refreshData = (prevData: any[]) => {
-  let updatedData = [...prevData];
-  let lastTime = Math.round(prevData[n - 1].date / tickInterval) * tickInterval,
-    currentTime = Math.round(Date.now() / tickInterval) * tickInterval,
-    howManyTimes =
-      Math.round((currentTime - lastTime) / tickInterval) > 1
-        ? Math.round((currentTime - lastTime) / tickInterval)
-        : 1,
-    currentValue = prevData[n - 1].value;
-
-  for (let i = 0; i < howManyTimes; i++) {
-    updatedData = updatedData.slice(1, n);
-    let rand = (Math.random() - 0.5) * 0.2;
-    currentValue =
-      currentValue + rand >= 0.2
-        ? currentValue + rand > 0.8
-          ? currentValue - rand
-          : currentValue + rand
-        : currentValue - rand;
-
-    updatedData.push({
-      date: currentTime - (howManyTimes - i - 1) * tickInterval,
-      value: currentValue,
-    });
-  }
-  return updatedData;
-};
