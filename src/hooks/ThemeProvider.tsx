@@ -23,6 +23,11 @@ const theme = {
       main: red[500],
       dark: red[700],
     },
+    success: {
+      light: green[300],
+      main: green[500],
+      dark: green[700],
+    },
     primary: {
       light: red[300],
       main: "#006AAE",

@@ -10,11 +10,19 @@ example react d3:
 interface IRealTimeProps {
   showLabel?: boolean;
   height?: number;
+  fill?: string;
+  stroke?: string;
+  strokeWidth?: string;
 }
+
+const TRANSITION_DURATION = 100;
 
 const RealTimeExample: React.FC<IRealTimeProps> = ({
   showLabel = true,
   height = 300,
+  fill,
+  stroke = "#038C7E",
+  strokeWidth = 5,
 }) => {
   const d3Container = React.useRef<SVGSVGElement | null>(null);
 
@@ -28,10 +36,10 @@ const RealTimeExample: React.FC<IRealTimeProps> = ({
   const [data, setData] = useState<IData[]>(generateInitalData());
 
   const [ref, dimensions] = useChartDimensions({
-    marginTop: 40,
-    marginRight: 30,
-    marginBottom: showLabel ? 75 : 40,
-    marginLeft: showLabel ? 75 : 40,
+    marginTop: 20,
+    marginRight: 20,
+    marginBottom: showLabel ? 40 : 20,
+    marginLeft: showLabel ? 40 : 20,
   });
 
   // scales and axis
@@ -53,27 +61,19 @@ const RealTimeExample: React.FC<IRealTimeProps> = ({
         "transform",
         `translate(0,${dimensions.height - dimensions.marginBottom})`
       )
-      .call(
-        d3
-          .axisBottom(x)
-          .ticks(dimensions.width / 80)
-          .tickSizeOuter(0)
-      );
+      .attr("stroke-width", 0)
+      .call(d3.axisBottom(x).ticks(dimensions.width / 80));
 
   let yAxis = (g) =>
     g
       .attr("class", "yAxisGroup")
       .attr("transform", `translate(${dimensions.marginLeft},0)`)
-      .call(d3.axisLeft(y))
-      .call((g) => g.select(".domain").remove())
-      .call((g) =>
-        g
-          .select(".tick:last-of-type text")
-          .clone()
-          .attr("x", 3)
-          .attr("text-anchor", "start")
-          .attr("font-weight", "bold")
-          .text("$ Close")
+      .attr("stroke-width", 0)
+      .call(
+        d3
+          .axisLeft(y)
+          .tickFormat(d3.format(".0%"))
+          .ticks(dimensions.height / 80)
       );
 
   const line = d3
@@ -81,6 +81,13 @@ const RealTimeExample: React.FC<IRealTimeProps> = ({
     .defined((d) => !isNaN(d.value))
     .x((d) => x(d.date))
     .y((d) => y(d.value));
+
+  const area = d3
+    .area<IData>()
+    .defined((d) => !isNaN(d.value))
+    .x((d) => x(d.date))
+    .y0(y(0))
+    .y1((d) => y(d.value));
 
   // initalise the chart
   useEffect(() => {
@@ -95,10 +102,13 @@ const RealTimeExample: React.FC<IRealTimeProps> = ({
       selection
         .append("path")
         .datum(data)
+        .attr("fill", fill || "none")
+        .attr("stroke", stroke || "black")
+        .attr("stroke-width", strokeWidth || 2)
         .attr("class", "line-chart-line")
-        .attr("fill", "none")
-        .attr("stroke", "steelblue")
-        .attr("stroke-width", 1.5)
+        // .attr("fill", "none")
+        // .attr("stroke", "steelblue")
+        // .attr("stroke-width", 1.5)
         .attr("stroke-linejoin", "round")
         .attr("stroke-linecap", "round")
         .attr("d", line);
@@ -133,11 +143,28 @@ const RealTimeExample: React.FC<IRealTimeProps> = ({
           dimensions.marginTop,
         ]);
 
-      selection.select(".xAxisGroup").call(xAxis);
-      selection.select(".yAxisGroup").call(yAxis);
+      selection
+        .select(".xAxisGroup")
+        .transition()
+        .duration(TRANSITION_DURATION)
+        .ease(d3.easeLinear)
+        .call(xAxis);
+
+      selection
+        .select(".yAxisGroup")
+        .transition()
+        .duration(TRANSITION_DURATION)
+        .ease(d3.easeLinear)
+        .call(yAxis);
 
       // updated line
-      selection.select(".line-chart-line").datum(data).attr("d", line);
+      selection
+        .select(".line-chart-line")
+        .datum(data)
+        .transition()
+        .duration(TRANSITION_DURATION)
+        .ease(d3.easeQuadIn)
+        .attr("d", line);
     }
   }, [data]);
 
@@ -153,7 +180,6 @@ const RealTimeExample: React.FC<IRealTimeProps> = ({
         width={dimensions.width}
         height={dimensions.height}
         ref={d3Container}
-        style={{ border: "3px solid red" }}
       ></svg>
     </div>
   );

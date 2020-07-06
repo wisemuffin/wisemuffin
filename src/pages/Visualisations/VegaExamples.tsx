@@ -45,58 +45,88 @@ const VegaExamples = (props) => {
           Example Vega Page
         </Typography>
 
-        <Grid container spacing={10}>
-          <Grid item xs={12} sm={6} md={4} lg={2} key={1}>
+        <Grid container spacing={2}>
+          {/* <Grid item xs={8} sm={8} md={6} lg={6} key={1}>
             <VegaLite
               spec={{
-                vconcat: [
-                  {
-                    mark: { type: "bar" },
-                    data: { name: "table" },
-                    encoding: {
-                      x: {
-                        field: "Year",
-                        type: "ordinal",
-                        timeUnit: "year",
-                        axis: { title: null, labelAngle: 0 },
-                      },
-                      y: {
-                        type: "quantitative",
-                        aggregate: "count",
-                        title: null,
-                      },
-                      opacity: {
-                        condition: { test: { selection: "sel3" }, value: 0.9 },
-                        value: 0.1,
-                      },
-                    },
-                    selection: { sel3: { type: "interval", encodings: ["x"] } },
-                    width: "container",
-                    height: 50,
+                width: "container",
+                mark: { type: "point" },
+                data: { name: "table" },
+                encoding: {
+                  x: { field: "Horsepower", type: "quantitative" },
+                  y: { field: "Miles_per_Gallon", type: "quantitative" },
+                  opacity: {
+                    value: 0.1,
                   },
-                  {
-                    mark: { type: "point" },
-                    data: { name: "table" },
-                    encoding: {
-                      x: { field: "Horsepower", type: "quantitative" },
-                      y: { field: "Miles_per_Gallon", type: "quantitative" },
-                      opacity: {
-                        condition: { test: { selection: "sel3" }, value: 0.9 },
-                        value: 0.1,
-                      },
-                    },
-                    width: "container",
-                    height: 150,
-                  },
-                ],
+                },
               }}
               data={{
                 table: cars,
               }}
-              style={{ width: "200px" }}
+              style={{ width: "100%" }}
             />
+          </Grid> */}
+          {/* <Grid item xs={12} sm={12} md={6} lg={6} key={1}>
+            <div style={{ width: "100%" }}>
+              <VegaLite
+                spec={{
+                  vconcat: [
+                    {
+                      mark: { type: "bar" },
+                      data: { name: "table" },
+                      encoding: {
+                        x: {
+                          field: "Year",
+                          type: "ordinal",
+                          timeUnit: "year",
+                          axis: { title: null, labelAngle: 0 },
+                        },
+                        y: {
+                          type: "quantitative",
+                          aggregate: "count",
+                          title: null,
+                        },
+                        opacity: {
+                          condition: {
+                            test: { selection: "sel3" },
+                            value: 0.9,
+                          },
+                          value: 0.1,
+                        },
+                      },
+                      selection: {
+                        sel3: { type: "interval", encodings: ["x"] },
+                      },
+                      width: "container",
+                      height: 50,
+                    },
+                    {
+                      mark: { type: "point" },
+                      data: { name: "table" },
+                      encoding: {
+                        x: { field: "Horsepower", type: "quantitative" },
+                        y: { field: "Miles_per_Gallon", type: "quantitative" },
+                        opacity: {
+                          condition: {
+                            test: { selection: "sel3" },
+                            value: 0.9,
+                          },
+                          value: 0.1,
+                        },
+                      },
+                      width: "container",
+                      height: 150,
+                    },
+                  ],
+                }}
+                data={{
+                  table: cars,
+                }}
+                style={{ width: "100%" }}
+              />
+            </div>
           </Grid>
-          <Grid item xs={12} sm={6} md={4} lg={2} key={2}>
+          <Grid item xs={12} sm={12} md={6} lg={6} key={2}>
             <VegaLite
               spec={{
                 vconcat: [
@@ -149,13 +179,13 @@ const VegaExamples = (props) => {
               data={{
                 table: movies,
               }}
-              style={{ width: "400px" }}
+              style={{ width: "100%" }}
             />
+          </Grid> */}
+          <Grid item xs={12} sm={12} md={6}>
+            <RealTimeExampleContainer sensorName="Sensor 1" />
           </Grid>
-          <Grid item>
-            <RealTimeExampleContainer />
-          </Grid>
-          <Grid item>
+          {/* <Grid item>
             <D3LineChartRealTime />
           </Grid>
           <Grid item>
@@ -166,7 +196,7 @@ const VegaExamples = (props) => {
           </Grid>
           <Grid item>
             <D3LineChartWithUpdatePattern />
-          </Grid>
+          </Grid> */}
         </Grid>
       </Container>
     </section>
