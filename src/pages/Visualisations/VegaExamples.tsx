@@ -4,12 +4,7 @@ import data from "vega-datasets";
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
 import Container from "@material-ui/core/Container";
-import RealTimeExample from "../../components/Charts/RealTimeExample";
-import SimpleD3LineChart from "../../components/Charts/Training/SimpleD3LineChart";
-import D3LineChartWithUpdatePattern from "../../components/Charts/Training/D3LineChartWithUpdatePattern";
-import D3LineChartRealTime from "../../components/Charts/Training/D3LineChartRealTime";
-import * as d3 from "d3";
-import RealTimeExampleContainer from "../../components/Charts/Containers/RealTimeExampleContainer";
+import Alert from "@material-ui/lab/Alert";
 
 const VegaExamples = (props) => {
   const [cars, setCars] = useState([]);
@@ -35,6 +30,13 @@ const VegaExamples = (props) => {
   return (
     <section>
       <Container maxWidth="lg">
+        <Alert severity="warning">
+          Still working on making resizing to mobile device work with vega lite,
+          and overlapping charts. Looks like a bug:{" "}
+          <span>
+            <a href="https://github.com/vega/vega-embed/pull/490">github</a>
+          </span>
+        </Alert>
         <Typography
           component="h1"
           variant="h2"
@@ -45,28 +47,8 @@ const VegaExamples = (props) => {
           Example Vega Page
         </Typography>
 
-        <Grid container spacing={2}>
-          {/* <Grid item xs={8} sm={8} md={6} lg={6} key={1}>
-            <VegaLite
-              spec={{
-                width: "container",
-                mark: { type: "point" },
-                data: { name: "table" },
-                encoding: {
-                  x: { field: "Horsepower", type: "quantitative" },
-                  y: { field: "Miles_per_Gallon", type: "quantitative" },
-                  opacity: {
-                    value: 0.1,
-                  },
-                },
-              }}
-              data={{
-                table: cars,
-              }}
-              style={{ width: "100%" }}
-            />
-          </Grid> */}
-          {/* <Grid item xs={12} sm={12} md={6} lg={6} key={1}>
+        <Grid container spacing={4}>
+          <Grid item xs={12} sm={12} md={6} lg={6} key={1}>
             <div style={{ width: "100%" }}>
               <VegaLite
                 spec={{
@@ -181,22 +163,7 @@ const VegaExamples = (props) => {
               }}
               style={{ width: "100%" }}
             />
-          </Grid> */}
-          <Grid item xs={12} sm={12} md={6}>
-            <RealTimeExampleContainer sensorName="Sensor 1" />
           </Grid>
-          {/* <Grid item>
-            <D3LineChartRealTime />
-          </Grid>
-          <Grid item>
-            <RealTimeExample />
-          </Grid>
-          <Grid item>
-            <SimpleD3LineChart />
-          </Grid>
-          <Grid item>
-            <D3LineChartWithUpdatePattern />
-          </Grid> */}
         </Grid>
       </Container>
     </section>

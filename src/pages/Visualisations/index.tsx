@@ -42,6 +42,20 @@ const visList: IVis[] = [
   {
     createdDate: `${new Date()}`,
     id: Math.trunc(Math.random() * 10000),
+    mediaType: "video",
+    media: {
+      medium:
+        "https://res.cloudinary.com/dkn8xtjbm/video/upload/v1594072662/2020-07-07_07-56-50.mp4",
+      original:
+        "https://res.cloudinary.com/dkn8xtjbm/video/upload/v1594072662/2020-07-07_07-56-50.mp4",
+    },
+    link: "/visualisations/realTimeExamples",
+    name: "Realtime Examples",
+    summary: "Testing realtime graphing with websockets",
+  },
+  {
+    createdDate: `${new Date()}`,
+    id: Math.trunc(Math.random() * 10000),
     mediaType: "img",
     media: {
       medium:
