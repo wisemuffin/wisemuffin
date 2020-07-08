@@ -13,6 +13,8 @@ interface IRealTimeContainerProps {
   colorError?: string;
   sensorId?: string;
   xTicks?: number;
+  numberOfRecords?: number;
+  tickInterval?: number;
 }
 
 const darkGreenHex = "#038C7E";
@@ -24,11 +26,65 @@ const RealTimeExampleContainer = ({
   colorSuccess = "#038C7E",
   colorError = "#D90D32",
   xTicks = 20,
+  numberOfRecords = 20, // number of records
+  tickInterval = 500,
 }: IRealTimeContainerProps) => {
   const lastTimestamp = new Date();
   const [connected, setConnected] = useState(true);
   const [error, setError] = useState(false);
+
+  // inital data
+  const generateInitalData = () => {
+    let currentValue = 0.5;
+    let initalData = d3.range(numberOfRecords).map((d, i) => {
+      let rand = (Math.random() - 0.5) * 0.2;
+      currentValue =
+        currentValue + rand < 0.2 || currentValue + rand > 0.8
+          ? currentValue - rand
+          : currentValue + rand;
+
+      return {
+        date:
+          Math.round(Date.now() / tickInterval) * tickInterval -
+          (numberOfRecords - d) * tickInterval,
+        value: currentValue,
+      };
+    });
+    return initalData;
+  };
+
   const [data, setData] = useState<IRealTimeChartData[]>(generateInitalData());
+
+  // refresh data
+  const refreshData = (prevData: any[]) => {
+    let updatedData = [...prevData];
+    let lastTime =
+        Math.round(prevData[numberOfRecords - 1].date / tickInterval) *
+        tickInterval,
+      currentTime = Math.round(Date.now() / tickInterval) * tickInterval,
+      howManyTimes =
+        Math.round((currentTime - lastTime) / tickInterval) > 1
+          ? Math.round((currentTime - lastTime) / tickInterval)
+          : 1,
+      currentValue = prevData[numberOfRecords - 1].value;
+
+    for (let i = 0; i < howManyTimes; i++) {
+      updatedData = updatedData.slice(1, numberOfRecords);
+      let rand = (Math.random() - 0.5) * 0.2;
+      currentValue =
+        currentValue + rand >= 0.2
+          ? currentValue + rand > 0.8
+            ? currentValue - rand
+            : currentValue + rand
+          : currentValue - rand;
+
+      updatedData.push({
+        date: currentTime - (howManyTimes - i - 1) * tickInterval,
+        value: currentValue,
+      });
+    }
+    return updatedData;
+  };
 
   // Update the data
   useEffect(() => {
@@ -64,57 +120,6 @@ const RealTimeExampleContainer = ({
       </Box>
     </Paper>
   );
-};
-
-// inital data
-const n = 20; // number of records
-const tickInterval = 500;
-const generateInitalData = () => {
-  let currentValue = 0.5;
-  let initalData = d3.range(n).map((d, i) => {
-    let rand = (Math.random() - 0.5) * 0.2;
-    currentValue =
-      currentValue + rand < 0.2 || currentValue + rand > 0.8
-        ? currentValue - rand
-        : currentValue + rand;
-
-    return {
-      date:
-        Math.round(Date.now() / tickInterval) * tickInterval -
-        (n - d) * tickInterval,
-      value: currentValue,
-    };
-  });
-  return initalData;
-};
-
-// refresh data
-const refreshData = (prevData: any[]) => {
-  let updatedData = [...prevData];
-  let lastTime = Math.round(prevData[n - 1].date / tickInterval) * tickInterval,
-    currentTime = Math.round(Date.now() / tickInterval) * tickInterval,
-    howManyTimes =
-      Math.round((currentTime - lastTime) / tickInterval) > 1
-        ? Math.round((currentTime - lastTime) / tickInterval)
-        : 1,
-    currentValue = prevData[n - 1].value;
-
-  for (let i = 0; i < howManyTimes; i++) {
-    updatedData = updatedData.slice(1, n);
-    let rand = (Math.random() - 0.5) * 0.2;
-    currentValue =
-      currentValue + rand >= 0.2
-        ? currentValue + rand > 0.8
-          ? currentValue - rand
-          : currentValue + rand
-        : currentValue - rand;
-
-    updatedData.push({
-      date: currentTime - (howManyTimes - i - 1) * tickInterval,
-      value: currentValue,
-    });
-  }
-  return updatedData;
 };
 
 export default RealTimeExampleContainer;

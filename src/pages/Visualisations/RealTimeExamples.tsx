@@ -5,6 +5,7 @@ import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
 import Container from "@material-ui/core/Container";
 import RealTimeExampleContainer from "../../components/Charts/Containers/RealTimeExampleContainer";
+import DropDown from "../../components/Buttons/DropDown";
 
 const RealTimeExamples = (props) => {
   const [cars, setCars] = useState([]);
@@ -39,6 +40,15 @@ const RealTimeExamples = (props) => {
         >
           Realtime Reporting Examples
         </Typography>
+        <div>
+          <DropDown
+            items={[
+              { id: 1, value: "yea" },
+              { id: 2, value: "nah" },
+            ]}
+            title="Select n"
+          />
+        </div>
 
         <Grid container spacing={2}>
           <Grid item xs={12} sm={12} md={6}>
