@@ -29,7 +29,7 @@ const Dropdown: React.FC<IDropDownProps> = ({
   multiSelect = false,
 }) => {
   const [open, setOpen] = useState(false);
-  const [selection, setSelection] = useState<item[]>([]);
+  const [selection, setSelection] = useState<item[]>([items[0]]);
   const toggle = () => setOpen((prevState) => !prevState);
   const ref = useRef<HTMLDivElement | null>(null);
   // Call hook passing in the ref and a function to call on outside click
@@ -59,29 +59,23 @@ const Dropdown: React.FC<IDropDownProps> = ({
   }
 
   return (
-    <Paper ref={ref}>
+    <Paper ref={ref} style={{ display: "inline-block" }}>
       <Button
         variant="outlined"
         color="primary"
-        style={{ display: "inline-block", width: "100%" }}
+        style={{ display: "inline-block" }}
         onKeyPress={() => toggle()}
         onClick={() => toggle()}
       >
-        {title} {open ? "Close" : "Open"}
+        {`${title}: ${selection[0].value}`}
         <ExpandMoreIcon />
       </Button>
       {open && (
         <MenuList>
           {items.map((item) => (
-            <MenuItem key={item.id}>
-              <Button
-                type="button"
-                onClick={() => handleOnClick(item)}
-                style={{ width: "100%" }}
-              >
-                <span>{item.value}</span>
-                <span>{isItemInSelection(item) && <CheckIcon />}</span>
-              </Button>
+            <MenuItem key={item.id} onClick={() => handleOnClick(item)}>
+              <span>{item.value}</span>
+              <span>{isItemInSelection(item) && <CheckIcon />}</span>
             </MenuItem>
           ))}
         </MenuList>

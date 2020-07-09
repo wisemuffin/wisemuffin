@@ -8,25 +8,7 @@ import RealTimeExampleContainer from "../../components/Charts/Containers/RealTim
 import DropDown from "../../components/Buttons/DropDown";
 
 const RealTimeExamples = (props) => {
-  const [cars, setCars] = useState([]);
-  const [movies, setMovies] = useState([]);
-  useEffect(() => {
-    const fetchData = async () => {
-      const res = await data["cars.json"]();
-      console.log("cars :", res[0]);
-      setCars(res);
-    };
-    fetchData();
-  }, []);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const res = await data["movies.json"]();
-      console.log("movies :", res[0]);
-      setMovies(res);
-    };
-    fetchData();
-  }, []);
+  const [frequency, setFrequency] = useState([]);
 
   return (
     <section>
@@ -40,15 +22,30 @@ const RealTimeExamples = (props) => {
         >
           Realtime Reporting Examples
         </Typography>
-        <div>
-          <DropDown
-            items={[
-              { id: 1, value: "yea" },
-              { id: 2, value: "nah" },
-            ]}
-            title="Select n"
-          />
-        </div>
+        <Grid container spacing={4}>
+          <Grid item>
+            <DropDown
+              items={[
+                { id: 1, value: "0.1s" },
+                { id: 2, value: "0.25s" },
+                { id: 3, value: "0.5s" },
+                { id: 4, value: "1s" },
+              ]}
+              title="Frequency"
+            />
+          </Grid>
+          <Grid item>
+            <DropDown
+              items={[
+                { id: 1, value: "60s" },
+                { id: 2, value: "120s" },
+                { id: 3, value: "240s" },
+                { id: 4, value: "360s" },
+              ]}
+              title="Time Window"
+            />
+          </Grid>
+        </Grid>
 
         <Grid container spacing={2}>
           <Grid item xs={12} sm={12} md={6}>
