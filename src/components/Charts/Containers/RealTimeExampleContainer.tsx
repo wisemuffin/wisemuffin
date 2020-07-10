@@ -12,7 +12,6 @@ interface IRealTimeContainerProps {
   colorSuccess?: string;
   colorError?: string;
   sensorId?: string;
-  xTicks?: number;
   numberOfRecords?: number;
   tickInterval?: number;
 }
@@ -25,9 +24,8 @@ const RealTimeExampleContainer = ({
   sensorName,
   colorSuccess = "#038C7E",
   colorError = "#D90D32",
-  xTicks = 20,
   numberOfRecords = 20, // number of records
-  tickInterval = 500,
+  tickInterval = 1000, // miliseconds
 }: IRealTimeContainerProps) => {
   const lastTimestamp = new Date();
   const [connected, setConnected] = useState(true);
@@ -58,18 +56,28 @@ const RealTimeExampleContainer = ({
   // refresh data
   const refreshData = (prevData: any[]) => {
     let updatedData = [...prevData];
+    // remove records when reducing time range
+    updatedData =
+      updatedData.length >= numberOfRecords
+        ? updatedData.slice(prevData.length - numberOfRecords, prevData.length)
+        : updatedData;
+
     let lastTime =
-        Math.round(prevData[numberOfRecords - 1].date / tickInterval) *
+        Math.round(prevData[prevData.length - 1].date / tickInterval) *
         tickInterval,
       currentTime = Math.round(Date.now() / tickInterval) * tickInterval,
       howManyTimes =
         Math.round((currentTime - lastTime) / tickInterval) > 1
           ? Math.round((currentTime - lastTime) / tickInterval)
           : 1,
-      currentValue = prevData[numberOfRecords - 1].value;
+      currentValue = prevData[prevData.length - 1].value;
 
     for (let i = 0; i < howManyTimes; i++) {
-      updatedData = updatedData.slice(1, numberOfRecords);
+      // keep removing 1 record for each new record added unless records is less than numberOfRecords
+      updatedData =
+        updatedData.length < numberOfRecords
+          ? updatedData
+          : updatedData.slice(1, prevData.length);
       let rand = (Math.random() - 0.5) * 0.2;
       currentValue =
         currentValue + rand >= 0.2
@@ -90,7 +98,7 @@ const RealTimeExampleContainer = ({
   useEffect(() => {
     const timer = setTimeout(() => {
       setData((prevData) => refreshData(prevData));
-    }, 1000);
+    }, tickInterval);
     return () => clearTimeout(timer);
   }, [data]);
 

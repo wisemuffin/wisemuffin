@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import useOnClickOutside from "../../../hooks/useOnClickOutside";
 import Button from "@material-ui/core/Button";
 import MenuList from "@material-ui/core/MenuList";
@@ -7,29 +7,35 @@ import CheckIcon from "@material-ui/icons/Check";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import Paper from "@material-ui/core/Paper";
 
-interface item {
+interface IDropDownItem {
   id: number;
-  value: any;
+  display: string;
+  value: number;
 }
 
 interface IDropDownProps {
   title: string;
-  items: item[];
+  items: IDropDownItem[];
   multiSelect?: boolean;
+  onChangeHandler?: React.Dispatch<React.SetStateAction<IDropDownItem[]>>;
 }
 
 /*
 TODO finish styles:
 https://github.com/karlhadwen/react-dropdown-menu/blob/master/src/App.scss
 */
-
-const Dropdown: React.FC<IDropDownProps> = ({
+/**
+ *
+ * @param param0
+ */
+const Dropdown = ({
   title,
   items,
   multiSelect = false,
-}) => {
+  onChangeHandler, // pass state to parent
+}: IDropDownProps) => {
   const [open, setOpen] = useState(false);
-  const [selection, setSelection] = useState<item[]>([items[0]]);
+  const [selection, setSelection] = useState<IDropDownItem[]>([items[0]]);
   const toggle = () => setOpen((prevState) => !prevState);
   const ref = useRef<HTMLDivElement | null>(null);
   // Call hook passing in the ref and a function to call on outside click
@@ -51,6 +57,10 @@ const Dropdown: React.FC<IDropDownProps> = ({
     }
   }
 
+  useEffect(() => {
+    onChangeHandler && onChangeHandler(selection);
+  }, [selection]);
+
   function isItemInSelection(item) {
     if (selection.some((current) => current.id === item.id)) {
       return true;
@@ -67,14 +77,14 @@ const Dropdown: React.FC<IDropDownProps> = ({
         onKeyPress={() => toggle()}
         onClick={() => toggle()}
       >
-        {`${title}: ${selection[0].value}`}
+        {`${title}: ${selection[0].display}`}
         <ExpandMoreIcon />
       </Button>
       {open && (
         <MenuList>
           {items.map((item) => (
             <MenuItem key={item.id} onClick={() => handleOnClick(item)}>
-              <span>{item.value}</span>
+              <span>{item.display}</span>
               <span>{isItemInSelection(item) && <CheckIcon />}</span>
             </MenuItem>
           ))}
