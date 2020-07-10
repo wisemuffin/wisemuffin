@@ -1,9 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
+import Store from "../../store/Store";
 import { VegaLite } from "react-vega";
 import data from "vega-datasets";
 import Typography from "@material-ui/core/Typography";
+import Box from "@material-ui/core/Box";
 import Grid from "@material-ui/core/Grid";
 import Container from "@material-ui/core/Container";
+import Alert from "@material-ui/lab/Alert";
 import RealTimeExampleContainer from "../../components/Charts/Containers/RealTimeExampleContainer";
 import DropDown from "../../components/Buttons/DropDown";
 
@@ -14,6 +17,8 @@ interface IDropDownItem {
 }
 
 const RealTimeExamples = (props) => {
+  const { state, dispatch } = React.useContext(Store);
+  const { sensorWebocketsOff } = state;
   const DropDownFrequency = [
     { id: 1, display: "0.5 sec", value: 500 },
     { id: 2, display: "1 sec", value: 1000 },
@@ -46,6 +51,15 @@ const RealTimeExamples = (props) => {
         >
           Realtime Reporting Examples
         </Typography>
+        {sensorWebocketsOff && (
+          <Box p={2}>
+            <Alert severity="warning">
+              Development mode is enabled on this page - live connections to
+              websockets have been removed to save costs.
+            </Alert>
+          </Box>
+        )}
+
         <Grid container spacing={4}>
           <Grid item>
             <DropDown

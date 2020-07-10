@@ -16,6 +16,7 @@ export interface IState {
   yahooFinanceApiOff: boolean;
   yahooFinanceApiOffChartWithinCard: boolean;
   yahooFinanceApiOffStockCard: boolean;
+  sensorWebocketsOff: boolean;
 }
 
 export interface IEpisode {

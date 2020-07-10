@@ -19,6 +19,11 @@ interface IRealTimeProps {
 
 const TRANSITION_DURATION = 100;
 
+/**
+ * Realtime data visualisation over a time period
+ * @TODO option to smooth out animation, by hiding the jerky ness
+ * https://observablehq.com/@bartok32/real-time-area-chart
+ */
 const RealTimeExample: React.FC<IRealTimeProps> = ({
   showLabel = true,
   height = 300,

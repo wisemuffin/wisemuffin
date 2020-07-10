@@ -12,6 +12,7 @@ export const initialState: IState = {
   // TODO turning off currently because so many api calls
   yahooFinanceApiOffChartWithinCard: true,
   yahooFinanceApiOffStockCard: true,
+  sensorWebocketsOff: true,
 };
 
 const Store = React.createContext<IState | any>(initialState);

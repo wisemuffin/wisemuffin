@@ -22,6 +22,8 @@ interface IDropDownProps {
 }
 
 /**
+ * Single Drop down select
+ *
  * @TODO multi select
  * @TODO IDropDownItem use typescript generics for more flexability
  */
