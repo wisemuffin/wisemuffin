@@ -18,24 +18,24 @@ interface IDropDownProps {
   items: IDropDownItem[];
   multiSelect?: boolean;
   onChangeHandler?: React.Dispatch<React.SetStateAction<IDropDownItem[]>>;
+  defaulltItem?: number;
 }
 
-/*
-TODO finish styles:
-https://github.com/karlhadwen/react-dropdown-menu/blob/master/src/App.scss
-*/
 /**
- *
- * @param param0
+ * @TODO multi select
+ * @TODO IDropDownItem use typescript generics for more flexability
  */
 const Dropdown = ({
   title,
   items,
   multiSelect = false,
   onChangeHandler, // pass state to parent
+  defaulltItem = 0,
 }: IDropDownProps) => {
   const [open, setOpen] = useState(false);
-  const [selection, setSelection] = useState<IDropDownItem[]>([items[0]]);
+  const [selection, setSelection] = useState<IDropDownItem[]>([
+    items[defaulltItem],
+  ]);
   const toggle = () => setOpen((prevState) => !prevState);
   const ref = useRef<HTMLDivElement | null>(null);
   // Call hook passing in the ref and a function to call on outside click

@@ -12,7 +12,7 @@ interface IRealTimeContainerProps {
   colorSuccess?: string;
   colorError?: string;
   sensorId?: string;
-  numberOfRecords?: number;
+  history?: number;
   tickInterval?: number;
 }
 
@@ -24,12 +24,14 @@ const RealTimeExampleContainer = ({
   sensorName,
   colorSuccess = "#038C7E",
   colorError = "#D90D32",
-  numberOfRecords = 20, // number of records
+  history = 60, //seconds
   tickInterval = 1000, // miliseconds
 }: IRealTimeContainerProps) => {
   const lastTimestamp = new Date();
   const [connected, setConnected] = useState(true);
   const [error, setError] = useState(false);
+
+  const numberOfRecords = history * (1000 / tickInterval);
 
   // inital data
   const generateInitalData = () => {

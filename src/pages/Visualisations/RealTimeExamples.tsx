@@ -15,20 +15,19 @@ interface IDropDownItem {
 
 const RealTimeExamples = (props) => {
   const DropDownFrequency = [
-    { id: 1, display: "1s", value: 1000 },
-    { id: 2, display: "0.5s", value: 500 },
-    { id: 3, display: "5s", value: 5000 },
+    { id: 1, display: "0.5 sec", value: 500 },
+    { id: 2, display: "1 sec", value: 1000 },
+    { id: 3, display: "5 sec", value: 5000 },
   ];
 
   const [frequency, setFrequency] = useState<IDropDownItem[]>([
-    DropDownFrequency[0],
+    DropDownFrequency[1],
   ]);
 
   const DropDownTimeWindow = [
-    { id: 1, display: "60s", value: 60 },
-    { id: 2, display: "120s", value: 120 },
-    { id: 3, display: "240s", value: 240 },
-    { id: 4, display: "360s", value: 360 },
+    { id: 1, display: "1 min", value: 60 },
+    { id: 2, display: "2 mins", value: 120 },
+    { id: 3, display: "4 mins", value: 240 },
   ];
 
   const [timeWindow, setTimeWindow] = useState<IDropDownItem[]>([
@@ -53,6 +52,7 @@ const RealTimeExamples = (props) => {
               items={DropDownFrequency}
               title="Frequency"
               onChangeHandler={setFrequency}
+              defaulltItem={1}
             />
           </Grid>
           <Grid item>
@@ -63,27 +63,36 @@ const RealTimeExamples = (props) => {
             />
           </Grid>
         </Grid>
-        {JSON.stringify(frequency)}
-        {JSON.stringify(timeWindow)}
+        {/* {JSON.stringify(frequency)} */}
+        {/* {JSON.stringify(timeWindow)} */}
         <Grid container spacing={2}>
           <Grid item xs={12} sm={12} md={6}>
             <RealTimeExampleContainer
               sensorName="Sensor 1"
               tickInterval={frequency[0].value}
-              numberOfRecords={
-                timeWindow[0].value * (1000 / frequency[0].value)
-              }
-              // numberOfRecords={60 * (1000 / 500)}
+              history={timeWindow[0].value}
             />
           </Grid>
           <Grid item xs={12} sm={12} md={6}>
-            <RealTimeExampleContainer sensorName="Sensor 2" />
+            <RealTimeExampleContainer
+              sensorName="Sensor 2"
+              tickInterval={frequency[0].value}
+              history={timeWindow[0].value}
+            />
           </Grid>
           <Grid item xs={12} sm={12} md={6}>
-            <RealTimeExampleContainer sensorName="Sensor 3" />
+            <RealTimeExampleContainer
+              sensorName="Sensor 3"
+              tickInterval={frequency[0].value}
+              history={timeWindow[0].value}
+            />
           </Grid>
           <Grid item xs={12} sm={12} md={6}>
-            <RealTimeExampleContainer sensorName="Sensor 4" />
+            <RealTimeExampleContainer
+              sensorName="Sensor 4"
+              tickInterval={frequency[0].value}
+              history={timeWindow[0].value}
+            />
           </Grid>
         </Grid>
       </Container>
