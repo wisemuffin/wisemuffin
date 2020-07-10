@@ -8,10 +8,7 @@ import {
   DatePicker,
   // TimePicker,
   // DateTimePicker,
-  MuiPickersUtilsProvider,
 } from "@material-ui/pickers";
-// pick a date util library
-import MomentUtils from "@date-io/moment";
 import moment from "moment";
 import StockLineHistoryChart from "../StockLineHistoryChart";
 
@@ -83,17 +80,15 @@ const StockLineHistoryChartWithUi = ({ classes }) => {
               </Typography>
             </Grid>
             <Grid item>
-              <MuiPickersUtilsProvider utils={MomentUtils}>
-                <DatePicker
-                  format="MM/DD/YYYY"
-                  value={moment.unix(selectedFromDate).format("ll")}
-                  onChange={(value) =>
-                    setSelectedFromDate(moment(value).format("X"))
-                  }
-                />
-                {/* <TimePicker value={selectedDate} onChange={setSelectedDate} /> */}
-                {/* <DateTimePicker value={selectedDate} onChange={setSelectedDate} /> */}
-              </MuiPickersUtilsProvider>
+              <DatePicker
+                format="MM/DD/YYYY"
+                value={moment.unix(selectedFromDate).format("ll")}
+                onChange={(value) =>
+                  setSelectedFromDate(moment(value).format("X"))
+                }
+              />
+              {/* <TimePicker value={selectedDate} onChange={setSelectedDate} /> */}
+              {/* <DateTimePicker value={selectedDate} onChange={setSelectedDate} /> */}
             </Grid>
           </Grid>
         </Grid>
@@ -106,17 +101,15 @@ const StockLineHistoryChartWithUi = ({ classes }) => {
               </Typography>
             </Grid>
             <Grid item>
-              <MuiPickersUtilsProvider utils={MomentUtils}>
-                <DatePicker
-                  format="MM/DD/YYYY"
-                  value={moment.unix(selectedToDate).format("ll")}
-                  onChange={(value) =>
-                    setSelectedToDate(moment(value).format("X"))
-                  }
-                />
-                {/* <TimePicker value={selectedDate} onChange={setSelectedDate} /> */}
-                {/* <DateTimePicker value={selectedDate} onChange={setSelectedDate} /> */}
-              </MuiPickersUtilsProvider>
+              <DatePicker
+                format="MM/DD/YYYY"
+                value={moment.unix(selectedToDate).format("ll")}
+                onChange={(value) =>
+                  setSelectedToDate(moment(value).format("X"))
+                }
+              />
+              {/* <TimePicker value={selectedDate} onChange={setSelectedDate} /> */}
+              {/* <DateTimePicker value={selectedDate} onChange={setSelectedDate} /> */}
             </Grid>
           </Grid>
         </Grid>

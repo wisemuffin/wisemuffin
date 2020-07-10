@@ -7,7 +7,6 @@ import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 
 import IconButton from "@material-ui/core/IconButton";
-import Timeline from "@material-ui/icons/Timeline";
 import MenuIcon from "@material-ui/icons/Menu";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
@@ -39,8 +38,6 @@ const drawerWidth = 240;
 const drawerItems = [
   { name: "Visualisations", link: "/visualisations", icon: BubbleChartIcon },
   { name: "Wisemuffin-charts", link: "/chartlib", icon: AssessmentIcon },
-  { name: "TV Episodes", link: "/tvepisodes", icon: TvIcon },
-  { name: "TV Fav", link: "/tvepisodesfav", icon: TvIcon },
 ];
 
 const NavBar = (props) => {
@@ -131,15 +128,6 @@ const NavBar = (props) => {
             href="/raiseIssue"
             // onClick={() => console.log("TODO add side menu")}
           ></IconButton>
-          <IconButton
-            color="inherit"
-            edge="start"
-            aria-label="Timeline - what are we working on"
-            href="/pipeline"
-            // onClick={() => console.log("TODO add side menu")}
-          >
-            <Timeline />
-          </IconButton>
         </Toolbar>
       </AppBar>
       <Drawer

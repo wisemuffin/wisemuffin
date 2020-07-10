@@ -6,6 +6,8 @@ import DashCard from "../Containers/DashCardGraph";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
+import Skeleton from "@material-ui/lab/Skeleton";
+import Paper from "@material-ui/core/Paper";
 
 // TODO centralise logic at run time
 
@@ -122,11 +124,11 @@ const StockMoverShakers = (props) => {
     <div>
       {quotes ? (
         <>
-          <Box p={2}>
+          {/* <Box p={2}>
             <Typography color="textPrimary" variant={"h2"}>
               {dayGainers?.title}
             </Typography>
-          </Box>
+          </Box> */}
           <Grid container spacing={1} justify="center" alignContent="center">
             {dayGainers?.quotes.map((moversQuote) => (
               <Grid item key={moversQuote.symbol} xs={12} sm={6} md={4} lg={3}>
@@ -201,7 +203,15 @@ const StockMoverShakers = (props) => {
           </Grid> */}
         </>
       ) : (
-        <div />
+        <Grid container spacing={1} justify="center" alignContent="center">
+          {[1, 2, 3, 4, 5, 6].map((d) => (
+            <Grid item key={d} xs={12} sm={6} md={4} lg={3}>
+              <Paper>
+                <Skeleton variant="rect" width={"100%"} height={200} />
+              </Paper>
+            </Grid>
+          ))}
+        </Grid>
       )}
     </div>
   );

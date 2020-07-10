@@ -11,36 +11,7 @@ import { IVis } from "../../interfaces";
 
 const visList: IVis[] = [
   {
-    createdDate: `${new Date()}`,
-    id: Math.trunc(Math.random() * 10000),
-    mediaType: "video",
-    media: {
-      medium:
-        "http://res.cloudinary.com/dkn8xtjbm/video/upload/v1557009747/ipo84yttye4dxxxijzke.mp4",
-      original:
-        "http://res.cloudinary.com/dkn8xtjbm/video/upload/v1557009747/ipo84yttye4dxxxijzke.mp4",
-    },
-    link: "/visualisations/earthquake",
-    name: "Earthquakes",
-    summary: "Visualisations on eathquake magnitude, frequency and location",
-  },
-  {
-    createdDate: `${new Date()}`,
-    id: Math.trunc(Math.random() * 10000),
-    mediaType: "img",
-    media: {
-      medium:
-        "http://res.cloudinary.com/dkn8xtjbm/image/upload/v1580243748/vugcn3xdvwyilslpbqn5.jpg",
-      original:
-        "http://res.cloudinary.com/dkn8xtjbm/image/upload/v1580243748/vugcn3xdvwyilslpbqn5.jpg",
-    },
-    link: "/visualisations/stocks",
-    name: "Stocks",
-    summary:
-      "Using Yahoo's Financial Trading APIs to get insight into the US Stock markets.",
-  },
-  {
-    createdDate: `${new Date()}`,
+    createdDate: `${new Date("2020-07-11")}`,
     id: Math.trunc(Math.random() * 10000),
     mediaType: "video",
     media: {
@@ -54,7 +25,37 @@ const visList: IVis[] = [
     summary: "Testing realtime graphing with websockets",
   },
   {
-    createdDate: `${new Date()}`,
+    createdDate: `${new Date("2020-04-24")}`,
+    id: Math.trunc(Math.random() * 10000),
+    mediaType: "video",
+    media: {
+      medium:
+        "http://res.cloudinary.com/dkn8xtjbm/video/upload/v1557009747/ipo84yttye4dxxxijzke.mp4",
+      original:
+        "http://res.cloudinary.com/dkn8xtjbm/video/upload/v1557009747/ipo84yttye4dxxxijzke.mp4",
+    },
+    link: "/visualisations/earthquake",
+    name: "Earthquakes",
+    summary: "Visualisations on eathquake magnitude, frequency and location",
+  },
+  {
+    createdDate: `${new Date("2020-03-15")}`,
+    id: Math.trunc(Math.random() * 10000),
+    mediaType: "img",
+    media: {
+      medium:
+        "http://res.cloudinary.com/dkn8xtjbm/image/upload/v1580243748/vugcn3xdvwyilslpbqn5.jpg",
+      original:
+        "http://res.cloudinary.com/dkn8xtjbm/image/upload/v1580243748/vugcn3xdvwyilslpbqn5.jpg",
+    },
+    link: "/visualisations/stocks",
+    name: "Stocks",
+    summary:
+      "Using Yahoo's Financial Trading APIs to get insight into the US Stock markets.",
+  },
+
+  {
+    createdDate: `${new Date("2020-02-20")}`,
     id: Math.trunc(Math.random() * 10000),
     mediaType: "img",
     media: {
@@ -66,6 +67,20 @@ const visList: IVis[] = [
     link: "/visualisations/vegaexamples",
     name: "Vega Examples",
     summary: "Testing out Vega for data visualisation.",
+  },
+  {
+    createdDate: `${new Date("2020-01-05")}`,
+    id: Math.trunc(Math.random() * 10000),
+    mediaType: "img",
+    media: {
+      medium:
+        "https://res.cloudinary.com/dkn8xtjbm/image/upload/v1594418663/TvShows.jpg",
+      original:
+        "https://res.cloudinary.com/dkn8xtjbm/image/upload/v1594418663/TvShows.jpg",
+    },
+    link: "/visualisations/tvepisodes",
+    name: "Tv Episodes",
+    summary: "Building out episode cards with like button",
   },
 ];
 

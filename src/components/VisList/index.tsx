@@ -40,7 +40,7 @@ const VisList: React.FC<IVisListProps> = ({ store, visualisations }) => {
             );
 
           return (
-            <Grid item key={vis.id} xl={3} md={6} sm={12}>
+            <Grid item key={vis.id} lg={3} md={4} sm={6} xs={12}>
               <Card>
                 <CardActionArea component={RouterLink} to={vis.link}>
                   <ChooseMedia />

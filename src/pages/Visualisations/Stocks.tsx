@@ -8,6 +8,12 @@ import Alert from "@material-ui/lab/Alert";
 import Container from "@material-ui/core/Container";
 import StockMoverShakers from "../../components/Charts/Views/StockMoverShakers";
 import StockLineHistoryChartWithUi from "../../components/Charts/Views/StockLineHistoryChartWithUi";
+// const StockMoverShakers = React.lazy(() =>
+//   import("../../components/Charts/Views/StockMoverShakers")
+// );
+// const StockLineHistoryChartWithUi = React.lazy(() =>
+//   import("../../components/Charts/Views/StockLineHistoryChartWithUi")
+// );
 
 const Stocks = () => {
   const { state, dispatch } = React.useContext(Store);
@@ -26,8 +32,14 @@ const Stocks = () => {
           // <div />
           <div />
         )}
-
+        <Box p={2}>
+          <Typography variant={"h2"} color="textPrimary">
+            Day Gainers - USA
+          </Typography>
+        </Box>
+        {/* <React.Suspense fallback={<div>Loading...</div>}> */}
         <StockMoverShakers />
+        {/* </React.Suspense> */}
         <Box p={2}>
           <Typography variant={"h2"} color="textPrimary">
             Original amazon chart
@@ -35,7 +47,9 @@ const Stocks = () => {
         </Box>
         <Grid container alignItems="center" justify="center" spacing={1}>
           <Grid lg={10} md={12} xs={12} item>
+            {/* <React.Suspense fallback={<div>Loading...</div>}> */}
             <StockLineHistoryChartWithUi />
+            {/* </React.Suspense> */}
           </Grid>
         </Grid>
       </Container>

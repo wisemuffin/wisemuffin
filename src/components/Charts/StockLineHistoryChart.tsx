@@ -142,13 +142,13 @@ const StockLineChart = (props) => {
   useEffect(() => {
     const getDataAndDraw = async () => {
       const preData = yahooFinanceApiOff ? fakeData : await getYahooFinance();
-      const clonedPreData = {
+      let clonedPreData = {
         ...preData,
         prices: [...preData?.prices],
         timeZone: { ...preData?.timeZone },
         eventsData: [...preData?.eventsData],
       };
-      clonedPreData.prices.reverse();
+      // clonedPreData.prices.reverse();
       const data = clonedPreData.prices.map((price) => ({
         x: price.date,
         y: price.close,

@@ -8,10 +8,10 @@ export const initialState: IState = {
   episodes: [],
   favourites: [],
   visualisations: [],
-  yahooFinanceApiOff: true,
+  yahooFinanceApiOff: false,
   // TODO turning off currently because so many api calls
-  yahooFinanceApiOffChartWithinCard: true,
-  yahooFinanceApiOffStockCard: true,
+  yahooFinanceApiOffChartWithinCard: false,
+  yahooFinanceApiOffStockCard: false,
   sensorWebocketsOff: true,
 };
 
