@@ -168,3 +168,8 @@ export interface IRealTimeChartData {
   date: number;
   value: number;
 }
+
+export interface ILineAreaChartData {
+  x: Date;
+  y: number;
+}

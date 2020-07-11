@@ -6,8 +6,8 @@ import Box from "@material-ui/core/Box";
 import Grid from "@material-ui/core/Grid";
 import Alert from "@material-ui/lab/Alert";
 import Container from "@material-ui/core/Container";
-import StockMoverShakers from "../../components/Charts/Views/StockMoverShakers";
-import StockLineHistoryChartWithUi from "../../components/Charts/Views/StockLineHistoryChartWithUi";
+import StockMoverShakers from "../../components/Charts/Containers/StockMoverShakers";
+import StockLineHistoryChartWithUi from "../../components/Charts/Containers/StockLineHistoryChartWithUi";
 // const StockMoverShakers = React.lazy(() =>
 //   import("../../components/Charts/Views/StockMoverShakers")
 // );

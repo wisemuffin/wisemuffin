@@ -1,15 +1,10 @@
 import React from "react";
 import { withStyles, createStyles, Theme } from "@material-ui/core/styles";
 import CardMi from "@material-ui/core/Card";
-import CardContent from "@material-ui/core/CardContent";
-import CardHeader from "@material-ui/core/CardHeader";
-
 import TrendingUp from "@material-ui/icons/TrendingUp";
 import TrendingDown from "@material-ui/icons/TrendingDown";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
-
-import MiniStockLineHistoryChart from "../MiniStockLineHistoryChart";
 
 const DashCardGraph = (props) => {
   const {

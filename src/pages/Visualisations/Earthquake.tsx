@@ -3,6 +3,7 @@ import { IEarthquake } from "../../interfaces";
 import Typography from "@material-ui/core/Typography";
 import ResponsiveEmbed from "react-responsive-embed";
 import { withStyles, createStyles } from "@material-ui/core/styles";
+import Container from "@material-ui/core/Container";
 import Link from "@material-ui/core/Link";
 import Map from "../../components/Map";
 import EarthquakeCard from "../../components/EarthquakeCard";
@@ -62,7 +63,7 @@ const Earthquake = (props) => {
 
   return (
     <section>
-      <div className={classes.root}>
+      <Container>
         <Typography
           component="h1"
           variant="h2"
@@ -223,50 +224,19 @@ const Earthquake = (props) => {
                     </div>
                   ),
                 },
-                {
-                  Header: "Mag Type",
-                  accessor: "properties.magType",
-                },
+                // {
+                //   Header: "Mag Type",
+                //   accessor: "properties.magType",
+                // },
               ]}
             />
           </>
         )}
-      </div>
+      </Container>
     </section>
   );
 };
 
-const styles = (theme) =>
-  createStyles({
-    root: {
-      textAlign: "center",
-      paddingTop: theme.spacing(5),
-    },
-    cardGrid: {
-      padding: `${theme.spacing(8)}px 0`,
-    },
-    card: {
-      height: "100%",
-      display: "flex",
-      flexDirection: "column",
-      alignTtems: "center",
-      // justifyContent: "center"
-    },
-    cardHeader: {
-      backgroundColor: theme.palette.warning[500],
-      boxShadow: theme.boxShadow,
-      marginBottom: theme.spacing(1),
-    },
-    title: {
-      color: "white",
-    },
-
-    cardContent: {
-      display: "flex",
-      justifyContent: "center",
-      alignItems: "baseline",
-      marginBottom: theme.spacing(2),
-    },
-  });
+const styles = (theme) => createStyles({});
 
 export default withStyles(styles)(Earthquake);

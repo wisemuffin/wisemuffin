@@ -102,6 +102,7 @@ const RealTimeExample: React.FC<IRealTimeProps> = ({
     } else {
       // selection.selectAll('rect').data(data).
       selection.append("g").call(xAxis);
+      console.log("xAxis: ", xAxis);
 
       selection.append("g").call(yAxis);
 

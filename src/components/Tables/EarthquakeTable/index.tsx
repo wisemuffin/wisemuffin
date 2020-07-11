@@ -234,9 +234,9 @@ function NumberRangeColumnFilter({
 
   return (
     <div
-      style={{
-        display: "flex",
-      }}
+    // style={{
+    //   display: "flex",
+    // }}
     >
       <input
         value={filterValue[0] || ""}
