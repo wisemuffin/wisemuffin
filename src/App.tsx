@@ -9,6 +9,7 @@ import Layout from "./components/UI/Layout";
 import "./App.css";
 
 import Home from "./pages/Home";
+import About from "./pages/About";
 import ChartLib from "./pages/ChartLib";
 import Visualisations from "./pages/Visualisations";
 import VegaExamples from "./pages/Visualisations/VegaExamples";
@@ -26,6 +27,7 @@ const App: React.FC = () => {
             <Layout>
               <Switch>
                 <Route exact path="/" component={Home} />
+                <Route exact path="/about" component={About} />
                 <Route exact path="/chartlib" component={ChartLib} />
                 <Route
                   exact

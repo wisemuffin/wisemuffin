@@ -5,6 +5,7 @@ import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
+import RealTimeExampleHome from "../components/Charts/Containers/RealTimeExampleHome";
 
 const Home: React.FC = (props) => {
   const classes = useStyles();
@@ -18,7 +19,7 @@ const Home: React.FC = (props) => {
           color="textPrimary"
           gutterBottom
         >
-          Visualisations
+          Home
         </Typography>
         <Typography variant="h6" align="center" color="textSecondary" paragraph>
           Explore my gallery of visualisations i have built with a range of
@@ -51,6 +52,7 @@ const Home: React.FC = (props) => {
             </Button>
           </Grid>
         </Grid>
+        <RealTimeExampleHome />
       </Container>
     </main>
   );
@@ -72,6 +74,7 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
     padding: theme.spacing(3),
     overflow: "auto",
+    marginTop: "15px",
   },
   container: {
     paddingTop: theme.spacing(4),

@@ -1,36 +1,36 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import * as d3 from "d3";
 import useChartDimensions from "../../../hooks/useChartDimensions";
-import { IRealTimeChartData } from "../../../interfaces";
+import { ILineAreaChartData } from "../../../interfaces";
 
-/*
-example react d3: 
-1) using multiple useEffect: https://www.youtube.com/watch?v=a9QyTI-2D80
-*/
-
-interface IRealTimeProps {
+interface IProps {
+  stockCode: string;
+  chartTitle: string;
+  ticksDivideBy: number;
   showLabel?: boolean;
   height?: number;
+  data: ILineAreaChartData[];
+  xAccessor?: <T>(any) => T;
+  yAccessor?: <T>(any) => T;
   fill?: string;
   stroke?: string;
   strokeWidth?: string;
-  data: IRealTimeChartData[];
 }
 
 const TRANSITION_DURATION = 100;
 
-/**
- * Realtime data visualisation over a time period
- * @TODO option to smooth out animation, by hiding the jerky ness
- * https://observablehq.com/@bartok32/real-time-area-chart
- */
-const RealTimeExample: React.FC<IRealTimeProps> = ({
+const LineAreaChart: React.FC<IProps> = ({
+  stockCode,
+  chartTitle,
+  ticksDivideBy,
   showLabel = true,
   height = 300,
-  fill,
+  data,
+  xAccessor = (d) => d.x,
+  yAccessor = (d) => d.y,
+  fill = "#038C7E",
   stroke = "#038C7E",
   strokeWidth = 5,
-  data,
 }) => {
   const d3Container = React.useRef<SVGSVGElement | null>(null);
 
@@ -51,12 +51,12 @@ const RealTimeExample: React.FC<IRealTimeProps> = ({
   // scales and axis
   let x = d3
     .scaleTime()
-    .domain([d3.min(data, (d) => d.date)!, d3.max(data, (d) => d.date)!])
+    .domain([d3.min(data, xAccessor), d3.max(data, xAccessor)])
     .range([dimensions.marginLeft, dimensions.width - dimensions.marginRight]);
 
   let y = d3
     .scaleLinear()
-    .domain([0, d3.max(data, (d) => d.value)!])
+    .domain([d3.min(data, yAccessor), d3.max(data, yAccessor)])
     .nice()
     .range([dimensions.height - dimensions.marginBottom, dimensions.marginTop]);
 
@@ -78,22 +78,22 @@ const RealTimeExample: React.FC<IRealTimeProps> = ({
       .call(
         d3
           .axisLeft(y)
-          .tickFormat(d3.format(".0%"))
+          .tickFormat(d3.format(""))
           .ticks(dimensions.height / 80)
       );
 
   const line = d3
-    .line<IRealTimeChartData>()
-    .defined((d) => !isNaN(d.value))
-    .x((d) => x(d.date))
-    .y((d) => y(d.value));
+    .line<ILineAreaChartData>()
+    .defined(yAccessor)
+    .x((d) => x(xAccessor(d)))
+    .y((d) => y(yAccessor(d)));
 
   const area = d3
-    .area<IRealTimeChartData>()
-    .defined((d) => !isNaN(d.value))
-    .x((d) => x(d.date))
+    .area<ILineAreaChartData>()
+    .defined(yAccessor)
+    .x((d) => x(xAccessor(d)))
     .y0(y(0))
-    .y1((d) => y(d.value));
+    .y1((d) => y(yAccessor(d)));
 
   // initalise the chart
   useEffect(() => {
@@ -101,23 +101,34 @@ const RealTimeExample: React.FC<IRealTimeProps> = ({
       setSelection(d3.select(d3Container.current));
     } else {
       // selection.selectAll('rect').data(data).
-      showLabel && selection.append("g").call(xAxis);
+      selection.append("g").call(xAxis);
+      console.log("xAxis: ", xAxis);
 
-      showLabel && selection.append("g").call(yAxis);
+      selection.append("g").call(yAxis);
 
       selection
         .append("path")
         .datum(data)
-        .attr("fill", fill || "none")
+        .attr("fill", "none")
         .attr("stroke", stroke || "black")
         .attr("stroke-width", strokeWidth || 2)
         .attr("class", "line-chart-line")
-        // .attr("fill", "none")
-        // .attr("stroke", "steelblue")
-        // .attr("stroke-width", 1.5)
         .attr("stroke-linejoin", "round")
         .attr("stroke-linecap", "round")
         .attr("d", line);
+
+      //   selection
+      //     .append("path")
+      //     .datum(data)
+      //     .attr("fill", fill)
+      //     .attr("opacity", 0.4)
+      //     .attr("class", "line-chart-area")
+      //     .attr("stroke-width", 1.5)
+      //     .attr("stroke-linejoin", "round")
+      //     .attr("stroke-linecap", "round")
+      //     .attr("d", area);
+
+      // add tool tip
     }
   }, [selection]);
 
@@ -126,7 +137,7 @@ const RealTimeExample: React.FC<IRealTimeProps> = ({
     if (selection) {
       x = d3
         .scaleTime()
-        .domain([d3.min(data, (d) => d.date)!, d3.max(data, (d) => d.date)!])
+        .domain([d3.min(data, xAccessor), d3.max(data, xAccessor)])
         .range([
           dimensions.marginLeft,
           dimensions.width - dimensions.marginRight,
@@ -134,28 +145,26 @@ const RealTimeExample: React.FC<IRealTimeProps> = ({
 
       y = d3
         .scaleLinear()
-        .domain([0, d3.max(data, (d) => d.value)!])
+        .domain([d3.min(data, yAccessor), d3.max(data, yAccessor)])
         .nice()
         .range([
           dimensions.height - dimensions.marginBottom,
           dimensions.marginTop,
         ]);
 
-      showLabel &&
-        selection
-          .select(".xAxisGroup")
-          .transition()
-          .duration(TRANSITION_DURATION)
-          .ease(d3.easeLinear)
-          .call(xAxis);
+      selection
+        .select(".xAxisGroup")
+        .transition()
+        .duration(TRANSITION_DURATION)
+        .ease(d3.easeLinear)
+        .call(xAxis);
 
-      showLabel &&
-        selection
-          .select(".yAxisGroup")
-          .transition()
-          .duration(TRANSITION_DURATION)
-          .ease(d3.easeLinear)
-          .call(yAxis);
+      selection
+        .select(".yAxisGroup")
+        .transition()
+        .duration(TRANSITION_DURATION)
+        .ease(d3.easeLinear)
+        .call(yAxis);
 
       // updated line
       selection
@@ -165,8 +174,17 @@ const RealTimeExample: React.FC<IRealTimeProps> = ({
         .duration(TRANSITION_DURATION)
         .ease(d3.easeQuadIn)
         .attr("d", line);
+
+      // updated area
+      //   selection
+      //     .select(".line-chart-area")
+      //     .datum(data)
+      //     .transition()
+      //     .duration(TRANSITION_DURATION)
+      //     .ease(d3.easeQuadIn)
+      //     .attr("d", area);
     }
-  }, [data]);
+  }, [data, dimensions]);
 
   return (
     <div
@@ -185,4 +203,4 @@ const RealTimeExample: React.FC<IRealTimeProps> = ({
   );
 };
 
-export default RealTimeExample;
+export default LineAreaChart;

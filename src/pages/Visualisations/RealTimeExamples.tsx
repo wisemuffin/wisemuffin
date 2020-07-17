@@ -40,7 +40,7 @@ const RealTimeExamples = (props) => {
   ]);
 
   return (
-    <section>
+    <section style={{ marginTop: "15px" }}>
       <Container maxWidth="lg">
         <Typography
           component="h1"

@@ -13,7 +13,7 @@ const TvEpisodes: React.FC = () => {
     setValue(newValue);
   };
   return (
-    <section>
+    <section style={{ marginTop: "15px" }}>
       <Paper style={{ position: "sticky", bottom: "0" }}>
         <Tabs
           value={value}

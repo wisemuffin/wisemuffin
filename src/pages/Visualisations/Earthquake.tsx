@@ -62,7 +62,7 @@ const Earthquake = (props) => {
   );
 
   return (
-    <section>
+    <section style={{ marginTop: "15px" }}>
       <Container>
         <Typography
           component="h1"

@@ -32,12 +32,14 @@ import AssessmentIcon from "@material-ui/icons/Assessment";
 import PieChartIcon from "@material-ui/icons/PieChart";
 import BubbleChartIcon from "@material-ui/icons/BubbleChart";
 import BarChartIcon from "@material-ui/icons/BarChart";
+import AccountBoxIcon from "@material-ui/icons/AccountBox";
 
 const drawerWidth = 240;
 
 const drawerItems = [
   { name: "Visualisations", link: "/visualisations", icon: BubbleChartIcon },
   { name: "Wisemuffin-charts", link: "/chartlib", icon: AssessmentIcon },
+  { name: "About Me", link: "/about", icon: AccountBoxIcon },
 ];
 
 const NavBar = (props) => {
@@ -101,9 +103,9 @@ const NavBar = (props) => {
           <Grid container spacing={1}>
             <Grid item>
               <Typography variant="h6" className={classes.title}>
-                <Link className={classes.link} to="/">
+                <Button className={classes.link} href="/">
                   Wisemuffin
-                </Link>
+                </Button>
               </Typography>
             </Grid>
             <Grid item>

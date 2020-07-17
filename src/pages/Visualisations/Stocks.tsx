@@ -20,7 +20,7 @@ const Stocks = () => {
   const { yahooFinanceApiOff } = state;
   const classes = useStyles();
   return (
-    <section>
+    <section style={{ marginTop: "15px" }}>
       <Container maxWidth="lg" className={classes.container}>
         {yahooFinanceApiOff ? (
           <Alert severity="warning">

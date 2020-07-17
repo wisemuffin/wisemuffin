@@ -103,7 +103,7 @@ const ChartLib: React.FC<ChartLibProps> = ({}) => {
 
   return (
     <section>
-      <div style={{ flexGrow: 1, padding: "2rem" }}>
+      <div style={{ flexGrow: 1, padding: "2rem", marginTop: "15px" }}>
         <Typography variant="h1" align="center" gutterBottom>
           wisemuffin chart library{" "}
           <span role="img" aria-label="chart emoji">

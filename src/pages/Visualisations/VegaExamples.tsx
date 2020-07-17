@@ -28,7 +28,7 @@ const VegaExamples = (props) => {
   }, []);
 
   return (
-    <section>
+    <section style={{ marginTop: "15px" }}>
       <Container maxWidth="lg">
         <Alert severity="warning">
           Still working on making resizing to mobile device work with vega lite,

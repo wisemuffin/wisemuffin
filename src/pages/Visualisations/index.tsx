@@ -99,7 +99,7 @@ const Visualisations: React.FC = () => {
         }));
 
   return (
-    <section>
+    <section style={{ marginTop: "15px" }}>
       <Container maxWidth="lg" className={classes.container}>
         <Typography
           component="h1"
