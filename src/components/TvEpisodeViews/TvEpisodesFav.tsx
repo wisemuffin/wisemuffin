@@ -26,7 +26,7 @@ const TvEpisodesFav: React.FC = (): JSX.Element => {
   return (
     <section>
       <Typography variant="h1" align="center" gutterBottom>
-        Favourite Tv Shows{" "}
+        Favourite Episodes{" "}
         <span role="img" aria-label="tv emoji">
           📺
         </span>{" "}

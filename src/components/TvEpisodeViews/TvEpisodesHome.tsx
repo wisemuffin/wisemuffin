@@ -24,7 +24,7 @@ const TvEpisodes: React.FC = () => {
   return (
     <section>
       <Typography variant="h1" align="center" gutterBottom>
-        Tv Shows{" "}
+        Episode List{" "}
         <span role="img" aria-label="tv emoji">
           📺
         </span>{" "}

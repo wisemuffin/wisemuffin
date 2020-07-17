@@ -78,8 +78,8 @@ const visList: IVis[] = [
       original:
         "https://res.cloudinary.com/dkn8xtjbm/image/upload/v1594418663/TvShows.jpg",
     },
-    link: "/visualisations/tvepisodes",
-    name: "Tv Episodes",
+    link: "/visualisations/tvshows",
+    name: "Tv Shows",
     summary: "Building out episode cards with like button",
   },
 ];
@@ -114,7 +114,7 @@ const Visualisations: React.FC = () => {
           <Grid container spacing={2} justify="center">
             <Grid item>
               <Search
-                onSubmit={setSearchVis}
+                onChange={setSearchVis}
                 placeholder="Search Visualisation"
               />
             </Grid>

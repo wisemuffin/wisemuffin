@@ -4,7 +4,6 @@ import CardContent from "@material-ui/core/CardContent";
 import CardHeader from "@material-ui/core/CardHeader";
 import CardActions from "@material-ui/core/CardActions";
 import CardActionArea from "@material-ui/core/CardActionArea";
-import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
 import { IEpisode, IAction, IEpisodeProps } from "../../interfaces";
 import IconButton from "@material-ui/core/IconButton";

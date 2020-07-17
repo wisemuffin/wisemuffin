@@ -5,6 +5,7 @@ import { falsy } from "vega";
 export const initialState: IState = {
   showNav: false,
   dark: false,
+  shows: [],
   episodes: [],
   favourites: [],
   visualisations: [],

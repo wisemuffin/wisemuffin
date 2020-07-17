@@ -6,16 +6,22 @@ import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
 import SearchIcon from "@material-ui/icons/Search";
 
-const Search = ({ placeholder = "Search", onSubmit }) => {
+/**
+ *
+ * @param onSubmit called on each time seatch is submitted
+ * @param onChange called when ever the user makes an input
+ */
+const Search = ({ placeholder = "Search", onChange }) => {
   const classes = useStyles();
   const [searchState, setSearchState] = useState();
 
   const updateSearch = (e) => {
     setSearchState(e.target.value.substr(0, 20));
+    onChange(e.target.value.substr(0, 20));
     e.preventDefault();
   };
   const handleSubmit = (e) => {
-    onSubmit(searchState);
+    onChange(searchState);
     e.preventDefault();
   };
 

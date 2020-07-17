@@ -21,6 +21,12 @@ const reducer = (stateContext: IState, { type, payload }: IAction): IState => {
         episodes: [...payload],
       };
 
+    case "ADD_SHOWS":
+      return {
+        ...stateContext,
+        shows: [...payload],
+      };
+
     case "ADD_FAV":
       return {
         ...stateContext,

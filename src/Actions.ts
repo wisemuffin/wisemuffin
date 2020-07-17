@@ -1,4 +1,22 @@
 import { IState, IEpisode, IAction } from "./interfaces";
+
+/**
+ * Fetches shows from https://api.tvmaze.com/
+ * Use async stream with throttle if observing key presses from search
+ * @param dispatch dispatch function from useContext
+ * @param search string to be sent to API for fuzi seach
+ */
+export const fetchShows = async (search = "morty") => {
+  const URL = `https://api.tvmaze.com/search/shows?q=:${search}`;
+  const data = await fetch(URL);
+  const dataJSON = await data.json();
+  return dataJSON;
+  // dispatch({
+  //   type: "ADD_SHOWS",
+  //   payload: dataJSON,
+  // });
+};
+
 export const fetchDataAction = async (dispatch: any) => {
   const URL =
     "https://api.tvmaze.com/singlesearch/shows?q=rick-&-morty&embed=episodes";

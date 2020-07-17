@@ -10,6 +10,7 @@ export interface IAction {
 export interface IState {
   showNav: boolean;
   dark: boolean;
+  shows: Array<IShow>;
   episodes: Array<IEpisode>;
   favourites: Array<IEpisode>;
   visualisations: Array<IVis>;
@@ -17,6 +18,59 @@ export interface IState {
   yahooFinanceApiOffChartWithinCard: boolean;
   yahooFinanceApiOffStockCard: boolean;
   sensorWebocketsOff: boolean;
+}
+
+export interface IShow {
+  score: number;
+  show: {
+    id: number;
+    url: string; //www.tvmaze.com/shows/216/rick-and-morty;
+    name: string;
+    type: string;
+    language: string;
+    genres: Array<string>;
+    status: string;
+    runtime: number;
+    premiered: string;
+    officialSite: string;
+    schedule: {
+      time: string;
+      days: Array<string>;
+    };
+    rating: {
+      average: number;
+    };
+    weight: number;
+    network: {
+      id: number;
+      name: string;
+      country: {
+        name: string;
+        code: string;
+        timezone: string;
+      };
+    };
+    webChannel: string;
+    externals: {
+      tvrage: number;
+      thetvdb: number;
+      imdb: string;
+    };
+    image: {
+      medium: string;
+      original: string;
+    };
+    summary: HTMLElement;
+    updated: number;
+    _links: {
+      self: {
+        href: string;
+      };
+      previousepisode: {
+        href: string;
+      };
+    };
+  };
 }
 
 export interface IEpisode {
