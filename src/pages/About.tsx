@@ -10,6 +10,7 @@ import LinkedInIcon from "@material-ui/icons/LinkedIn";
 import Grid from "@material-ui/core/Grid";
 import IconButton from "@material-ui/core/IconButton";
 import LocationOnIcon from "@material-ui/icons/LocationOn";
+import Grow from "@material-ui/core/Grow";
 
 import Chip from "@material-ui/core/Chip";
 
@@ -63,88 +64,97 @@ export const About = () => {
       <Container>
         <Grid container spacing={3}>
           <Grid item md={12} lg={6}>
-            <Paper className={classes.aboutMeContainer}>
-              <Box p={3}>
-                <Avatar
-                  alt="David Griffiths"
-                  src="https://res.cloudinary.com/dkn8xtjbm/image/upload/v1594449186/me.jpg"
-                  className={classes.large}
-                />
-                <div className={classes.sideBox}>
-                  <Typography variant="h4" gutterBottom>
-                    David Griffiths
-                  </Typography>
-                  <Chip
-                    label="Sydney AUS"
-                    icon={<LocationOnIcon />}
-                    variant="outlined"
+            <Grow in>
+              <Paper className={classes.aboutMeContainer}>
+                <Box p={3}>
+                  <Avatar
+                    alt="David Griffiths"
+                    src="https://res.cloudinary.com/dkn8xtjbm/image/upload/v1594449186/me.jpg"
+                    className={classes.large}
                   />
-                  <Grid container spacing={2}>
-                    <Grid item>
-                      <IconButton href="https://www.linkedin.com/in/david-griffiths-5a9387a1/">
-                        <LinkedInIcon color="primary" />
-                      </IconButton>
-                    </Grid>
-                    <Grid item>
-                      <IconButton href="https://github.com/wisemuffin">
-                        <GitHubIcon color="primary" />
-                      </IconButton>
-                    </Grid>
-                  </Grid>
-                </div>
-
-                <Box>
-                  <Typography variant="caption">
-                    I am a data engineering and visualisation nerd. I love to
-                    get people curious about data, ask questions no one has
-                    thought to ask, and have the ability to self serve with
-                    interactive visualisations. This website is just a portfolio
-                    and playground for for me to develope my skills 🚀
-                  </Typography>
-                </Box>
-              </Box>
-            </Paper>
-          </Grid>
-          <Grid item md={12} lg={6}>
-            <Paper>
-              <Box p={3}>
-                <Typography variant="h5" gutterBottom>
-                  Skills
-                </Typography>
-                {chipData.map((chipList) => {
-                  return (
-                    <Grid container spacing={2} alignItems="center">
+                  <div className={classes.sideBox}>
+                    <Typography variant="h4" gutterBottom>
+                      David Griffiths
+                    </Typography>
+                    <Chip
+                      label="Sydney AUS"
+                      icon={<LocationOnIcon />}
+                      variant="outlined"
+                    />
+                    <Grid container spacing={2}>
                       <Grid item>
-                        <Typography variant="caption">
-                          {chipList.skillType}
-                        </Typography>
+                        <IconButton href="https://www.linkedin.com/in/david-griffiths-5a9387a1/">
+                          <LinkedInIcon color="primary" />
+                        </IconButton>
                       </Grid>
-                      {chipList.skillList.map((data) => (
-                        <Grid item key={data.key}>
-                          <Chip label={data.label} />
-                        </Grid>
-                      ))}
+                      <Grid item>
+                        <IconButton href="https://github.com/wisemuffin">
+                          <GitHubIcon color="primary" />
+                        </IconButton>
+                      </Grid>
                     </Grid>
-                  );
-                })}
-              </Box>
-            </Paper>
+                  </div>
+
+                  <Box>
+                    <Typography variant="caption">
+                      I am a data engineering and visualisation nerd. I love to
+                      get people curious about data, ask questions no one has
+                      thought to ask, and have the ability to self serve with
+                      interactive visualisations. This website is just a
+                      portfolio and playground for for me to develope my skills
+                      🚀
+                    </Typography>
+                  </Box>
+                </Box>
+              </Paper>
+            </Grow>
           </Grid>
           <Grid item md={12} lg={6}>
-            <Paper>
-              <Box p={3}>
-                <Typography variant="h5">Work</Typography>
-                🚧 under construction 🚧
-              </Box>
-            </Paper>
+            <Grow in>
+              <Paper>
+                <Box p={3}>
+                  <Typography variant="h5" gutterBottom>
+                    Skills
+                  </Typography>
+                  {chipData.map((chipList) => {
+                    return (
+                      <Grid container spacing={2} alignItems="center">
+                        <Grid item>
+                          <Typography variant="caption">
+                            {chipList.skillType}
+                          </Typography>
+                        </Grid>
+                        {chipList.skillList.map((data) => (
+                          <Grid item key={data.key}>
+                            <Chip label={data.label} />
+                          </Grid>
+                        ))}
+                      </Grid>
+                    );
+                  })}
+                </Box>
+              </Paper>
+            </Grow>
           </Grid>
           <Grid item md={12} lg={6}>
-            <Paper>
-              <Box p={3}>
-                <Typography variant="h5">Education</Typography>
-                🚧 under construction 🚧
-              </Box>
-            </Paper>
+            <Grow in>
+              <Paper>
+                <Box p={3}>
+                  <Typography variant="h5">Work</Typography>
+                  🚧 under construction 🚧
+                </Box>
+              </Paper>
+            </Grow>
+          </Grid>
+          <Grid item md={12} lg={6}>
+            <Grow in>
+              <Paper>
+                <Box p={3}>
+                  <Typography variant="h5">Education</Typography>
+                  🚧 under construction 🚧
+                </Box>
+              </Paper>
+            </Grow>
           </Grid>
         </Grid>
       </Container>
