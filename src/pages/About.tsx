@@ -47,6 +47,9 @@ export const About = () => {
       skillList: [
         { key: 0, label: "Alteryx" },
         { key: 1, label: "Python" },
+        { key: 1, label: "SQL" },
+        { key: 1, label: "Data Warehousing" },
+        { key: 1, label: "Data Modeling" },
       ],
     },
     {
@@ -56,6 +59,10 @@ export const About = () => {
         { key: 1, label: "Solutions Architect" },
         { key: 1, label: "Big data Specilist" },
       ],
+    },
+    {
+      skillType: "Finance",
+      skillList: [{ key: 0, label: "Chartered Management Accountant" }],
     },
   ]);
 
