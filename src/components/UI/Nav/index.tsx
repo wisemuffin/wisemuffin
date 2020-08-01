@@ -123,13 +123,6 @@ const NavBar = (props) => {
           <IconButton onClick={handleToggleDarkTheme} color="inherit">
             {state.dark ? <WbSunny /> : <WbSunnyOutlined />}
           </IconButton>
-          <IconButton
-            color="inherit"
-            edge="start"
-            aria-label="Report an Issue"
-            href="/raiseIssue"
-            // onClick={() => console.log("TODO add side menu")}
-          ></IconButton>
         </Toolbar>
       </AppBar>
       <Drawer
