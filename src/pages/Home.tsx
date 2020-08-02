@@ -6,6 +6,7 @@ import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
 import RealTimeExampleHome from "../components/Charts/Containers/RealTimeExampleHome";
+import ParticlesDrifting from "../components/ParticlesDrifting";
 
 const Home: React.FC = (props) => {
   const classes = useStyles();
@@ -52,6 +53,7 @@ const Home: React.FC = (props) => {
             </Button>
           </Grid>
         </Grid>
+        <ParticlesDrifting />
         <RealTimeExampleHome />
       </Container>
     </main>
