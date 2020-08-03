@@ -7,8 +7,12 @@ interface ICanvasProps {
   draw: any;
   options: ICanvasOptions;
 }
-const Canvas = ({ draw, options = { context: "2d" }, ...rest }) => {
-  const { context, ...moreConfig } = options;
+const Canvas = ({
+  draw,
+  options = { context: "2d", height: 400 },
+  ...rest
+}) => {
+  const { context, height, ...moreConfig } = options;
   const canvasRef = useCanvas(draw, { context });
 
   const [ref, dimensions] = useChartDimensions({
@@ -22,7 +26,7 @@ const Canvas = ({ draw, options = { context: "2d" }, ...rest }) => {
     <div
       style={{
         width: "100%",
-        height: 400,
+        height: height,
       }}
       ref={ref}
     >

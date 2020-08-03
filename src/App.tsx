@@ -17,6 +17,7 @@ import Stocks from "./pages/Visualisations/Stocks";
 import Earthquake from "./pages/Visualisations/Earthquake";
 import RealTimeExamples from "./pages/Visualisations/RealTimeExamples";
 import TvShows from "./pages/Visualisations/TvShows";
+import CanvasExamples from "./pages/Visualisations/CanvasExamples";
 
 const App: React.FC = () => {
   return (
@@ -54,6 +55,11 @@ const App: React.FC = () => {
                   exact
                   path="/visualisations/tvshows"
                   component={TvShows}
+                />
+                <Route
+                  exact
+                  path="/visualisations/canvasExamples"
+                  component={CanvasExamples}
                 />
               </Switch>
             </Layout>

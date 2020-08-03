@@ -1,83 +1,64 @@
 import React from "react";
 import Canvas from "../Canvas";
+import * as R from "ramda";
 /**
  * canvas example
  * https://medium.com/@pdx.lucasm/canvas-with-react-js-32e133c05258
+ *
+ * end result: https://codepen.io/franksLaboratory/pen/aborBPJ
+ * and https://www.youtube.com/watch?v=d620nV6bp0A
  */
 const ParticlesDrifting = () => {
-  // const canvasRef = React.useRef<HTMLCanvasElement>(null);
-  // const contextRef = React.useRef<CanvasRenderingContext2D | null | undefined>(
-  //   null
-  // );
-  // const [isDrawing, setIsDrawing] = React.useState(false);
+  const draw = (ctx: CanvasRenderingContext2D, frameCount) => {
+    // ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+    const height = 500;
+    const width = 1300;
+    const min = 0;
+    const max = 100;
+    const max2 = Math.pow(max, 2);
+    const n = 100;
+    const particles = new Array(n);
+    let speed = 0.0001;
+    for (let i = 0; i < n; ++i) {
+      particles[i] = {
+        x: Math.random() * (width + max * 2) - max,
+        y: Math.random() * (height + max * 2) - max,
+        vx: 0,
+        vy: 0,
+      };
+    }
+    for (let i = 0; i < n; ++i) {
+      const p = particles[i];
+      p.x += p.vx;
+      if (p.x < -max) p.x += width + max;
+      else if (p.x > width + max) p.x -= width + max;
+      p.y += p.vy;
+      if (p.y < -max) p.y += height + max;
+      else if (p.y > height + max) p.y -= height + max;
+      p.vx += speed * (Math.random() - 0.5) - 0.01 * p.vx;
+      p.vy += speed * (Math.random() - 0.5) - 0.01 * p.vy;
+    }
 
-  const draw = (ctx, frameCount) => {
-    ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
-    ctx.fillStyle = "#000000";
-    ctx.beginPath();
-    ctx.arc(50, 100, 20 * Math.sin(frameCount * 0.05) ** 2, 0, 2 * Math.PI);
-    ctx.fill();
+    for (let i = 0; i < n; ++i) {
+      for (let j = i + 1; j < n; ++j) {
+        const pi = particles[i];
+        const pj = particles[j];
+        const dist = Math.pow(pi.x - pj.x, 2) + Math.pow(pi.y - pj.y, 2);
+        if (dist < max2) {
+          ctx.beginPath();
+
+          ctx.strokeStyle = `hsl(0,0%,${100 - ((max2 - dist) / max2) * 25}%)`;
+          ctx.moveTo(pi.x, pi.y);
+          ctx.lineTo(pj.x, pj.y);
+          ctx.stroke();
+        }
+      }
+    }
   };
-
-  // React.useEffect(() => {
-  //   if (canvasRef.current === undefined || canvasRef.current === null) return;
-  //   const canvas = canvasRef.current;
-  //   canvas.width = window.innerWidth * 2;
-  //   canvas.height = window.innerHeight * 2;
-  //   canvas.style.width = `${window.innerWidth}px`;
-  //   canvas.style.height = `${window.innerHeight}px`;
-
-  //   const context = canvas.getContext("2d");
-  //   let frameCount = 0;
-  //   let animationFrameId;
-  //   // context!.scale(2, 2);
-  //   // context!.lineCap = "round";
-  //   // context!.strokeStyle = "black";
-  //   // context!.lineWidth = 5;
-  //   // contextRef.current = context;
-
-  //   //Our draw came here
-  //   const render = () => {
-  //     frameCount++;
-  //     draw(context, frameCount);
-  //     animationFrameId = window.requestAnimationFrame(render);
-  //   };
-  //   render();
-
-  //   return () => {
-  //     window.cancelAnimationFrame(animationFrameId);
-  //   };
-  // }, [draw]);
-
-  // const startDrawing = ({ nativeEvent }) => {
-  //   const { offsetX, offsetY } = nativeEvent;
-  //   contextRef.current!.beginPath();
-  //   contextRef.current!.moveTo(offsetX, offsetY);
-  //   setIsDrawing(true);
-  // };
-
-  // const finishDrawing = () => {
-  //   contextRef.current!.closePath();
-  //   setIsDrawing(false);
-  // };
-
-  // const draw = ({ nativeEvent }) => {
-  //   if (!isDrawing) {
-  //     return;
-  //   }
-  //   const { offsetX, offsetY } = nativeEvent;
-  //   contextRef.current!.lineTo(offsetX, offsetY);
-  //   contextRef.current!.stroke();
-  // };
 
   return (
     <div>
-      <Canvas
-        draw={draw}
-        // onMouseDown={startDrawing}
-        // onMouseUp={finishDrawing}
-        // onMouseMove={draw}
-      />
+      <Canvas draw={draw} />
     </div>
   );
 };

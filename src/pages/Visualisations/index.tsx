@@ -82,6 +82,20 @@ const visList: IVis[] = [
     name: "Tv Shows",
     summary: "Building out episode cards with like button",
   },
+  {
+    createdDate: `${new Date("2020-01-05")}`,
+    id: Math.trunc(Math.random() * 10000),
+    mediaType: "img",
+    media: {
+      medium:
+        "https://res.cloudinary.com/dkn8xtjbm/image/upload/v1555039455/sample.jpg",
+      original:
+        "https://res.cloudinary.com/dkn8xtjbm/image/upload/v1555039455/sample.jpg",
+    },
+    link: "/visualisations/canvasExamples",
+    name: "Canvas Exampes",
+    summary: "🚧 Under Construction 🚧 ",
+  },
 ];
 
 const Visualisations: React.FC = () => {
