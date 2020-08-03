@@ -1,5 +1,5 @@
 import React from "react";
-import useCanvas from "../../hooks/useCanvas";
+import Canvas from "../Canvas";
 /**
  * canvas example
  * https://medium.com/@pdx.lucasm/canvas-with-react-js-32e133c05258
@@ -18,8 +18,6 @@ const ParticlesDrifting = () => {
     ctx.arc(50, 100, 20 * Math.sin(frameCount * 0.05) ** 2, 0, 2 * Math.PI);
     ctx.fill();
   };
-
-  const canvasRef = useCanvas(draw);
 
   // React.useEffect(() => {
   //   if (canvasRef.current === undefined || canvasRef.current === null) return;
@@ -74,12 +72,12 @@ const ParticlesDrifting = () => {
 
   return (
     <div>
-      <canvas
+      <Canvas
+        draw={draw}
         // onMouseDown={startDrawing}
         // onMouseUp={finishDrawing}
         // onMouseMove={draw}
-        ref={canvasRef}
-      ></canvas>
+      />
     </div>
   );
 };

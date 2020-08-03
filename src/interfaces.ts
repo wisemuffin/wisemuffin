@@ -2,6 +2,8 @@
  * all the interfaces
  */
 
+import { canvas } from "leaflet";
+
 export interface IAction {
   type: string;
   payload: any;
@@ -226,4 +228,8 @@ export interface IRealTimeChartData {
 export interface ILineAreaChartData {
   x: Date;
   y: number;
+}
+
+export interface ICanvasOptions {
+  context: string;
 }
