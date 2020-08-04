@@ -18,6 +18,7 @@ import RealTimeExamples from "./pages/Visualisations/RealTimeExamples";
 import TvShows from "./pages/Visualisations/TvShows";
 import CanvasExamples from "./pages/Visualisations/CanvasExamples";
 import GAListener from "./util/GAListener";
+import ExoPlanets from "./pages/Visualisations/ExoPlanets";
 
 const App: React.FC = () => {
   return (
@@ -65,6 +66,11 @@ const App: React.FC = () => {
                     exact
                     path="/visualisations/canvasExamples"
                     component={CanvasExamples}
+                  />
+                  <Route
+                    exact
+                    path="/visualisations/exoPlanets"
+                    component={ExoPlanets}
                   />
                 </Switch>
               </Layout>
