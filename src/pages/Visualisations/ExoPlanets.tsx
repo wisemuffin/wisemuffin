@@ -14,28 +14,48 @@ const methodsDescriptions = [
   {
     name: "Transit",
     description: `When a planet passes directly between its star and an observer, it dims the star's light by a measurable amount.`,
+    img:
+      "https://res.cloudinary.com/dkn8xtjbm/image/upload/v1596662596/Nasa/transit.png",
   },
   {
     name: "Radial Velocity",
     description: `Orbiting planets cause stars to wobble in space, causing an observable shift in the color of the star's light.`,
+    img:
+      "https://res.cloudinary.com/dkn8xtjbm/image/upload/v1596662858/Nasa/radial_velocity.png",
   },
   {
     name: "Microlensing",
     description: `Light from a distant star is bent and focused by gravity as a planet passes between the star and Earth.`,
+    img:
+      "https://res.cloudinary.com/dkn8xtjbm/image/upload/v1596662857/Nasa/microlensing.png",
   },
   {
     name: "Imaging",
     description: `Astronomers can take pictures of exoplanets using techniques that remove the overwhelming glare of the stars they orbit`,
+    img:
+      "https://res.cloudinary.com/dkn8xtjbm/image/upload/v1596662857/Nasa/direct_imaging.png",
   },
 ];
 
 const url_nasa_exoplanets =
   "https://exoplanets.nasa.gov/alien-worlds/ways-to-find-a-planet/";
 
-const ExoPlanets = (props) => {
-  const [exo_planets_by_method, setExo_planets_by_method] = React.useState();
+interface IExoPlanets {
+  pl_discmethod: string;
+}
 
-  const exo_planets = useFetch(
+interface IExoPlanetsByMethod {
+  pl_discmethod: string;
+  count_of_exo_planets: number;
+  ratio_of_exo_planets_to_total: number;
+}
+
+const ExoPlanets = (props) => {
+  const [exo_planets_by_method, setExo_planets_by_method] = React.useState<
+    IExoPlanetsByMethod[]
+  >();
+
+  const exo_planets: IExoPlanets[] = useFetch(
     "https://exoplanetarchive.ipac.caltech.edu/cgi-bin/nstedAPI/nph-nstedAPI?&table=exoplanets&format=json"
   );
 
@@ -45,6 +65,7 @@ const ExoPlanets = (props) => {
     const total_exo_planets = exo_planets.length;
 
     const exo_planets_by_method_trans = R.compose(
+      R.sortWith([R.descend(R.prop("count_of_exo_planets"))]),
       R.map((arr) => ({
         pl_discmethod: arr[0],
         count_of_exo_planets: arr[1],
@@ -81,10 +102,11 @@ const ExoPlanets = (props) => {
             <a href={url_nasa_exoplanets}>NASA Exoplanets</a>
           </span>
         </Alert>
-        {exo_planets_by_method?.map((method) => (
+        {exo_planets_by_method?.slice(0, 4).map((method) => (
           <Accordion
-            expanded={expanded === "panel1"}
-            onChange={handleChange("panel1")}
+            expanded={expanded === method.pl_discmethod}
+            onChange={handleChange(method.pl_discmethod)}
+            key={method.pl_discmethod}
           >
             <AccordionSummary
               expandIcon={<ExpandMoreIcon />}
@@ -93,14 +115,29 @@ const ExoPlanets = (props) => {
             >
               <Grid container spacing={1}>
                 <Grid item>
-                  <Typography>{method.pl_discmethod}</Typography>
+                  <Typography variant="h5">
+                    {(method.ratio_of_exo_planets_to_total * 100).toFixed(2)}%
+                  </Typography>
                 </Grid>
                 <Grid item>
-                  <Typography>{method.count_of_exo_planets}</Typography>
+                  <img
+                    src={
+                      methodsDescriptions.filter(
+                        (meth) =>
+                          meth.name.toLocaleLowerCase() ===
+                          method.pl_discmethod.toLocaleLowerCase()
+                      )[0]?.img
+                    }
+                  />
                 </Grid>
                 <Grid item>
-                  <Typography>
-                    {method.ratio_of_exo_planets_to_total.toFixed(2) * 100}%
+                  <Typography color="textSecondary">
+                    {method.pl_discmethod}
+                  </Typography>
+                </Grid>
+                <Grid item>
+                  <Typography color="textSecondary">
+                    ({method.count_of_exo_planets} planets)
                   </Typography>
                 </Grid>
               </Grid>
@@ -118,8 +155,16 @@ const ExoPlanets = (props) => {
             </AccordionDetails>
           </Accordion>
         ))}
-
-        <p>{JSON.stringify(exo_planets_by_method)}</p>
+        <Grid container>
+          {exo_planets_by_method?.slice(5).map((method) => (
+            <Grid item key={method.pl_discmethod}>
+              <Typography variant="caption">
+                {(method.ratio_of_exo_planets_to_total * 100).toFixed(2)}%{" "}
+                {method.pl_discmethod}{" "}
+              </Typography>
+            </Grid>
+          ))}
+        </Grid>
       </Container>
     </section>
   );
