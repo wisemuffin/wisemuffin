@@ -164,6 +164,36 @@ const VegaExamples = (props) => {
               style={{ width: "100%" }}
             />
           </Grid>
+          <Grid item xs={12} sm={12} md={6} lg={6} key={2}>
+            <VegaLite
+              spec={{
+                mark: { type: "bar", width: 4 },
+                data: { name: "table" },
+                selection: {
+                  sel18: { type: "interval", encodings: ["x"] },
+                },
+                encoding: {
+                  x: {
+                    field: "Release_Date",
+                    type: "temporal",
+                    timeUnit: "year",
+                    title: "Films by Release Year",
+                  },
+                  y: {
+                    type: "quantitative",
+                    aggregate: "count",
+                    title: null,
+                  },
+                },
+                width: "container",
+                height: 50,
+              }}
+              data={{
+                table: movies,
+              }}
+              style={{ width: "100%" }}
+            />
+          </Grid>
         </Grid>
       </Container>
     </section>
