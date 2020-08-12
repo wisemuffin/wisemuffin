@@ -6,6 +6,7 @@ import Typography from "@material-ui/core/Typography";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import Grid from "@material-ui/core/Grid";
 import Container from "@material-ui/core/Container";
+import Skeleton from "@material-ui/lab/Skeleton";
 
 import useFetch from "../../hooks/useFetch";
 import * as R from "ramda";
@@ -104,10 +105,19 @@ const ExoPlanets = (props) => {
         </Alert>
         <div style={{ flexGrow: 1 }}>
           <Grid container spacing={1}>
-            <Grid item md={12} lg={6}>
+            <Grid item xs={12} md={12} lg={6}>
               <Typography variant="h5" gutterBottom>
                 By Method
               </Typography>
+              {!exo_planets_by_method &&
+                R.range(1, 5).map((i) => (
+                  <Skeleton
+                    animation="wave"
+                    height={70}
+                    width="100%"
+                    style={{ marginBottom: 6 }}
+                  />
+                ))}
               {exo_planets_by_method?.slice(0, 4).map((method) => (
                 <Accordion
                   expanded={expanded === method.pl_discmethod}
@@ -179,25 +189,35 @@ const ExoPlanets = (props) => {
               <Typography variant="h5" gutterBottom>
                 Exoplanet Discovery Timeline
               </Typography>
-              <VegaLite
-                spec={{
-                  mark: { type: "line" },
-                  data: { name: "table" },
 
-                  encoding: {
-                    x: { field: "rowupdate", type: "temporal" },
-                    y: { type: "quantitative", aggregate: "count" },
-                  },
-                  width: "container",
-                  height: 300,
-                }}
-                data={{
-                  table: exo_planets,
-                }}
-                style={{ width: "95%", padding: 0 }}
-                renderer="svg"
-                actions={false}
-              />
+              {!exo_planets_by_method && (
+                <Skeleton
+                  animation="wave"
+                  height={700}
+                  style={{ marginTop: 0 }}
+                />
+              )}
+              {exo_planets_by_method && (
+                <VegaLite
+                  spec={{
+                    mark: { type: "line" },
+                    data: { name: "table" },
+
+                    encoding: {
+                      x: { field: "rowupdate", type: "temporal" },
+                      y: { type: "quantitative", aggregate: "count" },
+                    },
+                    width: "container",
+                    height: 300,
+                  }}
+                  data={{
+                    table: exo_planets,
+                  }}
+                  style={{ width: "95%", padding: 0 }}
+                  renderer="svg"
+                  actions={false}
+                />
+              )}
             </Grid>
           </Grid>
         </div>
