@@ -11,6 +11,20 @@ import { IVis } from "../../interfaces";
 
 const visList: IVis[] = [
   {
+    createdDate: `${new Date("2020-08-12")}`,
+    id: Math.trunc(Math.random() * 10000),
+    mediaType: "img",
+    media: {
+      medium:
+        "https://res.cloudinary.com/dkn8xtjbm/image/upload/v1597230942/Nasa/NASA-Logo.png",
+      original:
+        "https://res.cloudinary.com/dkn8xtjbm/image/upload/v1597230942/Nasa/NASA-Logo.png",
+    },
+    link: "/visualisations/exoPlanets",
+    name: "Exoplanets",
+    summary: "Explore exoplants from NASA's API",
+  },
+  {
     createdDate: `${new Date("2020-07-11")}`,
     id: Math.trunc(Math.random() * 10000),
     mediaType: "video",
