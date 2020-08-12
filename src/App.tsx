@@ -17,58 +17,58 @@ import Earthquake from "./pages/Visualisations/Earthquake";
 import RealTimeExamples from "./pages/Visualisations/RealTimeExamples";
 import TvShows from "./pages/Visualisations/TvShows";
 import CanvasExamples from "./pages/Visualisations/CanvasExamples";
-import ReactGa from "react-ga";
+import GAListener from "./util/GAListener";
 
 const App: React.FC = () => {
-  React.useEffect(() => {
-    ReactGa.initialize("UA-125075344-1");
-
-    // report page view
-    ReactGa.pageview(window.location.pathname + window.location.search);
-  }, []);
   return (
     <StoreProvider>
       <ThemeProvider>
         <MuiPickersUtilsProvider utils={MomentUtils}>
           <Router>
-            <Layout>
-              <Switch>
-                <Route exact path="/" component={Home} />
-                <Route exact path="/about" component={About} />
-                <Route exact path="/chartlib" component={ChartLib} />
-                <Route
-                  exact
-                  path="/visualisations"
-                  component={Visualisations}
-                />
-                <Route
-                  exact
-                  path="/visualisations/vegaExamples"
-                  component={VegaExamples}
-                />
-                <Route exact path="/visualisations/stocks" component={Stocks} />
-                <Route
-                  exact
-                  path="/visualisations/earthquake"
-                  component={Earthquake}
-                />
-                <Route
-                  exact
-                  path="/visualisations/realTimeExamples"
-                  component={RealTimeExamples}
-                />
-                <Route
-                  exact
-                  path="/visualisations/tvshows"
-                  component={TvShows}
-                />
-                <Route
-                  exact
-                  path="/visualisations/canvasExamples"
-                  component={CanvasExamples}
-                />
-              </Switch>
-            </Layout>
+            <GAListener trackingId="UA-125075344-1">
+              <Layout>
+                <Switch>
+                  <Route exact path="/" component={Home} />
+                  <Route exact path="/about" component={About} />
+                  <Route exact path="/chartlib" component={ChartLib} />
+                  <Route
+                    exact
+                    path="/visualisations"
+                    component={Visualisations}
+                  />
+                  <Route
+                    exact
+                    path="/visualisations/vegaExamples"
+                    component={VegaExamples}
+                  />
+                  <Route
+                    exact
+                    path="/visualisations/stocks"
+                    component={Stocks}
+                  />
+                  <Route
+                    exact
+                    path="/visualisations/earthquake"
+                    component={Earthquake}
+                  />
+                  <Route
+                    exact
+                    path="/visualisations/realTimeExamples"
+                    component={RealTimeExamples}
+                  />
+                  <Route
+                    exact
+                    path="/visualisations/tvshows"
+                    component={TvShows}
+                  />
+                  <Route
+                    exact
+                    path="/visualisations/canvasExamples"
+                    component={CanvasExamples}
+                  />
+                </Switch>
+              </Layout>
+            </GAListener>
           </Router>
         </MuiPickersUtilsProvider>
       </ThemeProvider>
