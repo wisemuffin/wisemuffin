@@ -1,6 +1,5 @@
 import React from "react";
-import { Router, Route, Switch } from "react-router-dom";
-import history from "./history";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import StoreProvider from "./store/StoreProvider";
 import ThemeProvider from "./hooks/ThemeProvider";
 import { MuiPickersUtilsProvider } from "@material-ui/pickers";
@@ -31,7 +30,7 @@ const App: React.FC = () => {
     <StoreProvider>
       <ThemeProvider>
         <MuiPickersUtilsProvider utils={MomentUtils}>
-          <Router history={history}>
+          <Router>
             <Layout>
               <Switch>
                 <Route exact path="/" component={Home} />

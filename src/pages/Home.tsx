@@ -1,5 +1,5 @@
 import React from "react";
-import { Link as RouterLink } from "react-router-dom";
+import { Link as RouterLink, useHistory } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
@@ -7,9 +7,9 @@ import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
 import RealTimeExampleHome from "../components/Charts/Containers/RealTimeExampleHome";
 import ReactGa from "react-ga";
-import history from "../history";
 
 const Home: React.FC = (props) => {
+  let history = useHistory();
   const classes = useStyles();
 
   const vizLibClickHandler = () => {

@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import history from "../../../history";
+import { useHistory } from "react-router-dom";
 import Context from "../../../store/Store";
 import { makeStyles, useTheme, Theme } from "@material-ui/core/styles";
 import { Link } from "react-router-dom";
@@ -43,6 +43,7 @@ const drawerItems = [
 ];
 
 const NavBar = (props) => {
+  let history = useHistory();
   const classes = useStyles();
   const theme = useTheme();
   const { state, dispatch } = useContext(Context);
