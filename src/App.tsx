@@ -18,8 +18,15 @@ import Earthquake from "./pages/Visualisations/Earthquake";
 import RealTimeExamples from "./pages/Visualisations/RealTimeExamples";
 import TvShows from "./pages/Visualisations/TvShows";
 import CanvasExamples from "./pages/Visualisations/CanvasExamples";
+import ReactGa from "react-ga";
 
 const App: React.FC = () => {
+  React.useEffect(() => {
+    ReactGa.initialize("UA-125075344-1");
+
+    // report page view
+    ReactGa.pageview(window.location.pathname + window.location.search);
+  }, []);
   return (
     <StoreProvider>
       <ThemeProvider>

@@ -6,9 +6,17 @@ import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
 import RealTimeExampleHome from "../components/Charts/Containers/RealTimeExampleHome";
+import ReactGa from "react-ga";
+import history from "../history";
 
 const Home: React.FC = (props) => {
   const classes = useStyles();
+
+  const vizLibClickHandler = () => {
+    ReactGa.event({ category: "Button", action: "Click Vis Library" });
+    history.push(`/chartlib`);
+  };
+
   return (
     <main className={classes.content}>
       <Container maxWidth="lg" className={classes.container}>
@@ -43,10 +51,9 @@ const Home: React.FC = (props) => {
           </Grid>
           <Grid item>
             <Button
-              component={RouterLink}
-              to="/chartlib"
               variant="outlined"
               color="primary"
+              onClick={vizLibClickHandler}
             >
               Vis Library
             </Button>
