@@ -96,7 +96,6 @@ const ExoPlanets = (props) => {
       <Container maxWidth="lg">
         <Typography variant="h3">NASA's Exoplanets</Typography>
         <Typography variant="caption">🚧 under construction 🚧</Typography>
-
         <Alert severity="info">
           find out more at{" "}
           <span>
@@ -193,7 +192,8 @@ const ExoPlanets = (props) => {
               {!exo_planets_by_method && (
                 <Skeleton
                   animation="wave"
-                  height={700}
+                  height={300}
+                  variant="rect"
                   style={{ marginTop: 0 }}
                 />
               )}
