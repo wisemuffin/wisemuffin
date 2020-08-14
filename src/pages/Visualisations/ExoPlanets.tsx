@@ -6,12 +6,13 @@ import Typography from "@material-ui/core/Typography";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import Grid from "@material-ui/core/Grid";
 import Container from "@material-ui/core/Container";
+import Paper from "@material-ui/core/Paper";
 import Skeleton from "@material-ui/lab/Skeleton";
 
 import useFetch from "../../hooks/useFetch";
 import * as R from "ramda";
 import Alert from "@material-ui/lab/Alert";
-import { VegaLite } from "react-vega";
+import VegaLiteWrapper from "../../components/Charts/VegaLiteWrapper";
 
 const methodsDescriptions = [
   {
@@ -188,36 +189,37 @@ const ExoPlanets = (props) => {
               <Typography variant="h5" gutterBottom>
                 Exoplanet Discovery Timeline
               </Typography>
+              <Paper>
+                {!exo_planets_by_method && (
+                  <Skeleton
+                    animation="wave"
+                    height={300}
+                    variant="rect"
+                    style={{ marginTop: 0 }}
+                  />
+                )}
+                {exo_planets_by_method && (
+                  <VegaLiteWrapper
+                    spec={{
+                      mark: { type: "line" },
+                      data: { name: "table" },
 
-              {!exo_planets_by_method && (
-                <Skeleton
-                  animation="wave"
-                  height={300}
-                  variant="rect"
-                  style={{ marginTop: 0 }}
-                />
-              )}
-              {exo_planets_by_method && (
-                <VegaLite
-                  spec={{
-                    mark: { type: "line" },
-                    data: { name: "table" },
-
-                    encoding: {
-                      x: { field: "rowupdate", type: "temporal" },
-                      y: { type: "quantitative", aggregate: "count" },
-                    },
-                    width: "container",
-                    height: 300,
-                  }}
-                  data={{
-                    table: exo_planets,
-                  }}
-                  style={{ width: "95%", padding: 0 }}
-                  renderer="svg"
-                  actions={false}
-                />
-              )}
+                      encoding: {
+                        x: { field: "rowupdate", type: "temporal" },
+                        y: { type: "quantitative", aggregate: "count" },
+                      },
+                      width: "container",
+                      height: 300,
+                    }}
+                    data={{
+                      table: exo_planets,
+                    }}
+                    style={{ width: "95%", padding: 0 }}
+                    renderer="svg"
+                    actions={false}
+                  />
+                )}
+              </Paper>
             </Grid>
           </Grid>
         </div>
