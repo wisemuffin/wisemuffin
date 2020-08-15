@@ -11,6 +11,7 @@ import Skeleton from "@material-ui/lab/Skeleton";
 
 import useFetch from "../../hooks/useFetch";
 import * as R from "ramda";
+import * as d3 from "d3";
 import Alert from "@material-ui/lab/Alert";
 import VegaLiteWrapper from "../../components/Charts/VegaLiteWrapper";
 
@@ -55,18 +56,28 @@ interface IExoPlanetsByMethod {
 }
 
 const ExoPlanets = (props) => {
+  const [exo_planets, setExo_planets] = React.useState<IExoPlanetsByMethod[]>();
   const [exo_planets_by_method, setExo_planets_by_method] = React.useState<
     IExoPlanetsByMethod[]
   >();
 
-  const exo_planets: IExoPlanets[] = useFetch(
-    "https://exoplanetarchive.ipac.caltech.edu/cgi-bin/nstedAPI/nph-nstedAPI?&table=exoplanets&format=json"
+  const exo_planets_raw: IExoPlanets[] = useFetch(
+    "https://exoplanetarchive.ipac.caltech.edu/cgi-bin/nstedAPI/nph-nstedAPI?&table=exoplanets&select=pl_name,pl_orbper,pl_masse,pl_facility,pl_discmethod,pl_publ_date,pl_rade,pl_orbper,pl_bmassj&order=pl_publ_date&format=json"
   );
 
   React.useEffect(() => {
-    if (!exo_planets) return;
+    if (!exo_planets_raw) return;
 
-    const total_exo_planets = exo_planets.length;
+    const exo_planets_transformed = R.compose(
+      R.map((planet) => ({
+        ...planet,
+        pl_publ_date: d3.timeParse("%Y-%m")(planet.pl_publ_date),
+      }))
+    )(exo_planets_raw);
+
+    setExo_planets(exo_planets_transformed);
+
+    const total_exo_planets = exo_planets_raw.length;
 
     const exo_planets_by_method_trans = R.compose(
       R.sortWith([R.descend(R.prop("count_of_exo_planets"))]),
@@ -78,10 +89,10 @@ const ExoPlanets = (props) => {
       R.toPairs,
       R.map(R.reduce((acc, curr) => acc + 1, 0)),
       R.groupBy(R.prop("pl_discmethod"))
-    )(exo_planets);
+    )(exo_planets_raw);
 
     setExo_planets_by_method(exo_planets_by_method_trans);
-  }, [exo_planets]);
+  }, [exo_planets_raw]);
 
   const [expanded, setExpanded] = React.useState<string | false>(false);
 
@@ -185,12 +196,13 @@ const ExoPlanets = (props) => {
                 ))}
               </Grid>
             </Grid>
+
             <Grid item xs={12} sm={12} md={12} lg={6}>
               <Typography variant="h5" gutterBottom>
                 Exoplanet Discovery Timeline
               </Typography>
               <Paper>
-                {!exo_planets_by_method && (
+                {!exo_planets && (
                   <Skeleton
                     animation="wave"
                     height={300}
@@ -198,25 +210,115 @@ const ExoPlanets = (props) => {
                     style={{ marginTop: 0 }}
                   />
                 )}
-                {exo_planets_by_method && (
+                {exo_planets && (
                   <VegaLiteWrapper
                     spec={{
-                      mark: { type: "line" },
-                      data: { name: "table" },
+                      vconcat: [
+                        {
+                          mark: { type: "area" },
+                          data: { name: "table" },
+                          encoding: {
+                            x: {
+                              field: "pl_publ_date",
+                              type: "temporal",
+                              title: null,
+                              scale: { domain: { selection: "sel33" } },
+                            },
+                            y: { type: "quantitative", aggregate: "count" },
+                          },
+                          width: "container",
+                        },
+                        {
+                          mark: { type: "area" },
+                          data: { name: "table" },
+                          encoding: {
+                            x: {
+                              field: "pl_publ_date",
+                              type: "temporal",
+                              title: null,
+                            },
+                            y: { type: "quantitative", aggregate: "count" },
+                          },
+                          width: "container",
+                          selection: {
+                            sel33: {
+                              type: "interval",
+                              encodings: ["x"],
+                              init: {
+                                x: [
+                                  new Date().getTime() -
+                                    10 * 365 * 24 * 60 * 60 * 1000,
+                                  Date.now(),
+                                ],
+                              },
+                            },
+                          },
+                          height: 60,
+                        },
+                      ],
+                    }}
+                    data={{
+                      table: R.filter((d) => d.pl_publ_date !== null)(
+                        exo_planets
+                      ),
+                    }}
+                    style={{ width: "90%", padding: 0 }}
+                    renderer="svg"
+                    actions={false}
+                  />
+                )}
+              </Paper>
+            </Grid>
+            <Grid item xs={12} sm={12} md={12} lg={6}>
+              <Typography variant="h5" gutterBottom>
+                How big and how long do planets take to orbit
+              </Typography>
+              <Typography variant="caption" gutterBottom>
+                Features: Zoom & pan
+              </Typography>
 
-                      encoding: {
-                        x: { field: "rowupdate", type: "temporal" },
-                        y: { type: "quantitative", aggregate: "count" },
-                      },
+              <Paper>
+                {!exo_planets && (
+                  <Skeleton
+                    animation="wave"
+                    height={300}
+                    variant="rect"
+                    style={{ marginTop: 0 }}
+                  />
+                )}
+                {exo_planets && (
+                  <VegaLiteWrapper
+                    spec={{
+                      data: { name: "table" },
                       width: "container",
+                      mark: { type: "circle" },
+                      selection: { sel9: { type: "interval", bind: "scales" } },
+                      encoding: {
+                        x: {
+                          field: "pl_orbper",
+                          type: "quantitative",
+                          scale: { type: "log" },
+                          title: "Orbit Time (days)",
+                        },
+                        y: {
+                          field: "pl_bmassj",
+                          type: "quantitative",
+                          title: "Mass (1 = Jupyter)",
+                        },
+                        tooltip: [
+                          { field: "pl_name", type: "nominal" },
+                          { field: "pl_orbper", type: "nominal" },
+                          { field: "pl_bmassj", type: "nominal" },
+                          { field: "pl_discmethod", type: "nominal" },
+                        ],
+                        color: { field: "pl_discmethod", type: "nominal" },
+                      },
                       height: 300,
                     }}
                     data={{
                       table: exo_planets,
                     }}
                     style={{ width: "95%", padding: 0 }}
-                    renderer="svg"
-                    actions={false}
                   />
                 )}
               </Paper>
