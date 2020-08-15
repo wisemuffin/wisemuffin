@@ -39,17 +39,19 @@ export const About = () => {
       skillType: "Data Vis",
       skillList: [
         { key: 0, label: "D3" },
-        { key: 1, label: "Tableau" },
+        { key: 1, label: "Vegalite" },
+        { key: 2, label: "Tableau" },
       ],
     },
     {
       skillType: "Data Engineering",
       skillList: [
-        { key: 0, label: "Alteryx" },
+        { key: 0, label: "GraphQL/REST APIs" },
         { key: 1, label: "Python" },
-        { key: 1, label: "SQL" },
-        { key: 1, label: "Data Warehousing" },
-        { key: 1, label: "Data Modeling" },
+        { key: 2, label: "Alteryx" },
+        { key: 3, label: "SQL" },
+        { key: 4, label: "Data Warehousing" },
+        { key: 5, label: "Data Modeling" },
       ],
     },
     {
