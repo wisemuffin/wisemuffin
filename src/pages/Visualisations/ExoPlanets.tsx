@@ -107,7 +107,7 @@ const ExoPlanets = (props) => {
     <section style={{ marginTop: "15px" }}>
       <Container maxWidth="lg">
         <Typography variant="h3">NASA's Exoplanets</Typography>
-        <Typography variant="caption">🚧 under construction 🚧</Typography>
+
         <Alert severity="info">
           find out more at{" "}
           <span>
@@ -118,7 +118,7 @@ const ExoPlanets = (props) => {
           <Grid container spacing={1}>
             <Grid item xs={12} md={12} lg={6}>
               <Typography variant="h5" gutterBottom>
-                By Method
+                By Discovery Method
               </Typography>
               {!exo_planets_by_method &&
                 R.range(1, 5).map((i) => (
