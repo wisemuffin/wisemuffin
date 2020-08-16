@@ -262,7 +262,7 @@ const ExoPlanets = (props) => {
                         exo_planets
                       ),
                     }}
-                    style={{ width: "90%", padding: 0 }}
+                    style={{ width: "80%", padding: 0 }}
                     renderer="svg"
                     actions={false}
                   />
