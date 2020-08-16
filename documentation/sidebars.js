@@ -7,7 +7,13 @@
 
 module.exports = {
   someSidebar: {
-    Wisemuffin: ["about", "visualisation", "ci_cd"],
-    "Docusaurus Examples": ["doc1", "mdx"]
-  }
+    Wisemuffin: [
+      "about",
+      "visualisation",
+      "monitoring",
+      "adding_a_vis",
+      "security",
+      "ci_cd",
+    ],
+  },
 };
