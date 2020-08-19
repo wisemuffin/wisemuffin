@@ -1,7 +1,12 @@
 {
   "compilerOptions": {
     "target": "es5",
-    "lib": ["dom", "dom.iterable", "esnext", "es6"],
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext",
+      "es6"
+    ],
     "allowJs": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
@@ -17,8 +22,17 @@
     "noImplicitAny": false,
     "noImplicitThis": true,
     "strictNullChecks": true,
-    "typeRoots": ["./node_modules/@types", "src/custom_typings"],
+    "typeRoots": [
+      "./node_modules/@types",
+      "src/custom_typings"
+    ],
     "downlevelIteration": true
   },
-  "include": ["src"]
+  "include": [
+    "src"
+  ],
+  "exclude": [
+    "node_modules",
+    "**/*.spec.ts"
+  ]
 }
