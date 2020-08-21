@@ -20,6 +20,28 @@ export interface IState {
   yahooFinanceApiOffChartWithinCard: boolean;
   yahooFinanceApiOffStockCard: boolean;
   sensorWebocketsOff: boolean;
+  auth: IAuth | null;
+  user: IUser | null;
+}
+
+export interface IAuth {
+  accessToken: string;
+  idToken: string;
+  isAuthenticated: boolean;
+  isPending: boolean;
+}
+
+export interface IUser {
+  email: string;
+  email_verified: boolean;
+  family_name: string;
+  given_name: string;
+  locale: string;
+  name: string;
+  preferred_username: string;
+  sub: string;
+  updated_at: number;
+  zoneinfo: string;
 }
 
 export interface IShow {

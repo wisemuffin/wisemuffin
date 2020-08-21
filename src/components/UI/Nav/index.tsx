@@ -33,8 +33,7 @@ import BarChartIcon from "@material-ui/icons/BarChart";
 import AccountBoxIcon from "@material-ui/icons/AccountBox";
 
 import Context from "../../../store/Store";
-import SignIn from "../Auth/SignIn";
-import UserInfo from "../Auth/UserInfo";
+import Login from "../Auth/Login";
 
 const drawerWidth = 240;
 
@@ -122,6 +121,11 @@ const NavBar = (props) => {
               </Typography>
             </Grid>
           </Grid>
+          {state.user && (
+            <Typography variant="caption">
+              Admin: {state.user.given_name}
+            </Typography>
+          )}
 
           <IconButton onClick={handleToggleDarkTheme} color="inherit">
             {state.dark ? <WbSunny /> : <WbSunnyOutlined />}
@@ -165,11 +169,11 @@ const NavBar = (props) => {
               </ListItem>
             );
           })}
+        </List>
+        <Divider />
+        <List>
           <ListItem>
-            <SignIn />
-          </ListItem>
-          <ListItem>
-            <UserInfo />
+            <Login />
           </ListItem>
         </List>
       </Drawer>

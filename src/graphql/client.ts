@@ -12,12 +12,18 @@ const authLink = setContext((_, { headers }) => {
   // get the authentication token from local storage if it exists
   const token_raw = localStorage.getItem("okta-token-storage");
   const token = JSON.parse(token_raw!);
-  console.log("token", token.accessToken.accessToken);
   // return the headers to the context so httpLink can read them
+  if (token.accessToken.accessToken) {
+    return {
+      headers: {
+        ...headers,
+        Authorization: token ? `Bearer ${token.accessToken.accessToken}` : "",
+      },
+    };
+  }
   return {
     headers: {
       ...headers,
-      Authorization: token ? `Bearer ${token.accessToken.accessToken}` : "",
     },
   };
 });

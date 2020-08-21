@@ -29,6 +29,7 @@ const frequencyCase = (aggregation): string => {
 
 const StockLineHistoryChartWithUi = ({ classes }) => {
   const { state } = useContext(Store);
+
   const { yahooFinanceApiOff } = state;
   const [selectedStockCode, setSelectedStockCode] = useState("AMZN");
 

@@ -1,5 +1,5 @@
 import React from "react";
-import { IState } from "../interfaces";
+import { IState, IAction } from "../interfaces";
 import { falsy } from "vega";
 
 export const initialState: IState = {
@@ -14,7 +14,18 @@ export const initialState: IState = {
   yahooFinanceApiOffChartWithinCard: false,
   yahooFinanceApiOffStockCard: false,
   sensorWebocketsOff: true,
+  auth: null,
+  user: null,
 };
 
-const Store = React.createContext<IState | any>(initialState);
+const Store = React.createContext<{
+  state: IState;
+  dispatch: React.Dispatch<IAction>;
+}>({
+  state: initialState,
+  dispatch: () => {
+    return {};
+  },
+});
+
 export default Store;

@@ -38,6 +38,16 @@ const reducer = (stateContext: IState, { type, payload }: IAction): IState => {
         ...stateContext,
         favourites: payload,
       };
+    case "AUTH":
+      return {
+        ...stateContext,
+        auth: payload,
+      };
+    case "USER":
+      return {
+        ...stateContext,
+        user: payload,
+      };
 
     default:
       return stateContext;
