@@ -1,6 +1,5 @@
 import React, { useContext } from "react";
 import { useHistory, Link } from "react-router-dom";
-import Context from "../../../store/Store";
 import { makeStyles, useTheme, Theme } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -32,6 +31,10 @@ import PieChartIcon from "@material-ui/icons/PieChart";
 import BubbleChartIcon from "@material-ui/icons/BubbleChart";
 import BarChartIcon from "@material-ui/icons/BarChart";
 import AccountBoxIcon from "@material-ui/icons/AccountBox";
+
+import Context from "../../../store/Store";
+import SignIn from "../Auth/SignIn";
+import UserInfo from "../Auth/UserInfo";
 
 const drawerWidth = 240;
 
@@ -162,6 +165,12 @@ const NavBar = (props) => {
               </ListItem>
             );
           })}
+          <ListItem>
+            <SignIn />
+          </ListItem>
+          <ListItem>
+            <UserInfo />
+          </ListItem>
         </List>
       </Drawer>
     </div>

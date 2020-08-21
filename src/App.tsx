@@ -1,13 +1,15 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import StoreProvider from "./store/StoreProvider";
-import ThemeProvider from "./hooks/ThemeProvider";
 import { MuiPickersUtilsProvider } from "@material-ui/pickers";
 import MomentUtils from "@date-io/moment";
+import { ApolloProvider } from "@apollo/client";
+import { Security, LoginCallback, SecureRoute } from "@okta/okta-react";
+
+import client from "./graphql/client";
 import Layout from "./components/UI/Layout";
 import "./App.css";
-import { ApolloProvider } from "@apollo/client";
-import client from "./graphql/client";
+import StoreProvider from "./store/StoreProvider";
+import ThemeProvider from "./hooks/ThemeProvider";
 
 import Home from "./pages/Home";
 import About from "./pages/About";
@@ -23,6 +25,16 @@ import GAListener from "./util/GAListener";
 import ExoPlanets from "./pages/Visualisations/ExoPlanets";
 import GraphqlTest from "./pages/Visualisations/GraphqlTest";
 
+const CALLBACK_PATH = "/implicit/callback";
+
+const config = {
+  clientId: process.env.REACT_APP_OKTA_CLIENT_ID,
+  issuer: `${process.env.REACT_APP_OKTA_DOMAIN}/oauth2/default`,
+  redirectUri: `${process.env.REACT_APP_HOST}${process.env.REACT_APP_OKTA_CALLBACK}`,
+  scopes: ["openid", "profile", "email"],
+  pkce: true,
+};
+
 const App: React.FC = () => {
   return (
     <StoreProvider>
@@ -30,60 +42,68 @@ const App: React.FC = () => {
         <ThemeProvider>
           <MuiPickersUtilsProvider utils={MomentUtils}>
             <Router>
-              <GAListener trackingId="UA-125075344-1">
-                <Layout>
-                  <Switch>
-                    <Route exact path="/" component={Home} />
-                    <Route exact path="/about" component={About} />
-                    <Route exact path="/chartlib" component={ChartLib} />
-                    <Route
-                      exact
-                      path="/visualisations"
-                      component={Visualisations}
-                    />
-                    <Route
-                      exact
-                      path="/visualisations/vegaExamples"
-                      component={VegaExamples}
-                    />
-                    <Route
-                      exact
-                      path="/visualisations/stocks"
-                      component={Stocks}
-                    />
-                    <Route
-                      exact
-                      path="/visualisations/earthquake"
-                      component={Earthquake}
-                    />
-                    <Route
-                      exact
-                      path="/visualisations/realTimeExamples"
-                      component={RealTimeExamples}
-                    />
-                    <Route
-                      exact
-                      path="/visualisations/tvshows"
-                      component={TvShows}
-                    />
-                    <Route
-                      exact
-                      path="/visualisations/canvasExamples"
-                      component={CanvasExamples}
-                    />
-                    <Route
-                      exact
-                      path="/visualisations/exoPlanets"
-                      component={ExoPlanets}
-                    />
-                    <Route
-                      exact
-                      path="/visualisations/graphqlTest"
-                      component={GraphqlTest}
-                    />
-                  </Switch>
-                </Layout>
-              </GAListener>
+              <Security {...config}>
+                <GAListener trackingId="UA-125075344-1">
+                  <Layout>
+                    <Switch>
+                      <Route exact path="/" component={Home} />
+                      <Route exact path="/about" component={About} />
+                      <Route exact path="/chartlib" component={ChartLib} />
+                      <Route
+                        exact
+                        path="/visualisations"
+                        component={Visualisations}
+                      />
+                      <Route
+                        exact
+                        path="/visualisations/vegaExamples"
+                        component={VegaExamples}
+                      />
+                      <Route
+                        exact
+                        path="/visualisations/stocks"
+                        component={Stocks}
+                      />
+                      <Route
+                        exact
+                        path="/visualisations/earthquake"
+                        component={Earthquake}
+                      />
+                      <Route
+                        exact
+                        path="/visualisations/realTimeExamples"
+                        component={RealTimeExamples}
+                      />
+                      <Route
+                        exact
+                        path="/visualisations/tvshows"
+                        component={TvShows}
+                      />
+                      <Route
+                        exact
+                        path="/visualisations/canvasExamples"
+                        component={CanvasExamples}
+                      />
+                      <Route
+                        exact
+                        path="/visualisations/exoPlanets"
+                        component={ExoPlanets}
+                      />
+                      <Route
+                        exact
+                        path="/visualisations/graphqlTest"
+                        component={GraphqlTest}
+                      />
+                      <SecureRoute
+                        exact
+                        path="/visualisations/graphqlTestSecure"
+                        component={GraphqlTest}
+                      />
+                      <Route path={CALLBACK_PATH} component={LoginCallback} />
+                    </Switch>
+                  </Layout>
+                </GAListener>
+              </Security>
             </Router>
           </MuiPickersUtilsProvider>
         </ThemeProvider>

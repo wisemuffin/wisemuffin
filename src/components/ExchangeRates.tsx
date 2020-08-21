@@ -1,5 +1,6 @@
 import React from "react";
-import { useQuery, gql } from "@apollo/client";
+import { useMutation, useQuery, gql } from "@apollo/client";
+import { useOktaAuth } from "@okta/okta-react";
 import {
   getGamesForPlayer,
   getGamesForPlayer_getGamesForPlayer,
@@ -16,20 +17,37 @@ const PLAYER = gql`
   }
 `;
 
+const DELETE_PLAYER = gql`
+  mutation deletePlayer {
+    deletePlayerScore(ID: "3") {
+      name
+    }
+  }
+`;
+
 function ExchangeRates() {
-  // const { loading, error, data } = useQuery<getGamesForPlayer>(PLAYER, {
+  const { authState, authService } = useOktaAuth();
+
   const { loading, error, data } = useQuery(PLAYER, {
-    variables: {},
+    // variables: {},
   });
 
-  if (loading || !data) return <p>Loading...</p>;
+  const [deletePlayer, { data: dataDeleted }] = useMutation(DELETE_PLAYER);
+
+  if (loading || !data)
+    return (
+      <div>
+        <p>Loading...</p>
+      </div>
+    );
   if (error) return <p>Error :(</p>;
-  console.log("data: ", data);
   return data.getGamesForPlayer.map(({ name, score }) => (
     <div key={name}>
       <p>
         {name}: {score}
       </p>
+      <button onClick={() => deletePlayer()}>delete</button>
+      {JSON.stringify(dataDeleted)}
     </div>
   ));
 }

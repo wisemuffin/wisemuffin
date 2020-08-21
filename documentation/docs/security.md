@@ -6,3 +6,11 @@ Single page apps (SPA) like create react app are built in the users browser. Env
 
 1. limit access to the API via CORS (cross origin resource sharing). Hackers could still find way to spoof the origin.
 2. create server that your SPA can hit, that will call your API (proxy), thus not exposing your API keys.
+
+# okta
+
+- enabled for accessing mutations on graphql endpoints
+- can even secure routes
+
+issues:
+no first part support for typescript yet. Has been [priortised](https://github.com/okta/okta-oidc-js/issues/66)
