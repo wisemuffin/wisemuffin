@@ -7,23 +7,19 @@ const httpLink = createHttpLink({
       ? process.env.REACT_APP_GRAHQL_PROD
       : process.env.REACT_APP_GRAHQL_LOCAL,
 });
+console.log("env", process.env.REACT_APP_ENV);
 
 const authLink = setContext((_, { headers }) => {
   // get the authentication token from local storage if it exists
   const token_raw = localStorage.getItem("okta-token-storage");
   const token = JSON.parse(token_raw!);
-  // return the headers to the context so httpLink can read them
-  if (token.accessToken.accessToken) {
-    return {
-      headers: {
-        ...headers,
-        Authorization: token ? `Bearer ${token.accessToken.accessToken}` : "",
-      },
-    };
-  }
+
   return {
     headers: {
       ...headers,
+      ...(token?.accessToken?.accessToken && {
+        Authorization: `Bearer ${token.accessToken.accessToken}`,
+      }),
     },
   };
 });

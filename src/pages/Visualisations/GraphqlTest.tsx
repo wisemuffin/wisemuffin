@@ -9,14 +9,14 @@ import Container from "@material-ui/core/Container";
 import Paper from "@material-ui/core/Paper";
 import Skeleton from "@material-ui/lab/Skeleton";
 
-import ExchangeRates from "../../components/ExchangeRates";
+import PlayerGames from "../../components/PlayerGames";
 
 const GraphqlTest = (props) => {
   return (
     <section style={{ marginTop: "15px" }}>
       <Container maxWidth="lg">
         <Typography variant="h3">Grapqhl Test</Typography>
-        <ExchangeRates />
+        <PlayerGames />
       </Container>
     </section>
   );
