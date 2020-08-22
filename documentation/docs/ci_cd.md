@@ -4,7 +4,7 @@ title: Continous Integration & Deployment
 sidebar_label: Continous Integration & Deployment
 ---
 
-# CI / CD Process
+# CI / CD Process - Front End
 
 - push any branch to github
 - circle CI runs jest tests
@@ -13,6 +13,10 @@ sidebar_label: Continous Integration & Deployment
 - AWS codepipline then builds master branch from github into S3 bucket and deploys for static website hosting
 - testing via lighthouse - performance testing
 - events are sent to slack via webhooks
+
+# CI / CD Backend
+
+- Serverless Framework
 
 # Slack notification
 
