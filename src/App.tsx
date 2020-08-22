@@ -21,7 +21,7 @@ import Earthquake from "./pages/Visualisations/Earthquake";
 import RealTimeExamples from "./pages/Visualisations/RealTimeExamples";
 import TvShows from "./pages/Visualisations/TvShows";
 import CanvasExamples from "./pages/Visualisations/CanvasExamples";
-import GAListener from "./util/GAListener";
+import GAListener from "./hooks/GAListener";
 import ExoPlanets from "./pages/Visualisations/ExoPlanets";
 import GraphqlTest from "./pages/Visualisations/GraphqlTest";
 

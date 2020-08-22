@@ -10,6 +10,7 @@ import Paper from "@material-ui/core/Paper";
 import Skeleton from "@material-ui/lab/Skeleton";
 
 import PlayerGames from "../../components/PlayerGames";
+import PlayerGames2 from "../../components/PlayerGames2";
 
 const GraphqlTest = (props) => {
   return (
@@ -17,6 +18,7 @@ const GraphqlTest = (props) => {
       <Container maxWidth="lg">
         <Typography variant="h3">Grapqhl Test</Typography>
         <PlayerGames />
+        <PlayerGames2 />
       </Container>
     </section>
   );
