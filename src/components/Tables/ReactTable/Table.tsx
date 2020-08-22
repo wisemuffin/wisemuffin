@@ -32,7 +32,8 @@ import {
   useTable,
 } from "react-table";
 
-import { camelToWords, useDebounce, useLocalStorage } from "../../../util";
+import { camelToWords } from "../../../util";
+import { useDebounce, useLocalStorage } from "../../../hooks";
 import { DumpInstance } from "./DumpInstance";
 import { FilterChipBar } from "./FilterChipBar";
 import { fuzzyTextFilter, numericTextFilter } from "./Filters";
