@@ -1,5 +1,5 @@
 import { useRef, useEffect } from "react";
-import { ICanvasOptions } from "../interfaces";
+import { ICanvasOptions } from "../types/interfaces";
 
 const useCanvas = (draw: any, options: ICanvasOptions) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);

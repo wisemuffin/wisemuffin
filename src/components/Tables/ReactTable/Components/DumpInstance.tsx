@@ -7,7 +7,7 @@ import {
 import BugReportTwoToneIcon from "@material-ui/icons/BugReportTwoTone";
 import React, { Suspense, useState } from "react";
 
-import { Loader } from "../../Loader";
+import { Loader } from "../../../Loader";
 
 const ReactJson = React.lazy(() => import("react-json-view"));
 

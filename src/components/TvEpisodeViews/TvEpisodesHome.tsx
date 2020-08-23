@@ -1,7 +1,12 @@
 import React from "react";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
-import { IEpisode, IAction, IEpisodeProps, IState } from "../../interfaces";
+import {
+  IEpisode,
+  IAction,
+  IEpisodeProps,
+  IState,
+} from "../../types/interfaces";
 import Store from "../../store/Store";
 import { fetchDataAction, toggleFavAction } from "../../Actions";
 

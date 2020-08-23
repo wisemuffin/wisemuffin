@@ -12,7 +12,7 @@ import {
 } from "@material-ui/pickers";
 import moment from "moment";
 import LineAreaChart from "../LineAreaChart";
-import { ILineAreaChartData } from "../../../interfaces";
+import { ILineAreaChartData } from "../../../types/interfaces";
 
 const frequencyCase = (aggregation): string => {
   switch (aggregation) {

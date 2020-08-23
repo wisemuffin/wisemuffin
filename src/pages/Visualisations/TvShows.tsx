@@ -9,7 +9,7 @@ import TvEpisodesHome from "../../components/TvEpisodeViews/TvEpisodesHome";
 import TvEpisodesFav from "../../components/TvEpisodeViews/TvEpisodesFav";
 import Search from "../../components/UI/Search";
 import { fetchShows } from "../../Actions";
-import { IShow } from "../../interfaces";
+import { IShow } from "../../types/interfaces";
 import ShowCard from "../../components/ShowCard";
 import Store from "../../store/Store";
 import { BehaviorSubject, from } from "rxjs";

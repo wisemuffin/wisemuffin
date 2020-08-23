@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useContext } from "react";
 import Store from "../../../store/Store";
-import { IStock, IStockQuote } from "../../../interfaces";
+import { IStock, IStockQuote } from "../../../types/interfaces";
 import moment from "moment";
 import DashCard from "./DashCardGraph";
 import Grid from "@material-ui/core/Grid";

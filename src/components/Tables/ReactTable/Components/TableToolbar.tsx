@@ -23,9 +23,10 @@ import React, {
 } from "react";
 import { TableInstance } from "react-table";
 
-import { TableMouseEventHandler } from "../../../types/react-table-config";
+import { TableMouseEventHandler } from "../../../../types/react-table-config";
 import { ColumnHidePage } from "./ColumnHidePage";
 import { FilterPage } from "./FilterPage";
+import AddDataDialog from "./CustomDialog/AddDataDialog";
 
 export const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -166,11 +167,13 @@ type TableToolbar<T extends object> = {
   onAdd?: TableMouseEventHandler;
   onDelete?: TableMouseEventHandler;
   onEdit?: TableMouseEventHandler;
+  onAddDialog?: (data) => void;
 };
 
 export function TableToolbar<T extends object>({
   instance,
   onAdd,
+  onAddDialog,
   onDelete,
   onEdit,
 }: PropsWithChildren<TableToolbar<T>>): ReactElement | null {
@@ -209,19 +212,7 @@ export function TableToolbar<T extends object>({
   return (
     <Toolbar className={classes.toolbar}>
       <div className={classes.leftButtons}>
-        {onAdd && (
-          <InstanceSmallIconActionButton<T>
-            instance={instance}
-            icon={<AddIcon />}
-            onClick={onAdd}
-            label="Add"
-            enabled={({ state }: TableInstance<T>) =>
-              !state.selectedRowIds ||
-              Object.keys(state.selectedRowIds).length === 0
-            }
-            variant="left"
-          />
-        )}
+        {onAddDialog && <AddDataDialog addDataHandler={onAddDialog} />}
         {onEdit && (
           <InstanceSmallIconActionButton<T>
             instance={instance}
@@ -262,7 +253,7 @@ export function TableToolbar<T extends object>({
           show={filterOpen}
           anchorEl={anchorEl}
         />
-        {hideableColumns.length > 1 && (
+        {hideableColumns.length >= 1 && (
           <SmallIconActionButton<T>
             icon={<ViewColumnsIcon />}
             onClick={handleColumnsClick}
@@ -270,6 +261,7 @@ export function TableToolbar<T extends object>({
             variant="right"
           />
         )}
+
         <SmallIconActionButton<T>
           icon={<FilterListIcon />}
           onClick={handleFilterClick}

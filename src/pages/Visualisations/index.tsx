@@ -7,7 +7,7 @@ import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
 import Search from "../../components/UI/Search";
 import VisList from "../../components/VisList";
-import { IVis } from "../../interfaces";
+import { IVis } from "../../types/interfaces";
 
 const visList: IVis[] = [
   {

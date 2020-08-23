@@ -1,7 +1,7 @@
 import React from "react";
 import useCanvas from "../../hooks/useCanvas";
 import useChartDimensions from "../../hooks/useChartDimensions";
-import { ICanvasOptions } from "../../interfaces";
+import { ICanvasOptions } from "../../types/interfaces";
 
 interface ICanvasProps {
   draw: any;

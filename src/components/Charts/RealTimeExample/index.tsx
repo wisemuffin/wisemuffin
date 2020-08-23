@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import * as d3 from "d3";
 import useChartDimensions from "../../../hooks/useChartDimensions";
-import { IRealTimeChartData } from "../../../interfaces";
+import { IRealTimeChartData } from "../../../types/interfaces";
 
 /*
 example react d3: 

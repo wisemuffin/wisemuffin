@@ -10,7 +10,7 @@ import Typography from "@material-ui/core/Typography";
 import AccessTime from "@material-ui/icons/AccessTime";
 import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
-import { IAction, IVis, IVisListProps } from "../../interfaces";
+import { IAction, IVis, IVisListProps } from "../../types/interfaces";
 import IconButton from "@material-ui/core/IconButton";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";

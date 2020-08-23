@@ -11,14 +11,17 @@ import Skeleton from "@material-ui/lab/Skeleton";
 
 import PlayerGames from "../../components/PlayerGames";
 import PlayerGames2 from "../../components/PlayerGames2";
+import ExampleTable from "../../components/Tables/ReactTable/ExampleTable";
 
 const GraphqlTest = (props) => {
   return (
     <section style={{ marginTop: "15px" }}>
       <Container maxWidth="lg">
         <Typography variant="h3">Grapqhl Test</Typography>
-        <PlayerGames />
         <PlayerGames2 />
+
+        <PlayerGames />
+        <ExampleTable />
       </Container>
     </section>
   );

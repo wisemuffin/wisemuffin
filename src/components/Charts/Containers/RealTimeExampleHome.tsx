@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import RealTimeExample from "../RealTimeExample";
 import Box from "@material-ui/core/Box";
-import { IRealTimeChartData } from "../../../interfaces";
+import { IRealTimeChartData } from "../../../types/interfaces";
 import * as d3 from "d3";
 
 interface IRealTimeContainerProps {

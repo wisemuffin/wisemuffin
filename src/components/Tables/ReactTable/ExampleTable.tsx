@@ -1,6 +1,4 @@
 import React from "react";
-import { useMutation, useQuery, gql } from "@apollo/client";
-import { useOktaAuth } from "@okta/okta-react";
 import {
   Button,
   CssBaseline,
@@ -8,67 +6,10 @@ import {
   MenuItem,
   TextField,
 } from "@material-ui/core";
-import {
-  CellProps,
-  FilterProps,
-  FilterValue,
-  IdType,
-  Row,
-  TableInstance,
-} from "react-table";
+import { CellProps, FilterProps, FilterValue, IdType, Row } from "react-table";
 
-import { Table } from "./Tables/ReactTable/Components/Table";
-import { PersonData, makePersonData } from "../util";
-import {
-  getGamesForPlayer,
-  getGamesForPlayer_getGamesForPlayer,
-} from "../graphql/generated/getGamesForPlayer";
-
-const PLAYER = gql`
-  query getGameScores {
-    getGameScores(game: "uno") {
-      ID
-      name
-      score
-      game
-      playerID
-    }
-  }
-`;
-
-const DELETE_PLAYER = gql`
-  mutation deletePlayer($ID: String!) {
-    deletePlayerScore(ID: $ID) {
-      name
-    }
-  }
-`;
-
-const ADD_PLAYER = gql`
-  mutation player(
-    $ID: String!
-    $name: String!
-    $score: Int!
-    $game: String!
-    $playerID: String!
-  ) {
-    createPlayerScore(
-      player: {
-        ID: $ID
-        name: $name
-        score: $score
-        game: $game
-        playerID: $playerID
-      }
-    ) {
-      ID
-      name
-      score
-      game
-      playerID
-    }
-  }
-`;
+import { Table } from "./Components/Table";
+import { PersonData, makePersonData } from "../../../util";
 
 // This is a custom aggregator that
 // takes in an array of values and
@@ -104,7 +45,7 @@ filterGreaterThan.autoRemove = (val: any) => typeof val !== "number";
 
 function SelectColumnFilter({
   column: { filterValue, render, setFilter, preFilteredRows, id },
-}: FilterProps<getGamesForPlayer_getGamesForPlayer>) {
+}: FilterProps<PersonData>) {
   const options = React.useMemo(() => {
     const options = new Set<any>();
     preFilteredRows.forEach((row) => {
@@ -132,10 +73,7 @@ function SelectColumnFilter({
   );
 }
 
-const getMinMax = (
-  rows: Row<getGamesForPlayer_getGamesForPlayer>[],
-  id: IdType<getGamesForPlayer_getGamesForPlayer>
-) => {
+const getMinMax = (rows: Row<PersonData>[], id: IdType<PersonData>) => {
   let min = rows.length ? rows[0].values[id] : 0;
   let max = rows.length ? rows[0].values[id] : 0;
   rows.forEach((row) => {
@@ -147,7 +85,7 @@ const getMinMax = (
 
 function SliderColumnFilter({
   column: { render, filterValue, setFilter, preFilteredRows, id },
-}: FilterProps<getGamesForPlayer_getGamesForPlayer>) {
+}: FilterProps<PersonData>) {
   const [min, max] = React.useMemo(() => getMinMax(preFilteredRows, id), [
     id,
     preFilteredRows,
@@ -207,7 +145,7 @@ const useActiveElement = () => {
 // ones that have values between the two
 function NumberRangeColumnFilter({
   column: { filterValue = [], render, preFilteredRows, setFilter, id },
-}: FilterProps<getGamesForPlayer_getGamesForPlayer>) {
+}: FilterProps<PersonData>) {
   const [min, max] = React.useMemo(() => getMinMax(preFilteredRows, id), [
     id,
     preFilteredRows,
@@ -271,129 +209,88 @@ function NumberRangeColumnFilter({
 
 const columns = [
   {
-    Header: "Player Table",
+    Header: "Name",
     columns: [
       {
-        Header: "ID",
-        accessor: "ID",
-        Aggregated: ({
-          cell: { value },
-        }: CellProps<getGamesForPlayer_getGamesForPlayer>) => `${value} Names`,
+        Header: "First Name",
+        accessor: "firstName",
+        aggregate: "count",
+        Aggregated: ({ cell: { value } }: CellProps<PersonData>) =>
+          `${value} Names`,
       },
       {
-        Header: "Player Name",
-        accessor: "name",
-        Aggregated: ({
-          cell: { value },
-        }: CellProps<getGamesForPlayer_getGamesForPlayer>) => `${value} Names`,
+        Header: "Last Name",
+        accessor: "lastName",
+        aggregate: "uniqueCount",
+        filter: "fuzzyText",
+        Aggregated: ({ cell: { value } }: CellProps<PersonData>) =>
+          `${value} Unique Names`,
       },
-      {
-        Header: "Score",
-        accessor: "score",
-        Aggregated: ({
-          cell: { value },
-        }: CellProps<getGamesForPlayer_getGamesForPlayer>) => `${value} Names`,
-        Filter: SliderColumnFilter,
-        filter: "equals",
-      },
-      {
-        Header: "Game",
-        accessor: "game",
-        Aggregated: ({
-          cell: { value },
-        }: CellProps<getGamesForPlayer_getGamesForPlayer>) => `${value} Names`,
-      },
-      // {
-      //   Header: "Last Name",
-      //   accessor: "lastName",
-      //   aggregate: "uniqueCount",
-      //   filter: "fuzzyText",
-      //   Aggregated: ({ cell: { value } }: CellProps<getGamesForPlayer_getGamesForPlayer>) =>
-      //     `${value} Unique Names`,
-      // },
     ],
   },
-];
+  {
+    Header: "Info",
+    columns: [
+      {
+        Header: "Age",
+        accessor: "age",
+        width: 50,
+        minWidth: 50,
+        align: "right",
+        Filter: SliderColumnFilter,
+        filter: "equals",
+        aggregate: "average",
+        disableGroupBy: true,
+        Aggregated: ({ cell: { value } }: CellProps<PersonData>) =>
+          `${value} (avg)`,
+      },
+      {
+        Header: "Visits",
+        accessor: "visits",
+        width: 50,
+        minWidth: 50,
+        align: "right",
+        Filter: NumberRangeColumnFilter,
+        filter: "between",
+        aggregate: "sum",
+        Aggregated: ({ cell: { value } }: CellProps<PersonData>) =>
+          `${value} (total)`,
+      },
+      {
+        Header: "Status",
+        accessor: "status",
+        Filter: SelectColumnFilter,
+        filter: "includes",
+      },
+      {
+        Header: "Profile Progress",
+        accessor: "progress",
+        Filter: SliderColumnFilter,
+        filter: filterGreaterThan,
+        aggregate: roundedMedian,
+        Aggregated: ({ cell: { value } }: CellProps<PersonData>) =>
+          `${value} (med)`,
+      },
+    ],
+  },
+]; //.flatMap((c:any)=>c.columns) // remove comment to drop header groups
 
-function PlayerGames2() {
-  // const { authState, authService } = useOktaAuth();
+function ExampleTable() {
+  const [data] = React.useState<PersonData[]>(() => makePersonData(100));
 
-  const { loading, error, data } = useQuery(PLAYER, {
-    // variables: {},
-  });
-
-  const [deletePlayer, { data: dataDeleted }] = useMutation(DELETE_PLAYER);
-  const [addPlayer, { data: dataAdd }] = useMutation(ADD_PLAYER);
-
-  const deletePlayerCallback = React.useCallback(
-    (instance: TableInstance<getGamesForPlayer_getGamesForPlayer>) => (
-      e: React.MouseEvent<Element, MouseEvent>
-    ) =>
-      instance.rows
-        .filter((row) => row.isSelected)
-        .map((rowToDelete) =>
-          deletePlayer({ variables: { ID: rowToDelete.original.ID } })
-        ),
-
-    []
-  );
-
-  const addPlayerCallback = React.useCallback(
-    // (instance: TableInstance<getGamesForPlayer_getGamesForPlayer>) =>
-    (player: getGamesForPlayer_getGamesForPlayer) => {
-      console.log("player to add: ", player);
-      addPlayer({
-        variables: {
-          ID: player.ID,
-          name: player.name,
-          playerID: player.playerID,
-          score: 3,
-          game: "uno",
-        },
-      });
-    },
-    []
-  );
-
-  // const dummy = React.useCallback(() => () => null, []);
-  const dummy = React.useCallback(
-    (instance: TableInstance<getGamesForPlayer_getGamesForPlayer>) => (
-      e: React.MouseEvent<Element, MouseEvent>
-    ) => console.log(instance),
-    []
-  );
-
-  if (loading || !data)
-    return (
-      <div>
-        <p>Loading...</p>
-      </div>
-    );
-  if (error) return <p>Error :(</p>;
-
-  // const [data] = React.useState<PersonData[]>(() => makePersonData(100));
+  const dummy = React.useCallback(() => () => null, []);
 
   return (
     <div>
-      {/* {data.getGameScores.map(({ name, score }) => (
-        <div key={name}>
-          <p>
-            {name}: {score}
-          </p>
-          <button onClick={() => deletePlayer()}>delete</button>
-          {JSON.stringify(dataDeleted)}
-        </div>
-      ))} */}
-      <Table<getGamesForPlayer_getGamesForPlayer>
+      <Table<PersonData>
         name={"testTable"}
         columns={columns}
-        data={data.getGameScores}
-        onAddDialog={addPlayerCallback}
+        data={data}
         onAdd={dummy}
         onEdit={dummy}
-        onDelete={deletePlayerCallback}
+        onDelete={dummy}
       />
     </div>
   );
 }
-export default PlayerGames2;
+export default ExampleTable;

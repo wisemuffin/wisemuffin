@@ -1,4 +1,4 @@
-import { IState, IEpisode, IAction } from "./interfaces";
+import { IState, IEpisode, IAction } from "./types/interfaces";
 
 /**
  * Fetches shows from https://api.tvmaze.com/

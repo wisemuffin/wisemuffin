@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import * as d3 from "d3";
 import useChartDimensions from "../../../hooks/useChartDimensions";
-import { ILineAreaChartData } from "../../../interfaces";
+import { ILineAreaChartData } from "../../../types/interfaces";
 
 interface IProps {
   stockCode: string;

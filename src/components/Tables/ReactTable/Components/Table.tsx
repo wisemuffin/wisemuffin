@@ -32,11 +32,11 @@ import {
   useTable,
 } from "react-table";
 
-import { camelToWords } from "../../../util";
-import { useDebounce, useLocalStorage } from "../../../hooks";
+import { camelToWords } from "../../../../util";
+import { useDebounce, useLocalStorage } from "../../../../hooks";
 import { DumpInstance } from "./DumpInstance";
 import { FilterChipBar } from "./FilterChipBar";
-import { fuzzyTextFilter, numericTextFilter } from "./Filters";
+import { fuzzyTextFilter, numericTextFilter } from "./../Filters";
 import { ResizeHandle } from "./ResizeHandle";
 import { TablePagination } from "./TablePagination";
 import { HeaderCheckbox, RowCheckbox, useStyles } from "./TableStyles";
@@ -174,7 +174,15 @@ const filterTypes = {
 export function Table<T extends object>(
   props: PropsWithChildren<Table<T>>
 ): ReactElement {
-  const { name, columns, onAdd, onDelete, onEdit, onClick } = props;
+  const {
+    name,
+    columns,
+    onAdd,
+    onAddDialog,
+    onDelete,
+    onEdit,
+    onClick,
+  } = props;
   const classes = useStyles();
 
   const [initialState, setInitialState] = useLocalStorage(
@@ -226,7 +234,10 @@ export function Table<T extends object>(
 
   return (
     <>
-      <TableToolbar instance={instance} {...{ onAdd, onDelete, onEdit }} />
+      <TableToolbar
+        instance={instance}
+        {...{ onAdd, onDelete, onEdit, onAddDialog }}
+      />
       <FilterChipBar<T> instance={instance} />
       <div className={classes.tableTable} {...getTableProps()}>
         <div>

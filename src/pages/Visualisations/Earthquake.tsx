@@ -1,5 +1,5 @@
 import React, { Fragment, useEffect, useState } from "react";
-import { IEarthquake } from "../../interfaces";
+import { IEarthquake } from "../../types/interfaces";
 import Typography from "@material-ui/core/Typography";
 import ResponsiveEmbed from "react-responsive-embed";
 import { withStyles, createStyles } from "@material-ui/core/styles";

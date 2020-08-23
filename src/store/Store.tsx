@@ -1,5 +1,5 @@
 import React from "react";
-import { IState, IAction } from "../interfaces";
+import { IState, IAction } from "../types/interfaces";
 import { falsy } from "vega";
 
 export const initialState: IState = {

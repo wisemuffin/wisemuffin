@@ -4,7 +4,7 @@ import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
 import Pulse from "../ChartParts/Pulse";
-import { IRealTimeChartData } from "../../../interfaces";
+import { IRealTimeChartData } from "../../../types/interfaces";
 import * as d3 from "d3";
 
 interface IRealTimeContainerProps {

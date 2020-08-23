@@ -2,7 +2,7 @@ import React from "react";
 import Store from "../../store/Store";
 import Grid from "@material-ui/core/Grid";
 import { fetchDataAction, toggleFavAction } from "../../Actions";
-import { IEpisodeProps } from "../../interfaces";
+import { IEpisodeProps } from "../../types/interfaces";
 import Typography from "@material-ui/core/Typography";
 
 const EpisodeList = React.lazy<any>(() => import("../EpisodeList"));
