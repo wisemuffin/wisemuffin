@@ -4,17 +4,14 @@
 // This file was automatically generated and should not be edited.
 
 // ====================================================
-// GraphQL query operation: getGamesForPlayer
+// GraphQL mutation operation: deletePlayer
 // ====================================================
 
-export interface getGamesForPlayer_getGamesForPlayer {
+export interface deletePlayer_deletePlayerScore {
   __typename: "Player";
-  ID: string | null;
   name: string | null;
-  score: number | null;
-  playerID: string | null;
 }
 
-export interface getGamesForPlayer {
-  getGamesForPlayer: getGamesForPlayer_getGamesForPlayer[] | null;
+export interface deletePlayer {
+  deletePlayerScore: deletePlayer_deletePlayerScore;
 }

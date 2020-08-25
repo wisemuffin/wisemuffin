@@ -19,13 +19,10 @@ import {
 
 import { Table } from "./Tables/ReactTable/Components/Table";
 import { PersonData, makePersonData } from "../util";
-import {
-  getGamesForPlayer,
-  getGamesForPlayer_getGamesForPlayer,
-} from "../graphql/generated/getGamesForPlayer";
+import { getGameScores2_getGameScores } from "../graphql/generated/getGameScores2";
 
 const PLAYER = gql`
-  query getGameScores {
+  query getGameScores2 {
     getGameScores(game: "uno") {
       ID
       name
@@ -37,7 +34,7 @@ const PLAYER = gql`
 `;
 
 const DELETE_PLAYER = gql`
-  mutation deletePlayer($ID: String!) {
+  mutation deletePlayer2($ID: String!) {
     deletePlayerScore(ID: $ID) {
       name
     }
@@ -104,7 +101,7 @@ filterGreaterThan.autoRemove = (val: any) => typeof val !== "number";
 
 function SelectColumnFilter({
   column: { filterValue, render, setFilter, preFilteredRows, id },
-}: FilterProps<getGamesForPlayer_getGamesForPlayer>) {
+}: FilterProps<getGameScores2_getGameScores>) {
   const options = React.useMemo(() => {
     const options = new Set<any>();
     preFilteredRows.forEach((row) => {
@@ -133,8 +130,8 @@ function SelectColumnFilter({
 }
 
 const getMinMax = (
-  rows: Row<getGamesForPlayer_getGamesForPlayer>[],
-  id: IdType<getGamesForPlayer_getGamesForPlayer>
+  rows: Row<getGameScores2_getGameScores>[],
+  id: IdType<getGameScores2_getGameScores>
 ) => {
   let min = rows.length ? rows[0].values[id] : 0;
   let max = rows.length ? rows[0].values[id] : 0;
@@ -147,7 +144,7 @@ const getMinMax = (
 
 function SliderColumnFilter({
   column: { render, filterValue, setFilter, preFilteredRows, id },
-}: FilterProps<getGamesForPlayer_getGamesForPlayer>) {
+}: FilterProps<getGameScores2_getGameScores>) {
   const [min, max] = React.useMemo(() => getMinMax(preFilteredRows, id), [
     id,
     preFilteredRows,
@@ -207,7 +204,7 @@ const useActiveElement = () => {
 // ones that have values between the two
 function NumberRangeColumnFilter({
   column: { filterValue = [], render, preFilteredRows, setFilter, id },
-}: FilterProps<getGamesForPlayer_getGamesForPlayer>) {
+}: FilterProps<getGameScores2_getGameScores>) {
   const [min, max] = React.useMemo(() => getMinMax(preFilteredRows, id), [
     id,
     preFilteredRows,
@@ -278,21 +275,21 @@ const columns = [
         accessor: "ID",
         Aggregated: ({
           cell: { value },
-        }: CellProps<getGamesForPlayer_getGamesForPlayer>) => `${value} Names`,
+        }: CellProps<getGameScores2_getGameScores>) => `${value} Names`,
       },
       {
         Header: "Player Name",
         accessor: "name",
         Aggregated: ({
           cell: { value },
-        }: CellProps<getGamesForPlayer_getGamesForPlayer>) => `${value} Names`,
+        }: CellProps<getGameScores2_getGameScores>) => `${value} Names`,
       },
       {
         Header: "Score",
         accessor: "score",
         Aggregated: ({
           cell: { value },
-        }: CellProps<getGamesForPlayer_getGamesForPlayer>) => `${value} Names`,
+        }: CellProps<getGameScores2_getGameScores>) => `${value} Names`,
         Filter: SliderColumnFilter,
         filter: "equals",
       },
@@ -301,14 +298,14 @@ const columns = [
         accessor: "game",
         Aggregated: ({
           cell: { value },
-        }: CellProps<getGamesForPlayer_getGamesForPlayer>) => `${value} Names`,
+        }: CellProps<getGameScores2_getGameScores>) => `${value} Names`,
       },
       // {
       //   Header: "Last Name",
       //   accessor: "lastName",
       //   aggregate: "uniqueCount",
       //   filter: "fuzzyText",
-      //   Aggregated: ({ cell: { value } }: CellProps<getGamesForPlayer_getGamesForPlayer>) =>
+      //   Aggregated: ({ cell: { value } }: CellProps<getGameScores2_getGameScores>) =>
       //     `${value} Unique Names`,
       // },
     ],
@@ -318,38 +315,40 @@ const columns = [
 function PlayerGames2() {
   // const { authState, authService } = useOktaAuth();
 
+  const [deletePlayer, { data: dataDeleted }] = useMutation(DELETE_PLAYER);
+  const [addPlayer, { data: dataAdd }] = useMutation(ADD_PLAYER);
   const { loading, error, data } = useQuery(PLAYER, {
     // variables: {},
   });
-
-  const [deletePlayer, { data: dataDeleted }] = useMutation(DELETE_PLAYER);
-  const [addPlayer, { data: dataAdd }] = useMutation(ADD_PLAYER);
-
   const deletePlayerCallback = React.useCallback(
-    (instance: TableInstance<getGamesForPlayer_getGamesForPlayer>) => (
+    (instance: TableInstance<getGameScores2_getGameScores>) => (
       e: React.MouseEvent<Element, MouseEvent>
     ) =>
       instance.rows
         .filter((row) => row.isSelected)
         .map((rowToDelete) =>
-          deletePlayer({ variables: { ID: rowToDelete.original.ID } })
+          deletePlayer({
+            variables: { ID: rowToDelete.original.ID },
+            refetchQueries: [{ query: PLAYER }],
+          })
         ),
 
     []
   );
 
   const addPlayerCallback = React.useCallback(
-    // (instance: TableInstance<getGamesForPlayer_getGamesForPlayer>) =>
-    (player: getGamesForPlayer_getGamesForPlayer) => {
+    // (instance: TableInstance<getGameScores2_getGameScores>) =>
+    (player: getGameScores2_getGameScores) => {
       console.log("player to add: ", player);
       addPlayer({
         variables: {
           ID: player.ID,
           name: player.name,
           playerID: player.playerID,
-          score: 3,
-          game: "uno",
+          score: player.score && +player.score,
+          game: player.game,
         },
+        refetchQueries: [{ query: PLAYER }],
       });
     },
     []
@@ -357,7 +356,7 @@ function PlayerGames2() {
 
   // const dummy = React.useCallback(() => () => null, []);
   const dummy = React.useCallback(
-    (instance: TableInstance<getGamesForPlayer_getGamesForPlayer>) => (
+    (instance: TableInstance<getGameScores2_getGameScores>) => (
       e: React.MouseEvent<Element, MouseEvent>
     ) => console.log(instance),
     []
@@ -384,7 +383,7 @@ function PlayerGames2() {
           {JSON.stringify(dataDeleted)}
         </div>
       ))} */}
-      <Table<getGamesForPlayer_getGamesForPlayer>
+      <Table<getGameScores2_getGameScores>
         name={"testTable"}
         columns={columns}
         data={data.getGameScores}

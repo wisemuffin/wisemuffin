@@ -12,20 +12,21 @@ import Switch from "@material-ui/core/Switch";
 import TextField from "@material-ui/core/TextField";
 import Tooltip from "@material-ui/core/Tooltip";
 
-import { getGamesForPlayer_getGamesForPlayer } from "../../../../../graphql/generated/getGamesForPlayer";
+import { getGameScores2_getGameScores } from "../../../../../graphql/generated/getGameScores2";
 
-const initialPlayer: getGamesForPlayer_getGamesForPlayer = {
+const initialPlayer: getGameScores2_getGameScores = {
   ID: "",
   name: "",
   playerID: "",
   score: 0,
+  game: "",
   __typename: "Player",
 };
 
 const AddDataDialog = ({
   addDataHandler,
 }: {
-  addDataHandler: (data: getGamesForPlayer_getGamesForPlayer) => void;
+  addDataHandler: (data: getGameScores2_getGameScores) => void;
 }) => {
   const [player, setPlayer] = useState(initialPlayer);
   const [open, setOpen] = React.useState(false);
@@ -111,6 +112,14 @@ const AddDataDialog = ({
             fullWidth
             value={player.playerID}
             onChange={handleChange("playerID")}
+          />
+          <TextField
+            margin="dense"
+            label="Game"
+            type="text"
+            fullWidth
+            value={player.game}
+            onChange={handleChange("game")}
           />
         </DialogContent>
         <DialogActions>

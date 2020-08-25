@@ -1,10 +1,7 @@
 import React from "react";
 import { useMutation, useQuery, gql } from "@apollo/client";
 import { useOktaAuth } from "@okta/okta-react";
-import {
-  getGamesForPlayer,
-  getGamesForPlayer_getGamesForPlayer,
-} from "../graphql/generated/getGamesForPlayer";
+import { getGameScores_getGameScores } from "../graphql/generated/getGameScores";
 import EnhancedTable from "./Tables/ReatTableComponents/EnhancedTable";
 
 const PLAYER = gql`
