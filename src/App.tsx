@@ -4,6 +4,8 @@ import { MuiPickersUtilsProvider } from "@material-ui/pickers";
 import MomentUtils from "@date-io/moment";
 import { ApolloProvider } from "@apollo/client";
 import { Security, LoginCallback, SecureRoute } from "@okta/okta-react";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 import client from "./graphql/client";
 import Layout from "./components/UI/Layout";
@@ -35,6 +37,7 @@ const config = {
   pkce: true,
 };
 
+toast.configure();
 const App: React.FC = () => {
   return (
     <StoreProvider>

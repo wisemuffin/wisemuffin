@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 
 import AddIcon from "@material-ui/icons/Add";
 import Button from "@material-ui/core/Button";
@@ -11,7 +11,9 @@ import IconButton from "@material-ui/core/IconButton";
 import Switch from "@material-ui/core/Switch";
 import TextField from "@material-ui/core/TextField";
 import Tooltip from "@material-ui/core/Tooltip";
+import { toast } from "react-toastify";
 
+import Store from "../../../../../store/Store";
 import { getGameScores2_getGameScores } from "../../../../../graphql/generated/getGameScores2";
 
 const initialPlayer: getGameScores2_getGameScores = {
@@ -35,6 +37,8 @@ const AddDataDialog = ({
     addMultiple: false,
   });
 
+  const { state } = useContext(Store);
+
   const handleSwitchChange = (name) => (event) => {
     setSwitchState({ ...switchState, [name]: event.target.checked });
   };
@@ -44,6 +48,12 @@ const AddDataDialog = ({
   };
 
   const handleClickOpen = () => {
+    if (!state.auth?.isAuthenticated) {
+      toast.warn("Not Authenticated: Please Login", {
+        position: toast.POSITION.BOTTOM_RIGHT,
+      });
+      return;
+    }
     setOpen(true);
   };
 

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useMutation, useQuery, gql } from "@apollo/client";
 import { useOktaAuth } from "@okta/okta-react";
 import {
@@ -17,9 +17,11 @@ import {
   TableInstance,
 } from "react-table";
 
-import { Table } from "./Tables/ReactTable/Components/Table";
-import { PersonData, makePersonData } from "../util";
-import { getGameScores2_getGameScores } from "../graphql/generated/getGameScores2";
+import { Table } from "./ReactTable/Components/Table";
+import { PersonData, makePersonData } from "../../util";
+import { getGameScores2_getGameScores } from "../../graphql/generated/getGameScores2";
+import Store from "../../store/Store";
+import { toast } from "react-toastify";
 
 const PLAYER = gql`
   query getGameScores2 {
@@ -315,6 +317,8 @@ const columns = [
 function PlayerGames2() {
   // const { authState, authService } = useOktaAuth();
 
+  const { state } = useContext(Store);
+
   const [deletePlayer, { data: dataDeleted }] = useMutation(DELETE_PLAYER);
   const [addPlayer, { data: dataAdd }] = useMutation(ADD_PLAYER);
   const { loading, error, data } = useQuery(PLAYER, {
@@ -323,7 +327,13 @@ function PlayerGames2() {
   const deletePlayerCallback = React.useCallback(
     (instance: TableInstance<getGameScores2_getGameScores>) => (
       e: React.MouseEvent<Element, MouseEvent>
-    ) =>
+    ) => {
+      if (!state.auth?.isAuthenticated) {
+        toast.warn("Not Authenticated: Please Login", {
+          position: toast.POSITION.BOTTOM_RIGHT,
+        });
+        return "not Authenticated";
+      }
       instance.rows
         .filter((row) => row.isSelected)
         .map((rowToDelete) =>
@@ -331,15 +341,14 @@ function PlayerGames2() {
             variables: { ID: rowToDelete.original.ID },
             refetchQueries: [{ query: PLAYER }],
           })
-        ),
-
+        );
+    },
     []
   );
 
   const addPlayerCallback = React.useCallback(
     // (instance: TableInstance<getGameScores2_getGameScores>) =>
     (player: getGameScores2_getGameScores) => {
-      console.log("player to add: ", player);
       addPlayer({
         variables: {
           ID: player.ID,
@@ -358,7 +367,14 @@ function PlayerGames2() {
   const dummy = React.useCallback(
     (instance: TableInstance<getGameScores2_getGameScores>) => (
       e: React.MouseEvent<Element, MouseEvent>
-    ) => console.log(instance),
+    ) => {
+      if (!state.auth?.isAuthenticated) {
+        toast.warn("not Authenticated", {
+          position: toast.POSITION.BOTTOM_RIGHT,
+        });
+      }
+      console.log(instance);
+    },
     []
   );
 

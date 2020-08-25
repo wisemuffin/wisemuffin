@@ -9,8 +9,7 @@ import Container from "@material-ui/core/Container";
 import Paper from "@material-ui/core/Paper";
 import Skeleton from "@material-ui/lab/Skeleton";
 
-import PlayerGames from "../../components/PlayerGames";
-import PlayerGames2 from "../../components/PlayerGames2";
+import PlayerGames2 from "../../components/Tables/PlayerGames2";
 import ExampleTable from "../../components/Tables/ReactTable/ExampleTable";
 
 const GraphqlTest = (props) => {
@@ -20,8 +19,7 @@ const GraphqlTest = (props) => {
         <Typography variant="h3">Grapqhl Test</Typography>
         <PlayerGames2 />
 
-        <PlayerGames />
-        <ExampleTable />
+        {/* <ExampleTable /> */}
       </Container>
     </section>
   );

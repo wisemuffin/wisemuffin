@@ -39,6 +39,7 @@
     "react-spring": "^9.0.0-rc.3",
     "react-svg-brush": "^1.0.0",
     "react-table": "^7.1.0",
+    "react-toastify": "^6.0.8",
     "react-vega": "^7.3.0",
     "resize-observer-polyfill": "^1.5.1",
     "rxjs": "^6.6.0",
