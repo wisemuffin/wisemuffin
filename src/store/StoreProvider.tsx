@@ -21,6 +21,8 @@ const StoreProvider = ({
         episodes: state.episodes,
         favourites: state.favourites,
         visualisations: state.visualisations,
+        auth: state.auth,
+        user: state.user,
       })
     );
   }, [state]);

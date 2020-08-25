@@ -318,7 +318,6 @@ function PlayerGames2() {
   // const { authState, authService } = useOktaAuth();
 
   const { state } = useContext(Store);
-
   const [deletePlayer, { data: dataDeleted }] = useMutation(DELETE_PLAYER);
   const [addPlayer, { data: dataAdd }] = useMutation(ADD_PLAYER);
   const { loading, error, data } = useQuery(PLAYER, {
@@ -329,6 +328,7 @@ function PlayerGames2() {
       e: React.MouseEvent<Element, MouseEvent>
     ) => {
       if (!state.auth?.isAuthenticated) {
+        console.log("state", state);
         toast.warn("Not Authenticated: Please Login", {
           position: toast.POSITION.BOTTOM_RIGHT,
         });
