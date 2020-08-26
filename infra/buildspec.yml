@@ -2,7 +2,7 @@ version: 0.1
 phases:
   pre_build:
     commands:
-      - echo REACT_APP_OKTA_DOMAIN: $REACT_APP_OKTA_DOMAIN
+      - echo $REACT_APP_OKTA_DOMAIN
       - echo Installing source YARN dependencies...
       - yarn install
   build:
