@@ -11,6 +11,20 @@ import { IVis } from "../../types/interfaces";
 
 const visList: IVis[] = [
   {
+    createdDate: `${new Date("2020-08-26")}`,
+    id: Math.trunc(Math.random() * 10000),
+    mediaType: "img",
+    media: {
+      medium:
+        "https://res.cloudinary.com/dkn8xtjbm/image/upload/c_scale,h_213/v1598437318/wisemuffin/NicePng_lord-of-the-rings_1747616.png",
+      original:
+        "https://res.cloudinary.com/dkn8xtjbm/image/upload/c_scale,h_213/v1598437318/wisemuffin/NicePng_lord-of-the-rings_1747616.png",
+    },
+    link: "/visualisations/graphqlTest",
+    name: "Lord of the Rings",
+    summary: "Testing out hosting Graphql on AWS Lambda with dynamoDb",
+  },
+  {
     createdDate: `${new Date("2020-08-12")}`,
     id: Math.trunc(Math.random() * 10000),
     mediaType: "img",

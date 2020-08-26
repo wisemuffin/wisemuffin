@@ -60,7 +60,7 @@
     "cdkWeb": "cdk deploy Wisemuffin-Pipeline",
     "cdkDocs": "cdk deploy Wisemuffin-Pipeline-Docs",
     "e2e": "cypress open",
-    "types:generate:prod": "apollo codegen:generate --target typescript --excludes=node_modules/* --includes=**/*.tsx --endpoint https://api.wisemuffin.com/graphql --header \"X-Shopify-Storefront-Access-Token: TBC\" --tagName=gql --outputFlat src/graphql/generated --passthroughCustomScalars --customScalarsPrefix Wisemuffin",
+    "types:generate:prod:notworking": "apollo codegen:generate --target typescript --excludes=node_modules/* --includes=**/*.tsx --endpoint https://api.wisemuffin.com/graphql --header \"X-Shopify-Storefront-Access-Token: TBC\" --tagName=gql --outputFlat src/graphql/generated --passthroughCustomScalars --customScalarsPrefix Wisemuffin",
     "types:generate:dev": "apollo codegen:generate --target typescript --excludes=node_modules/* --includes=**/*.tsx --endpoint http://localhost:3000/dev/graphql --tagName=gql --outputFlat src/graphql/generated --passthroughCustomScalars --customScalarsPrefix Wisemuffin",
     "schema:download": "apollo schema:download --endpoint https://graphql.myshopify.com/api/graphql --header \"X-Shopify-Storefront-Access-Token: 078bc5caa0ddebfa89cccb4a1baa1f5c\""
   },
