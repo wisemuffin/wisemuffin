@@ -126,6 +126,24 @@ export class Pipeline extends CDK.Stack {
           `arn:aws:ssm:${CDK.Stack.of(this).region}:${
             CDK.Stack.of(this).account
           }:parameter/REACT_APP_MAPBOX_TOKEN`,
+          `arn:aws:ssm:${CDK.Stack.of(this).region}:${
+            CDK.Stack.of(this).account
+          }:parameter/WISEMUFFIN_REACT_APP_ENV`,
+          `arn:aws:ssm:${CDK.Stack.of(this).region}:${
+            CDK.Stack.of(this).account
+          }:parameter/WISEMUFFIN_REACT_APP_GRAHQL_PROD`,
+          `arn:aws:ssm:${CDK.Stack.of(this).region}:${
+            CDK.Stack.of(this).account
+          }:parameter/WISEMUFFIN_REACT_APP_OKTA_CLIENT_ID`,
+          `arn:aws:ssm:${CDK.Stack.of(this).region}:${
+            CDK.Stack.of(this).account
+          }:parameter/WISEMUFFIN_REACT_APP_OKTA_DOMAIN`,
+          `arn:aws:ssm:${CDK.Stack.of(this).region}:${
+            CDK.Stack.of(this).account
+          }:parameter/WISEMUFFIN_REACT_APP_OKTA_CALLBACK`,
+          `arn:aws:ssm:${CDK.Stack.of(this).region}:${
+            CDK.Stack.of(this).account
+          }:parameter/WISEMUFFIN_REACT_APP_HOST`,
         ],
         effect: iam.Effect.ALLOW,
       })
