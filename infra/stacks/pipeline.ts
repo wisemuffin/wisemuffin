@@ -82,6 +82,30 @@ export class Pipeline extends CDK.Stack {
             type: CodeBuild.BuildEnvironmentVariableType.PARAMETER_STORE,
             value: "REACT_APP_MAPBOX_TOKEN",
           },
+          REACT_APP_ENV: {
+            type: CodeBuild.BuildEnvironmentVariableType.PARAMETER_STORE,
+            value: "WISEMUFFIN_REACT_APP_ENV",
+          },
+          REACT_APP_GRAHQL_PROD: {
+            type: CodeBuild.BuildEnvironmentVariableType.PARAMETER_STORE,
+            value: "WISEMUFFIN_REACT_APP_GRAHQL_PROD",
+          },
+          REACT_APP_OKTA_CLIENT_ID: {
+            type: CodeBuild.BuildEnvironmentVariableType.PARAMETER_STORE,
+            value: "WISEMUFFIN_REACT_APP_OKTA_CLIENT_ID",
+          },
+          REACT_APP_OKTA_DOMAIN: {
+            type: CodeBuild.BuildEnvironmentVariableType.PARAMETER_STORE,
+            value: "WISEMUFFIN_REACT_APP_OKTA_DOMAIN",
+          },
+          REACT_APP_OKTA_CALLBACK: {
+            type: CodeBuild.BuildEnvironmentVariableType.PARAMETER_STORE,
+            value: "WISEMUFFIN_REACT_APP_OKTA_CALLBACK",
+          },
+          REACT_APP_HOST: {
+            type: CodeBuild.BuildEnvironmentVariableType.PARAMETER_STORE,
+            value: "WISEMUFFIN_REACT_APP_HOST",
+          },
         },
         projectName: "Websitetemp",
         buildSpec: CodeBuild.BuildSpec.fromSourceFilename(
