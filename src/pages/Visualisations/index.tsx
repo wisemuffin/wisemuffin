@@ -16,9 +16,9 @@ const visList: IVis[] = [
     mediaType: "img",
     media: {
       medium:
-        "https://res.cloudinary.com/dkn8xtjbm/image/upload/c_scale,h_213/v1598437318/wisemuffin/NicePng_lord-of-the-rings_1747616.png",
+        "https://res.cloudinary.com/dkn8xtjbm/image/upload/v1598605353/wisemuffin/wisemuffin_api.png",
       original:
-        "https://res.cloudinary.com/dkn8xtjbm/image/upload/c_scale,h_213/v1598437318/wisemuffin/NicePng_lord-of-the-rings_1747616.png",
+        "https://res.cloudinary.com/dkn8xtjbm/image/upload/v1598605353/wisemuffin/wisemuffin_api.png",
     },
     link: "/visualisations/graphqlTest",
     name: "Lord of the Rings",

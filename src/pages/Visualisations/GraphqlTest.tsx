@@ -26,14 +26,20 @@ const GraphqlTest = (props) => {
               <CardHeader title="Architecture" subheader="Graphql on Lambda" />
               <CardMedia
                 style={{
-                  height: "20vh",
-                  width: "auto",
-                  maxWidth: "490px",
+                  // height: "240px",
+                  // display: "block",
+                  // height: "auto",
+                  // width: "auto",
+                  // minHeight: "20vh",
+                  paddingTop: "2px",
+                  // maxWidth: "390px",
                   marginLeft: "auto",
                   marginRight: "auto",
                 }}
+                component="img"
+                // height="235px"
                 title="Architecture"
-                image="https://res.cloudinary.com/dkn8xtjbm/image/upload/c_scale,w_436/v1598438569/wisemuffin/wisemuffin_api.png"
+                image="https://res.cloudinary.com/dkn8xtjbm/image/upload/v1598605353/wisemuffin/wisemuffin_api.png"
               />
               <CardContent>
                 <Typography variant="body2" color="textSecondary" component="p">
