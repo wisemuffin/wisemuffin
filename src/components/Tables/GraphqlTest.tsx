@@ -7,6 +7,8 @@ import {
   InputLabel,
   MenuItem,
   TextField,
+  CardHeader,
+  CardContent,
 } from "@material-ui/core";
 import {
   CellProps,
@@ -17,11 +19,26 @@ import {
   TableInstance,
 } from "react-table";
 
+import {
+  BarChart,
+  Bar,
+  Cell,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  Legend,
+  ResponsiveContainer,
+} from "recharts";
+
 import { Table } from "./ReactTable/Components/Table";
 import { PersonData, makePersonData } from "../../util";
 import { getAllGamesAnyPlayers_getAllGamesAnyPlayers } from "../../graphql/generated/getAllGamesAnyPlayers";
 import Store from "../../store/Store";
 import { toast } from "react-toastify";
+import Grid from "@material-ui/core/Grid";
+import Card from "@material-ui/core/Card";
+import * as R from "ramda";
 
 const PLAYER = gql`
   query getAllGamesAnyPlayers {
@@ -394,6 +411,65 @@ function GraphqlTest() {
 
   return (
     <div>
+      <Grid container spacing={2}>
+        <Grid item xs={12} lg={6}>
+          <Card>
+            <CardHeader title="Score" subheader="by Player" />
+
+            <CardContent>
+              <div style={{ width: "100%", height: 200 }}>
+                <ResponsiveContainer>
+                  <BarChart
+                    width={500}
+                    height={200}
+                    data={R.compose(
+                      R.map((arr) => ({ name: arr[0], score: arr[1] })),
+                      R.toPairs,
+                      R.map(R.reduce((acc, curr) => acc + curr["score"], 0)),
+                      R.groupBy(R.prop("name"))
+                    )(data.getAllGamesAnyPlayers)}
+                  >
+                    <XAxis dataKey="name" />
+                    {/* <YAxis /> */}
+                    <Tooltip />
+                    {/* <Legend /> */}
+                    <Bar dataKey="score" fill="#8884d8" />
+                  </BarChart>
+                </ResponsiveContainer>
+              </div>
+            </CardContent>
+          </Card>
+        </Grid>
+        <Grid item xs={12} lg={6}>
+          <Card>
+            <CardHeader title="Score" subheader="by Game" />
+
+            <CardContent>
+              <div style={{ width: "100%", height: 200 }}>
+                <ResponsiveContainer>
+                  <BarChart
+                    width={500}
+                    height={200}
+                    data={R.compose(
+                      R.map((arr) => ({ game: arr[0], score: arr[1] })),
+                      R.toPairs,
+                      R.map(R.reduce((acc, curr) => acc + curr["score"], 0)),
+                      R.groupBy(R.prop("game"))
+                    )(data.getAllGamesAnyPlayers)}
+                  >
+                    <XAxis dataKey="game" />
+                    {/* <YAxis /> */}
+                    <Tooltip />
+                    {/* <Legend /> */}
+                    <Bar dataKey="score" fill="#8884d8" />
+                  </BarChart>
+                </ResponsiveContainer>
+              </div>
+            </CardContent>
+          </Card>
+        </Grid>
+      </Grid>
+
       {/* {data.getGameScores.map(({ name, score }) => (
         <div key={name}>
           <p>
