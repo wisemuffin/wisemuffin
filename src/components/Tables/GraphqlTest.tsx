@@ -420,7 +420,6 @@ function GraphqlTest() {
               <div style={{ width: "100%", height: 200 }}>
                 <ResponsiveContainer>
                   <BarChart
-                    width={500}
                     height={200}
                     data={R.compose(
                       R.map((arr) => ({ name: arr[0], score: arr[1] })),
@@ -448,7 +447,6 @@ function GraphqlTest() {
               <div style={{ width: "100%", height: 200 }}>
                 <ResponsiveContainer>
                   <BarChart
-                    width={500}
                     height={200}
                     data={R.compose(
                       R.map((arr) => ({ game: arr[0], score: arr[1] })),
