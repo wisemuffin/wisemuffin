@@ -30,12 +30,14 @@ const VisList: React.FC<IVisListProps> = ({ store, visualisations }) => {
                 component={"video"}
                 autoPlay={true}
                 loop={true}
+                height={150}
               />
             ) : (
               <CardMedia
                 title={vis.summary}
                 image={vis.media.medium}
                 component={"img"}
+                height={150}
               />
             );
 
