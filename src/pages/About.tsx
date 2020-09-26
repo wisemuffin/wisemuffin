@@ -14,6 +14,8 @@ import Grow from "@material-ui/core/Grow";
 
 import Chip from "@material-ui/core/Chip";
 
+import TimeLine from "../components/TimeLine";
+
 interface ChipData {
   key: number;
   label: string;
@@ -155,12 +157,13 @@ export const About = () => {
               </Paper>
             </Grow>
           </Grid>
+
           <Grid item md={12} lg={6}>
             <Grow in>
               <Paper>
                 <Box p={3}>
                   <Typography variant="h5">Education</Typography>
-                  🚧 under construction 🚧
+                  <TimeLine />
                 </Box>
               </Paper>
             </Grow>
