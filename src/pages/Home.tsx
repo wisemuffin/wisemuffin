@@ -4,6 +4,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
+import Box from "@material-ui/core/Box";
 import Button from "@material-ui/core/Button";
 import RealTimeExampleHome from "../components/Charts/Containers/RealTimeExampleHome";
 import ReactGa from "react-ga";
@@ -70,8 +71,10 @@ const Home: React.FC = (props) => {
             </Button>
           </Grid>
         </Grid>
-        <Lottie options={defaultOptions} height={400} width={400} />
-        <RealTimeExampleHome />
+        <Box padding="15px">
+          <Lottie options={defaultOptions} />
+        </Box>
+        {/* <RealTimeExampleHome /> */}
       </Container>
     </main>
   );

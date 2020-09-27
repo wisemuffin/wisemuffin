@@ -22,7 +22,7 @@ import TimelineIcon from "@material-ui/icons/Timeline";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
-    padding: "6px 16px",
+    padding: "4px 10px",
   },
   secondaryTail: {
     backgroundColor: theme.palette.secondary.main,
@@ -33,7 +33,7 @@ export default function CustomizedTimeline() {
   const classes = useStyles();
 
   return (
-    <Timeline align="alternate">
+    <Timeline align="alternate" style={{ padding: 0 }}>
       <TimelineItem>
         <TimelineOppositeContent>
           <Typography variant="body2" color="textSecondary">
