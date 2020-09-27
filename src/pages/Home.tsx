@@ -7,6 +7,8 @@ import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
 import RealTimeExampleHome from "../components/Charts/Containers/RealTimeExampleHome";
 import ReactGa from "react-ga";
+import Lottie from "react-lottie";
+import dataAnalysisLottie from "../lotties/dataAnalysisLottie.json";
 
 const Home: React.FC = (props) => {
   let history = useHistory();
@@ -15,6 +17,15 @@ const Home: React.FC = (props) => {
   const vizLibClickHandler = () => {
     ReactGa.event({ category: "Button", action: "Click Vis Library" });
     history.push(`/chartlib`);
+  };
+
+  const defaultOptions = {
+    loop: true,
+    autoplay: true,
+    animationData: dataAnalysisLottie,
+    rendererSettings: {
+      preserveAspectRatio: "xMidYMid slice",
+    },
   };
 
   return (
@@ -59,6 +70,7 @@ const Home: React.FC = (props) => {
             </Button>
           </Grid>
         </Grid>
+        <Lottie options={defaultOptions} height={400} width={400} />
         <RealTimeExampleHome />
       </Container>
     </main>
